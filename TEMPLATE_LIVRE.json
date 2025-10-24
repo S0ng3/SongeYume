@@ -1,0 +1,22 @@
+{
+  "id": 9,
+  "title": "Titre du Livre",
+  "author": "Nom de l'Auteur",
+  "cover": "/covers/titre-du-livre.jpg",
+  "summary": "Résumé complet du livre. Décrivez l'histoire, les personnages principaux, le contexte...",
+  "personalReview": "Votre avis personnel détaillé. Qu'avez-vous aimé ? Qu'est-ce qui vous a marqué ? Comment avez-vous ressenti cette lecture ?",
+  "rating": 4,
+  "maxRating": 5,
+  "quotes": [
+    "Première citation marquante du livre",
+    "Deuxième citation favorite",
+    "Troisième citation si vous en avez"
+  ],
+  "tags": ["Genre1", "Genre2", "Genre3", "Thème"],
+  "publishedOnInstagram": false,
+  "instagramLink": null,
+  "publishedOnBabelio": false,
+  "babelioLink": "https://www.babelio.com/livres/...",
+  "readDate": "2024-03-20"
+}
+
