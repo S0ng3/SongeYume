@@ -36,20 +36,22 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
+            className="text-center max-w-4xl mx-auto"
           >
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-              className="inline-block mb-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="mb-8"
             >
-              <BookOpen className="w-20 h-20 text-accent mx-auto" />
+              <img 
+                src="/SongeYume_HomePage.png" 
+                alt="Songe Yume - Ma Bibliothèque Virtuelle"
+                className="mx-auto max-w-full h-auto"
+                style={{ maxHeight: '400px' }}
+              />
             </motion.div>
             
-            <h1 className="page-title">
-              Bienvenue dans mon univers littéraire
-            </h1>
             <p className="page-subtitle">
               Découvrez ma collection personnelle de livres, mes critiques et mes coups de cœur
             </p>
