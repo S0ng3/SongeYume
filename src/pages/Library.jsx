@@ -3,12 +3,15 @@ import { motion } from 'framer-motion'
 import BookShelf from '../components/BookShelf'
 import SearchBar from '../components/SearchBar'
 import TagList from '../components/TagList'
+import CategoryFilter from '../components/CategoryFilter'
+import { filterBooksByCategory } from '../data/categories'
 import booksData from '../data/books.json'
 
 const Library = () => {
   const [books, setBooks] = useState(booksData)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTags, setSelectedTags] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const [allTags, setAllTags] = useState([])
 
   useEffect(() => {
@@ -21,10 +24,15 @@ const Library = () => {
   }, [])
 
   useEffect(() => {
-    // Filter books based on search term and selected tags
+    // Filter books based on category, search term and selected tags (in this order)
     let filtered = booksData
 
-    // Filter by search term
+    // 1. Filter by category (highest level)
+    if (selectedCategory) {
+      filtered = filterBooksByCategory(filtered, selectedCategory)
+    }
+
+    // 2. Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(book => {
         const searchLower = searchTerm.toLowerCase()
@@ -37,7 +45,7 @@ const Library = () => {
       })
     }
 
-    // Filter by selected tags
+    // 3. Filter by selected tags (lowest level)
     if (selectedTags.length > 0) {
       filtered = filtered.filter(book =>
         selectedTags.every(tag => book.tags.includes(tag))
@@ -45,7 +53,7 @@ const Library = () => {
     }
 
     setBooks(filtered)
-  }, [searchTerm, selectedTags])
+  }, [searchTerm, selectedTags, selectedCategory])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -63,6 +71,20 @@ const Library = () => {
     setSearchTerm(value)
   }
 
+  const handleCategoryClick = (category) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null)
+    } else {
+      setSelectedCategory(category)
+      // Clear tags when changing category for cleaner UX
+      setSelectedTags([])
+    }
+  }
+
+  const handleClearCategory = () => {
+    setSelectedCategory(null)
+  }
+
   return (
     <div className="page-transition py-12">
       <div className="container-custom">
@@ -78,11 +100,25 @@ const Library = () => {
           </p>
         </motion.div>
 
-        {/* Search and Filters */}
+        {/* Category Filter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
+          className="card-base p-6 mb-6"
+        >
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            onCategoryClick={handleCategoryClick}
+            onClearCategory={handleClearCategory}
+          />
+        </motion.div>
+
+        {/* Search and Tags Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
           className="card-base p-6 mb-12 space-y-6"
         >
           <SearchBar
@@ -101,7 +137,7 @@ const Library = () => {
         </motion.div>
 
         {/* Results Info */}
-        {(searchTerm || selectedTags.length > 0) && (
+        {(searchTerm || selectedTags.length > 0 || selectedCategory) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -112,15 +148,16 @@ const Library = () => {
                 <span className="font-semibold text-accent">{books.length}</span>{' '}
                 {books.length > 1 ? 'résultats trouvés' : 'résultat trouvé'}
               </p>
-              {(searchTerm || selectedTags.length > 0) && (
+              {(searchTerm || selectedTags.length > 0 || selectedCategory) && (
                 <button
                   onClick={() => {
                     setSearchTerm('')
                     setSelectedTags([])
+                    setSelectedCategory(null)
                   }}
                   className="text-sm text-accent hover:text-opacity-80 transition-colors"
                 >
-                  Réinitialiser les filtres
+                  Réinitialiser tous les filtres
                 </button>
               )}
             </div>
