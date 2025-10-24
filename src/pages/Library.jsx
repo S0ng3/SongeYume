@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import BookShelf from '../components/BookShelf'
+import BookCardCompact from '../components/BookCardCompact'
 import SearchBar from '../components/SearchBar'
 import TagList from '../components/TagList'
 import CategoryFilter from '../components/CategoryFilter'
-import { filterBooksByCategory } from '../data/categories'
+import Pagination from '../components/Pagination'
+import { filterBooksByCategory, getCategoryNames } from '../data/categories'
 import booksData from '../data/books.json'
+
+const BOOKS_PER_PAGE = 48 // 4 rows of 12 on large screens
 
 const Library = () => {
   const [books, setBooks] = useState(booksData)
@@ -13,12 +16,20 @@ const Library = () => {
   const [selectedTags, setSelectedTags] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [allTags, setAllTags] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
-    // Extract all unique tags
+    // Extract all unique tags, excluding only the exact category names
+    const categoryNames = getCategoryNames()
     const tagsSet = new Set()
     booksData.forEach(book => {
-      book.tags.forEach(tag => tagsSet.add(tag))
+      book.tags.forEach(tag => {
+        // Only exclude tags that are exactly category names (Fantasy, Classique, etc.)
+        // Keep specific tags like "Science-Fiction", "Romance", etc.
+        if (!categoryNames.includes(tag)) {
+          tagsSet.add(tag)
+        }
+      })
     })
     setAllTags(Array.from(tagsSet).sort())
   }, [])
@@ -53,6 +64,7 @@ const Library = () => {
     }
 
     setBooks(filtered)
+    setCurrentPage(1) // Reset to first page when filters change
   }, [searchTerm, selectedTags, selectedCategory])
 
   const handleTagClick = (tag) => {
@@ -84,6 +96,16 @@ const Library = () => {
   const handleClearCategory = () => {
     setSelectedCategory(null)
   }
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+  }
+
+  // Calculate pagination
+  const totalPages = Math.ceil(books.length / BOOKS_PER_PAGE)
+  const startIndex = (currentPage - 1) * BOOKS_PER_PAGE
+  const endIndex = startIndex + BOOKS_PER_PAGE
+  const currentBooks = books.slice(startIndex, endIndex)
 
   return (
     <div className="page-transition py-12">
@@ -164,11 +186,30 @@ const Library = () => {
           </motion.div>
         )}
 
-        {/* Books Grid */}
-        <BookShelf books={books} />
+        {/* Books Grid - Compact view with pagination */}
+        {books.length > 0 ? (
+          <>
+            {/* Show pagination info */}
+            <div className="mb-4 text-center text-text-light text-opacity-70 text-sm">
+              Affichage de {startIndex + 1} à {Math.min(endIndex, books.length)} sur {books.length} livres
+            </div>
 
-        {/* Empty State */}
-        {books.length === 0 && (
+            {/* Books Grid - 6 columns on large screens for compact view */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4 mb-8">
+              {currentBooks.map((book) => (
+                <BookCardCompact key={book.id} book={book} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </>
+        ) : (
+          /* Empty State */
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -185,6 +226,7 @@ const Library = () => {
                 onClick={() => {
                   setSearchTerm('')
                   setSelectedTags([])
+                  setSelectedCategory(null)
                 }}
                 className="btn-primary"
               >

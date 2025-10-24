@@ -48,6 +48,12 @@ export const CATEGORIES = {
   }
 }
 
+// Get only the category names (to filter them out from tag list)
+// We only exclude the exact category names, not all their associated tags
+export const getCategoryNames = () => {
+  return Object.values(CATEGORIES).map(category => category.name)
+}
+
 // Helper function to get category from tags
 export const getCategoryFromTags = (bookTags) => {
   for (const [key, category] of Object.entries(CATEGORIES)) {
