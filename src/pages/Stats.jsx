@@ -143,7 +143,7 @@ const Stats = () => {
               </div>
             </div>
             <h3 className="text-3xl font-bold text-text-light mb-1">
-              {statistics.averageRating}/10
+              {statistics.averageRating}/5
             </h3>
             <p className="text-text-light text-opacity-60 text-sm">
               Note moyenne
