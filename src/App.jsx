@@ -5,6 +5,7 @@ import Library from './pages/Library'
 import BookDetail from './pages/BookDetail'
 import Stats from './pages/Stats'
 import About from './pages/About'
+import Admin from './pages/Admin'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/book/:id" element={<BookDetail />} />
         <Route path="/stats" element={<Stats />} />
         <Route path="/about" element={<About />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Layout>
   )

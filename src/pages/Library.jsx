@@ -4,6 +4,8 @@ import BookCardCompact from '../components/BookCardCompact'
 import SearchBar from '../components/SearchBar'
 import TagList from '../components/TagList'
 import CategoryFilter from '../components/CategoryFilter'
+import RatingFilter from '../components/RatingFilter'
+import PublisherFilter from '../components/PublisherFilter'
 import Pagination from '../components/Pagination'
 import { filterBooksByCategory, getCategoryNames } from '../data/categories'
 import booksData from '../data/books.json'
@@ -15,7 +17,10 @@ const Library = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTags, setSelectedTags] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [selectedRating, setSelectedRating] = useState(null)
+  const [selectedPublisher, setSelectedPublisher] = useState(null)
   const [allTags, setAllTags] = useState([])
+  const [allPublishers, setAllPublishers] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
@@ -32,10 +37,22 @@ const Library = () => {
       })
     })
     setAllTags(Array.from(tagsSet).sort())
+
+    // Extract all unique publishers with their counts
+    const publisherCount = {}
+    booksData.forEach(book => {
+      if (book.publisher && book.publisher.trim() !== '') {
+        publisherCount[book.publisher] = (publisherCount[book.publisher] || 0) + 1
+      }
+    })
+    const publishersList = Object.entries(publisherCount)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count) // Tri par nombre de livres (descendant)
+    setAllPublishers(publishersList)
   }, [])
 
   useEffect(() => {
-    // Filter books based on category, search term and selected tags (in this order)
+    // Filter books based on category, search term, tags, rating and publisher
     let filtered = booksData
 
     // 1. Filter by category (highest level)
@@ -51,21 +68,35 @@ const Library = () => {
           book.title.toLowerCase().includes(searchLower) ||
           book.author.toLowerCase().includes(searchLower) ||
           book.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
-          book.summary.toLowerCase().includes(searchLower)
+          book.summary.toLowerCase().includes(searchLower) ||
+          book.rating.toString().includes(searchLower) ||
+          (book.publisher && book.publisher.toLowerCase().includes(searchLower))
         )
       })
     }
 
-    // 3. Filter by selected tags (lowest level)
+    // 3. Filter by selected tags
     if (selectedTags.length > 0) {
       filtered = filtered.filter(book =>
         selectedTags.every(tag => book.tags.includes(tag))
       )
     }
 
+    // 4. Filter by rating (inclut la note et la note +0.5)
+    if (selectedRating !== null) {
+      filtered = filtered.filter(book => 
+        book.rating === selectedRating || book.rating === selectedRating + 0.5
+      )
+    }
+
+    // 5. Filter by publisher
+    if (selectedPublisher) {
+      filtered = filtered.filter(book => book.publisher === selectedPublisher)
+    }
+
     setBooks(filtered)
     setCurrentPage(1) // Reset to first page when filters change
-  }, [searchTerm, selectedTags, selectedCategory])
+  }, [searchTerm, selectedTags, selectedCategory, selectedRating, selectedPublisher])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -97,6 +128,30 @@ const Library = () => {
     setSelectedCategory(null)
   }
 
+  const handleRatingClick = (rating) => {
+    if (selectedRating === rating) {
+      setSelectedRating(null)
+    } else {
+      setSelectedRating(rating)
+    }
+  }
+
+  const handleClearRating = () => {
+    setSelectedRating(null)
+  }
+
+  const handlePublisherClick = (publisher) => {
+    if (selectedPublisher === publisher) {
+      setSelectedPublisher(null)
+    } else {
+      setSelectedPublisher(publisher)
+    }
+  }
+
+  const handleClearPublisher = () => {
+    setSelectedPublisher(null)
+  }
+
   const handlePageChange = (page) => {
     setCurrentPage(page)
   }
@@ -114,7 +169,7 @@ const Library = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-8"
         >
           <h1 className="page-title">Ma Bibliothèque</h1>
           <p className="page-subtitle">
@@ -122,32 +177,35 @@ const Library = () => {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* Search Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="card-base p-6 mb-6"
         >
-          <CategoryFilter
-            selectedCategory={selectedCategory}
-            onCategoryClick={handleCategoryClick}
-            onClearCategory={handleClearCategory}
+          <SearchBar
+            searchTerm={searchTerm}
+            onSearchChange={handleSearchChange}
+            placeholder="Rechercher par titre, auteur, tag, note, maison d'édition..."
           />
         </motion.div>
 
-        {/* Search and Tags Filters */}
+        {/* Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="card-base p-6 mb-12 space-y-6"
         >
-          <SearchBar
-            searchTerm={searchTerm}
-            onSearchChange={handleSearchChange}
+          {/* Category Filter */}
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            onCategoryClick={handleCategoryClick}
+            onClearCategory={handleClearCategory}
           />
 
+          {/* Tags Filter */}
           <div className="border-t border-text-light border-opacity-10 pt-6">
             <TagList
               tags={allTags}
@@ -156,10 +214,29 @@ const Library = () => {
               onClearTags={handleClearTags}
             />
           </div>
+
+          {/* Rating Filter */}
+          <div className="border-t border-text-light border-opacity-10 pt-6">
+            <RatingFilter
+              selectedRating={selectedRating}
+              onRatingClick={handleRatingClick}
+              onClearRating={handleClearRating}
+            />
+          </div>
+
+          {/* Publisher Filter */}
+          <div className="border-t border-text-light border-opacity-10 pt-6">
+            <PublisherFilter
+              publishers={allPublishers}
+              selectedPublisher={selectedPublisher}
+              onPublisherClick={handlePublisherClick}
+              onClearPublisher={handleClearPublisher}
+            />
+          </div>
         </motion.div>
 
         {/* Results Info */}
-        {(searchTerm || selectedTags.length > 0 || selectedCategory) && (
+        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -170,12 +247,14 @@ const Library = () => {
                 <span className="font-semibold text-accent">{books.length}</span>{' '}
                 {books.length > 1 ? 'résultats trouvés' : 'résultat trouvé'}
               </p>
-              {(searchTerm || selectedTags.length > 0 || selectedCategory) && (
+              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher) && (
                 <button
                   onClick={() => {
                     setSearchTerm('')
                     setSelectedTags([])
                     setSelectedCategory(null)
+                    setSelectedRating(null)
+                    setSelectedPublisher(null)
                   }}
                   className="text-sm text-accent hover:text-opacity-80 transition-colors"
                 >
@@ -227,6 +306,8 @@ const Library = () => {
                   setSearchTerm('')
                   setSelectedTags([])
                   setSelectedCategory(null)
+                  setSelectedRating(null)
+                  setSelectedPublisher(null)
                 }}
                 className="btn-primary"
               >

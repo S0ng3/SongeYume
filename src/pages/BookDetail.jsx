@@ -179,6 +179,14 @@ const BookDetail = () => {
                   <Calendar className="w-4 h-4" />
                   <span className="text-sm">Lu le {formatDate(book.readDate)}</span>
                 </div>
+
+                {/* Publisher */}
+                {book.publisher && book.publisher.trim() !== '' && (
+                  <div className="flex items-center space-x-2 text-text-light text-opacity-60 mt-2">
+                    <BookMarked className="w-4 h-4" />
+                    <span className="text-sm">Maison d'édition : {book.publisher}</span>
+                  </div>
+                )}
               </div>
 
               {/* Tags */}

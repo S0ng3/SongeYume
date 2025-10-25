@@ -1,166 +1,111 @@
 [
-  {
-    "id": 1,
-    "title": "Yumi et le Peintre de Cauchemars",
-    "author": "Brandon Sanderson",
-    "cover": "/covers/yumi-et-le-peintre-de-cauchemars.png",
-    "summary": "Yumi vit dans un monde où elle invoque des esprits pour son peuple. Painter vit dans un monde de technologie et de machines. Séparés par des dimensions, ils se retrouvent mystérieusement connectés et doivent apprendre à vivre dans le corps de l'autre. Une histoire bouleversante sur deux mondes opposés qui doivent s'unir face à une menace cosmique.",
-    "personalReview": "Bien que cela puisse sembler incongru, je découvre Brandon Sanderson avec Yumi et le peintre de cauchemars (car oui, je n'ai toujours pas fini ma relecture de la Roue du Temps). Je commence donc, enfin, à découvrir cet auteur dont les mérites ne sont apparemment plus à prouver, par un genre qu'il n'a pas l'habitude d'écrire, soit de la fantasy romancée. Et bien, ce fut pour moi une totale réussite : non seulement les personnages étaient attachants, du conteur à nos protagonistes, mais l'intrigue était palpitante, le cadre très pertinent, car bien posé avec des repères, et les valeurs défendues étaient... justes et belles. Inestimables, oserai-je dire. On sent vraiment les inspirations de l'auteur, et les oeuvres citées dans son post-scriptum m'ont révélé ce que je cherchais tout du long à trouver. Certains trouveront les idées fantastiques, d'autres trouveront que ce n'est pas si original, mais moi, ce que j'en pense, c'est que j'ai passé un incroyable moment : poétique, artistique. Humain. Merci pour cette belle histoire !",
-    "rating": 5,
-    "maxRating": 5,
-    "quotes": [
-      "Le véritable héros est celui qui se trouve dans votre tête, la représentation d'un idéal qui fait de vous quelqu'un de meilleur.",
-      "Les choses n'ont que la valeur qu'on leur accorde. Et de la même manière, les actions peuvent valoir tout ce que nous décidons qu'elles valent.",
-      "N'obligez pas les gens à se montrer à la hauteur de ce que vous avez rêvé d'eux."
-    ],
-    "tags": ["Fantasy", "Science-Fiction", "Romance", "Cosmère", "Quête d'identité"],
-    "publishedOnInstagram": false,
-    "instagramLink": "",
-    "publishedOnBabelio": true,
-    "babelioLink": "https://www.babelio.com/livres/Sanderson-Yumi-et-le-peintre-de-cauchemars/1540363",
-    "readDate": "2024-05-09"
-  },
-  {
-    "id": 2,
-    "title": "The Sword of Kaigen",
-    "author": "M. L. Wang",
-    "cover": "/covers/the-sword-of-kaigen.png",
-    "summary": "Dans un village montagneux isolé, Misaki était autrefois une guerrière redoutable. Aujourd'hui mère de famille, elle a enfoui son passé. Mais quand la guerre frappe à sa porte, elle doit reprendre son épée pour protéger les siens. Un récit épique mêlant arts martiaux, magie et drame familial dans un monde inspiré du Japon féodal.",
-    "personalReview": "Un roman de fantasy absolument bouleversant. M.L. Wang crée un univers fascinant avec un système de magie basé sur les éléments, mais c'est l'exploration profonde des thèmes familiaux qui m'a le plus touchée. Les scènes de combat sont spectaculaires, les personnages incroyablement humains, et la fin... j'ai pleuré. Un coup de cœur absolu.",
-    "rating": 5,
-    "maxRating": 5,
-    "quotes": [
-      "A mother's love is the fiercest blade.",
-      "We are not defined by the traditions we follow, but by the choices we make when those traditions fail us."
-    ],
-    "tags": ["Fantasy", "Épique", "Arts Martiaux", "Japon", "Famille"],
-    "publishedOnInstagram": false,
-    "instagramLink": "https://instagram.com/p/kaigen",
-    "publishedOnBabelio": false,
-    "babelioLink": "https://www.babelio.com/livres/Wang-The-Sword-of-Kaigen/1170926",
-    "readDate": "2024-09-22"
-  },
-  {
-    "id": 3,
-    "title": "Retour à la Librairie Morisaki",
-    "author": "Satoshi Yagisawa",
-    "cover": "/covers/retour-a-la-librairie-morisaki.png",
-    "summary": "Takako retrouve la petite librairie Morisaki de son oncle à Tokyo. Entre les rayons poussiéreux et les livres d'occasion, elle redécouvre le plaisir de la lecture et la chaleur des rencontres humaines. Une suite douce et nostalgique qui célèbre l'amour des livres et la magie des librairies de quartier.",
-    "personalReview": "Quelle douceur et quelle tendresse dans ce petit roman ! Yagisawa capture parfaitement l'atmosphère unique des librairies japonaises et l'amour des livres. Une lecture réconfortante comme une tasse de thé par un après-midi pluvieux. Parfait pour tous les bibliophiles qui rêvent de se perdre dans une librairie intemporelle.",
-    "rating": 4.5,
-    "maxRating": 5,
-    "quotes": [
-      "Les livres sont comme de vieux amis, ils nous attendent patiemment sur leurs étagères.",
-      "Dans une librairie, chaque livre a une histoire, et chaque visiteur en commence une nouvelle."
-    ],
-    "tags": ["Littérature japonaise", "Slice of life", "Livres", "Librairie", "Cozy"],
-    "publishedOnInstagram": true,
-    "instagramLink": "https://instagram.com/p/morisaki",
-    "publishedOnBabelio": true,
-    "babelioLink": "https://www.babelio.com/livres/Yagisawa-Retour-a-la-Librairie-Morisaki/1485731",
-    "readDate": "2024-08-10"
-  },
-  {
-    "id": 4,
-    "title": "La Campagne Écarlate",
-    "author": "Jean-Laurent Del Socorro",
-    "cover": "/covers/la-campagne-ecarlate.png",
-    "summary": "Dans un monde ravagé par la guerre, une compagnie de mercenaires erre sur les routes désolées. Entre survivants et désespérés, ils tentent de garder leur humanité dans un univers de violence et de trahison. Une fresque épique et sombre qui explore les thèmes de la loyauté, de l'honneur et du prix de la survie.",
-    "personalReview": "Un roman de fantasy française puissant et sans concession. Del Socorro n'épargne rien au lecteur mais crée des personnages profondément humains et attachants. L'atmosphère est oppressante, la violence réaliste, mais c'est l'humanité de ces mercenaires qui m'a le plus marquée. Une lecture intense et mémorable.",
-    "rating": 4.5,
-    "maxRating": 5,
-    "quotes": [
-      "Dans la guerre, il n'y a pas de héros, seulement des survivants.",
-      "L'honneur est un luxe que seuls les morts peuvent s'offrir."
-    ],
-    "tags": ["Fantasy", "Grimdark", "Militaire", "France", "Épique"],
-    "publishedOnInstagram": true,
-    "instagramLink": "https://instagram.com/p/campagne-ecarlate",
-    "publishedOnBabelio": true,
-    "babelioLink": "https://www.babelio.com/livres/Del-Socorro-La-Campagne-ecarlate/1310234",
-    "readDate": "2024-07-18"
-  },
-  {
-    "id": 5,
-    "title": "Le Seigneur des Anneaux",
-    "author": "J.R.R. Tolkien",
-    "cover": "https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?w=400&h=600&fit=crop",
-    "summary": "Frodon Sacquet hérite d'un anneau aux pouvoirs immenses. Accompagné de ses compagnons, il doit entreprendre un périlleux voyage pour détruire l'Anneau Unique et sauver la Terre du Milieu de l'emprise du Seigneur des Ténèbres Sauron.",
-    "personalReview": "L'œuvre fondatrice de la fantasy moderne. Tolkien a créé un univers d'une richesse inégalée avec ses langues, ses mythologies, ses peuples. L'épopée est grandiose, les personnages attachants et les thèmes (l'amitié, le courage, le sacrifice) universels. Une aventure épique inoubliable.",
-    "rating": 5,
-    "maxRating": 5,
-    "quotes": [
-      "Tout ce que nous avons à décider, c'est ce que nous devons faire du temps qui nous est imparti.",
-      "Même les plus sages ne peuvent connaître toutes les fins.",
-      "Le courage se trouve en des lieux improbables."
-    ],
-    "tags": ["Fantasy", "Aventure", "Épique", "Classique", "Anglais"],
-    "publishedOnInstagram": true,
-    "instagramLink": "https://instagram.com/p/example4",
-    "publishedOnBabelio": true,
-    "babelioLink": "https://www.babelio.com/livres/Tolkien-Le-Seigneur-des-Anneaux/2375",
-    "readDate": "2023-11-05"
-  },
-  {
-    "id": 6,
-    "title": "Les Misérables",
-    "author": "Victor Hugo",
-    "cover": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=600&fit=crop",
-    "summary": "Jean Valjean, ancien bagnard condamné pour avoir volé du pain, tente de se racheter dans la France post-révolutionnaire. À travers son parcours et ceux de Fantine, Cosette, Marius et Javert, Hugo dresse un portrait saisissant de la société du XIXe siècle.",
-    "personalReview": "Une fresque monumentale de l'humanité. Hugo alterne action haletante et réflexions philosophiques avec un talent narratif exceptionnel. Les personnages sont complexes, touchants et incarnent les luttes sociales de leur époque. Un roman fleuve passionnant qui reste d'une actualité troublante.",
-    "rating": 4.5,
-    "maxRating": 5,
-    "quotes": [
-      "Aimer, c'est agir.",
-      "Même la nuit la plus sombre prendra fin et le soleil se lèvera.",
-      "Il n'y a rien comme le rêve pour créer le futur."
-    ],
-    "tags": ["Classique", "Historique", "France", "Social", "Roman-fleuve"],
-    "publishedOnInstagram": false,
-    "instagramLink": null,
-    "publishedOnBabelio": true,
-    "babelioLink": "https://www.babelio.com/livres/Hugo-Les-Miserables/1655",
-    "readDate": "2023-10-12"
-  },
-  {
-    "id": 7,
-    "title": "Cent ans de solitude",
-    "author": "Gabriel García Márquez",
-    "cover": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop",
-    "summary": "L'histoire de sept générations de la famille Buendía dans le village fictif de Macondo. Entre réalisme magique et chronique familiale, García Márquez raconte l'amour, la solitude, la guerre et la destinée avec une prose envoûtante.",
-    "personalReview": "Un chef-d'œuvre du réalisme magique. La prose de García Márquez est hypnotique, mêlant le quotidien et le fantastique avec une fluidité déconcertante. L'arbre généalogique complexe des Buendía devient une méditation sur les cycles de l'histoire et la condition humaine. Éblouissant.",
-    "rating": 4,
-    "maxRating": 5,
-    "quotes": [
-      "Il pleuvait depuis quatre ans, onze mois et deux jours.",
-      "Les choses ont une vie propre, tout est question de réveiller leur âme."
-    ],
-    "tags": ["Réalisme magique", "Classique", "Colombie", "Famille", "Amérique Latine"],
-    "publishedOnInstagram": true,
-    "instagramLink": "https://instagram.com/p/example5",
-    "publishedOnBabelio": false,
-    "babelioLink": "https://www.babelio.com/livres/Garcia-Marquez-Cent-ans-de-solitude/3787",
-    "readDate": "2024-01-28"
-  },
-  {
-    "id": 8,
-    "title": "Dune",
-    "author": "Frank Herbert",
-    "cover": "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=600&fit=crop",
-    "summary": "Sur la planète désertique d'Arrakis, seule source de l'Épice, substance la plus précieuse de l'univers, Paul Atréides doit affronter trahisons et complots. Son destin est lié à celui de tout un peuple et pourrait changer le cours de l'humanité.",
-    "personalReview": "Un monument de la science-fiction. Herbert a créé un univers d'une complexité fascinante, où se mêlent politique, religion, écologie et mystique. Les thèmes sont profonds, l'intrigue est captivante et l'univers est d'une richesse incroyable. Un classique incontournable qui a inspiré des générations.",
-    "rating": 4.5,
-    "maxRating": 5,
-    "quotes": [
-      "La peur est le tue-esprit. La peur est la petite mort qui conduit à l'oblitération totale.",
-      "Il est des moments où la survie dicte des actes qui autrement semblent impensables."
-    ],
-    "tags": ["Science-Fiction", "Épique", "Politique", "Écologie", "Anglais"],
-    "publishedOnInstagram": true,
-    "instagramLink": "https://instagram.com/p/example6",
-    "publishedOnBabelio": true,
-    "babelioLink": "https://www.babelio.com/livres/Herbert-Dune/7924",
-    "readDate": "2024-02-18"
-  }
+    {
+        "id":  1,
+        "title":  "Yumi et le Peintre de Cauchemars",
+        "author":  "Brandon Sanderson",
+        "cover":  "/covers/yumi-et-le-peintre-de-cauchemars.png",
+        "summary":  "Yumi vit dans un monde où elle invoque des esprits pour son peuple. Painter vit dans un monde de technologie et de machines. Séparés par des dimensions, ils se retrouvent mystérieusement connectés et doivent apprendre à vivre dans le corps de l\u0027autre. Une histoire bouleversante sur deux mondes opposés qui doivent s\u0027unir face à une menace cosmique.",
+        "personalReview":  "Bien que cela puisse sembler incongru, je découvre Brandon Sanderson avec Yumi et le peintre de cauchemars (car oui, je n\u0027ai toujours pas fini ma relecture de la Roue du Temps). Je commence donc, enfin, à découvrir cet auteur dont les mérites ne sont apparemment plus à prouver, par un genre qu\u0027il n\u0027a pas l\u0027habitude d\u0027écrire, soit de la fantasy romancée. Et bien, ce fut pour moi une totale réussite : non seulement les personnages étaient attachants, du conteur à nos protagonistes, mais l\u0027intrigue était palpitante, le cadre très pertinent, car bien posé avec des repères, et les valeurs défendues étaient... justes et belles. Inestimables, oserai-je dire. On sent vraiment les inspirations de l\u0027auteur, et les oeuvres citées dans son post-scriptum m\u0027ont révélé ce que je cherchais tout du long à trouver. Certains trouveront les idées fantastiques, d\u0027autres trouveront que ce n\u0027est pas si original, mais moi, ce que j\u0027en pense, c\u0027est que j\u0027ai passé un incroyable moment : poétique, artistique. Humain. Merci pour cette belle histoire !",
+        "rating":  5,
+        "maxRating":  5,
+        "quotes":  [
+                       "Le véritable héros est celui qui se trouve dans votre tête, la représentation d\u0027un idéal qui fait de vous quelqu\u0027un de meilleur.",
+                       "Les choses n\u0027ont que la valeur qu\u0027on leur accorde. Et de la même manière, les actions peuvent valoir tout ce que nous décidons qu\u0027elles valent.",
+                       "N\u0027obligez pas les gens à se montrer à la hauteur de ce que vous avez rêvé d\u0027eux."
+                   ],
+        "tags":  [
+                     "Fantasy",
+                     "Science-Fiction",
+                     "Romance",
+                     "Cosmère",
+                     "Quête d\u0027identité"
+                 ],
+        "publishedOnInstagram":  false,
+        "instagramLink":  "",
+        "publishedOnBabelio":  true,
+        "babelioLink":  "https://www.babelio.com/livres/Sanderson-Yumi-et-le-peintre-de-cauchemars/1540363",
+        "readDate":  "2024-05-09",
+        "publisher":  "Le Livre de Poche"
+    },
+    {
+        "id":  2,
+        "title":  "The Sword of Kaigen",
+        "author":  "M. L. Wang",
+        "cover":  "/covers/the-sword-of-kaigen.png",
+        "summary":  "Dans un village montagneux isolé, Misaki était autrefois une guerrière redoutable. Aujourd\u0027hui mère de famille, elle a enfoui son passé. Mais quand la guerre frappe à sa porte, elle doit reprendre son épée pour protéger les siens. Un récit épique mêlant arts martiaux, magie et drame familial dans un monde inspiré du Japon féodal.",
+        "personalReview":  "Un roman de fantasy absolument bouleversant. M.L. Wang crée un univers fascinant avec un système de magie basé sur les éléments, mais c\u0027est l\u0027exploration profonde des thèmes familiaux qui m\u0027a le plus touchée. Les scènes de combat sont spectaculaires, les personnages incroyablement humains, et la fin... j\u0027ai pleuré. Un coup de cœur absolu.",
+        "rating":  5,
+        "maxRating":  5,
+        "quotes":  [
+                       "A mother\u0027s love is the fiercest blade.",
+                       "We are not defined by the traditions we follow, but by the choices we make when those traditions fail us."
+                   ],
+        "tags":  [
+                     "Fantasy",
+                     "Épique",
+                     "Arts Martiaux",
+                     "Japon",
+                     "Famille"
+                 ],
+        "publishedOnInstagram":  false,
+        "instagramLink":  "https://instagram.com/p/kaigen",
+        "publishedOnBabelio":  false,
+        "babelioLink":  "https://www.babelio.com/livres/Wang-The-Sword-of-Kaigen/1170926",
+        "readDate":  "2024-09-22",
+        "publisher":  ""
+    },
+    {
+        "id":  3,
+        "title":  "Retour à la Librairie Morisaki",
+        "author":  "Satoshi Yagisawa",
+        "cover":  "/covers/retour-a-la-librairie-morisaki.png",
+        "summary":  "Takako retrouve la petite librairie Morisaki de son oncle à Tokyo. Entre les rayons poussiéreux et les livres d\u0027occasion, elle redécouvre le plaisir de la lecture et la chaleur des rencontres humaines. Une suite douce et nostalgique qui célèbre l\u0027amour des livres et la magie des librairies de quartier.",
+        "personalReview":  "Quelle douceur et quelle tendresse dans ce petit roman ! Yagisawa capture parfaitement l\u0027atmosphère unique des librairies japonaises et l\u0027amour des livres. Une lecture réconfortante comme une tasse de thé par un après-midi pluvieux. Parfait pour tous les bibliophiles qui rêvent de se perdre dans une librairie intemporelle.",
+        "rating":  4.5,
+        "maxRating":  5,
+        "quotes":  [
+                       "Les livres sont comme de vieux amis, ils nous attendent patiemment sur leurs étagères.",
+                       "Dans une librairie, chaque livre a une histoire, et chaque visiteur en commence une nouvelle."
+                   ],
+        "tags":  [
+                     "Littérature japonaise",
+                     "Slice of life",
+                     "Livres",
+                     "Librairie",
+                     "Cozy"
+                 ],
+        "publishedOnInstagram":  true,
+        "instagramLink":  "https://instagram.com/p/morisaki",
+        "publishedOnBabelio":  true,
+        "babelioLink":  "https://www.babelio.com/livres/Yagisawa-Retour-a-la-Librairie-Morisaki/1485731",
+        "readDate":  "2024-08-10",
+        "publisher":  ""
+    },
+    {
+        "id":  4,
+        "title":  "La Campagne Écarlate",
+        "author":  "Jean-Laurent Del Socorro",
+        "cover":  "/covers/la-campagne-ecarlate.png",
+        "summary":  "Dans un monde ravagé par la guerre, une compagnie de mercenaires erre sur les routes désolées. Entre survivants et désespérés, ils tentent de garder leur humanité dans un univers de violence et de trahison. Une fresque épique et sombre qui explore les thèmes de la loyauté, de l\u0027honneur et du prix de la survie.",
+        "personalReview":  "Un roman de fantasy française puissant et sans concession. Del Socorro n\u0027épargne rien au lecteur mais crée des personnages profondément humains et attachants. L\u0027atmosphère est oppressante, la violence réaliste, mais c\u0027est l\u0027humanité de ces mercenaires qui m\u0027a le plus marquée. Une lecture intense et mémorable.",
+        "rating":  4.5,
+        "maxRating":  5,
+        "quotes":  [
+                       "Dans la guerre, il n\u0027y a pas de héros, seulement des survivants.",
+                       "L\u0027honneur est un luxe que seuls les morts peuvent s\u0027offrir."
+                   ],
+        "tags":  [
+                     "Fantasy",
+                     "Grimdark",
+                     "Militaire",
+                     "France",
+                     "Épique"
+                 ],
+        "publishedOnInstagram":  true,
+        "instagramLink":  "https://instagram.com/p/campagne-ecarlate",
+        "publishedOnBabelio":  true,
+        "babelioLink":  "https://www.babelio.com/livres/Del-Socorro-La-Campagne-ecarlate/1310234",
+        "readDate":  "2024-07-18",
+        "publisher":  ""
+    }
 ]
-

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Book, Library, BarChart3, User, BookOpen } from 'lucide-react'
+import { Book, Library, BarChart3, User, BookOpen, Settings } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Layout = ({ children }) => {
@@ -9,7 +9,8 @@ const Layout = ({ children }) => {
     { path: '/', label: 'Accueil', icon: BookOpen },
     { path: '/library', label: 'Bibliothèque', icon: Library },
     { path: '/stats', label: 'Statistiques', icon: BarChart3 },
-    { path: '/about', label: 'À propos', icon: User }
+    { path: '/about', label: 'À propos', icon: User },
+    { path: '/admin', label: 'Admin', icon: Settings }
   ]
 
   const isActive = (path) => location.pathname === path
@@ -115,7 +116,7 @@ const Layout = ({ children }) => {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-text-light text-opacity-80">
-                © 2024 Songe Yume - Tous droits réservés
+                © 2025 SongeYume - Tous droits réservés
               </p>
               <p className="text-text-light text-opacity-60 text-sm mt-1">
                 Ma bibliothèque virtuelle personnelle

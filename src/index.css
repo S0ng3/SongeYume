@@ -94,3 +94,47 @@
   }
 }
 
+/* Styles pour le nuage de tags personnalisé */
+.tag-cloud-wrapper-organic {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1.5rem;
+  width: 100%;
+  min-height: 250px;
+}
+
+.tag-cloud-item-organic {
+  display: inline-block;
+  margin: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  user-select: none;
+  transition: all 0.2s ease;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Scrollbar personnalisée pour les listes */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(42, 47, 69, 0.5);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #f5b557;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e09e29;
+}
+

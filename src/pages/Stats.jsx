@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { BookOpen, Star, TrendingUp, Award, Users, Tag } from 'lucide-react'
+import { BookOpen, Star, TrendingUp, Award, Users, Tag, Building2 } from 'lucide-react'
+import TagCloud from '../components/TagCloud'
 import booksData from '../data/books.json'
 
 const Stats = () => {
@@ -39,6 +40,22 @@ const Stats = () => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 8)
       .map(([tag, count]) => ({ tag, count }))
+    
+    // Tags for word cloud (all tags)
+    const tagsWordCloud = Object.entries(tagCount)
+      .map(([tag, count]) => ({ value: tag, count: count }))
+
+    // Publisher distribution (top 8, excluding empty publishers)
+    const publisherCount = {}
+    booksData.forEach(book => {
+      if (book.publisher && book.publisher.trim() !== '') {
+        publisherCount[book.publisher] = (publisherCount[book.publisher] || 0) + 1
+      }
+    })
+    const topPublishers = Object.entries(publisherCount)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([publisher, count]) => ({ publisher, count }))
 
     // Instagram vs Babelio
     const publishedOnInstagram = booksData.filter(b => b.publishedOnInstagram).length
@@ -64,6 +81,8 @@ const Stats = () => {
       ratingDistribution,
       topAuthors,
       topTags,
+      tagsWordCloud,
+      topPublishers,
       publishedOnInstagram,
       publishedOnBabelio,
       monthsData
@@ -246,26 +265,53 @@ const Stats = () => {
           </motion.div>
         </div>
 
-        {/* Top Tags */}
+        {/* Top Tags - Word Cloud */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
           className="card-base p-6 mb-8"
         >
-          <h2 className="text-2xl font-bold text-text-light mb-6">
-            Tags les plus utilisés
-          </h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={statistics.topTags} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#2a2f45" />
-              <XAxis type="number" stroke="#dde5f2" />
-              <YAxis dataKey="tag" type="category" stroke="#dde5f2" width={120} />
-              <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="count" fill="#e09e29" radius={[0, 8, 8, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="flex items-center space-x-3 mb-6">
+            <Tag className="w-6 h-6 text-accent" />
+            <h2 className="text-2xl font-bold text-text-light">
+              Nuage de tags
+            </h2>
+          </div>
+          <div className="py-4">
+            <TagCloud
+              tags={statistics.tagsWordCloud}
+              minSize={16}
+              maxSize={50}
+            />
+          </div>
         </motion.div>
+
+        {/* Top Publishers */}
+        {statistics.topPublishers.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.75 }}
+            className="card-base p-6 mb-8"
+          >
+            <div className="flex items-center space-x-3 mb-6">
+              <Building2 className="w-6 h-6 text-accent" />
+              <h2 className="text-2xl font-bold text-text-light">
+                Maisons d'édition
+              </h2>
+            </div>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={statistics.topPublishers} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" stroke="#2a2f45" />
+                <XAxis type="number" stroke="#dde5f2" />
+                <YAxis dataKey="publisher" type="category" stroke="#dde5f2" width={150} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="count" fill="#f5b557" radius={[0, 8, 8, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </motion.div>
+        )}
 
         {/* Top Authors and Publication Status */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
