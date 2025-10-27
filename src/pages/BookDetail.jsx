@@ -2,11 +2,21 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Star, StarHalf, Quote, Instagram, ExternalLink, Calendar, BookMarked } from 'lucide-react'
 import booksData from '../data/books.json'
+import BookCardCompact from '../components/BookCardCompact'
 
 const BookDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const book = booksData.find(b => b.id === parseInt(id))
+
+  // Filtrer les autres livres du même auteur
+  const otherBooksByAuthor = book 
+    ? booksData.filter(b => 
+        b.author === book.author && 
+        b.id !== book.id && 
+        b.author.trim() !== '' // Exclure les livres sans auteur
+      )
+    : []
 
   if (!book) {
     return (
@@ -250,16 +260,36 @@ const BookDetail = () => {
       </section>
 
       {/* Related Books */}
-      <section className="py-12 bg-card-bg bg-opacity-30">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold text-text-light mb-8">
-            Autres livres du même auteur
-          </h2>
-          <div className="text-center text-text-light text-opacity-60">
-            <p>Fonctionnalité à venir</p>
+      {otherBooksByAuthor.length > 0 && (
+        <section className="py-12 bg-card-bg bg-opacity-30">
+          <div className="container-custom">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <h2 className="text-3xl font-bold text-text-light mb-2">
+                Autres livres de {book.author}
+              </h2>
+              <p className="text-text-light text-opacity-60 mb-8">
+                {otherBooksByAuthor.length} {otherBooksByAuthor.length > 1 ? 'livres' : 'livre'} dans la bibliothèque
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+                {otherBooksByAuthor.map((relatedBook, index) => (
+                  <motion.div
+                    key={relatedBook.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                  >
+                    <BookCardCompact book={relatedBook} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   )
 }

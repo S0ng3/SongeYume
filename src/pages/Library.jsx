@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import BookCardCompact from '../components/BookCardCompact'
 import SearchBar from '../components/SearchBar'
 import TagList from '../components/TagList'
 import CategoryFilter from '../components/CategoryFilter'
 import RatingFilter from '../components/RatingFilter'
 import PublisherFilter from '../components/PublisherFilter'
+import PlatformFilter from '../components/PlatformFilter'
 import Pagination from '../components/Pagination'
 import { filterBooksByCategory, getCategoryNames } from '../data/categories'
 import booksData from '../data/books.json'
@@ -19,9 +21,11 @@ const Library = () => {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedRating, setSelectedRating] = useState(null)
   const [selectedPublisher, setSelectedPublisher] = useState(null)
+  const [selectedPlatforms, setSelectedPlatforms] = useState([])
   const [allTags, setAllTags] = useState([])
   const [allPublishers, setAllPublishers] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false)
 
   useEffect(() => {
     // Extract all unique tags, excluding only the exact category names
@@ -52,7 +56,7 @@ const Library = () => {
   }, [])
 
   useEffect(() => {
-    // Filter books based on category, search term, tags, rating and publisher
+    // Filter books based on category, search term, tags, rating, publisher and platforms
     let filtered = booksData
 
     // 1. Filter by category (highest level)
@@ -94,9 +98,20 @@ const Library = () => {
       filtered = filtered.filter(book => book.publisher === selectedPublisher)
     }
 
+    // 6. Filter by platforms (Babelio et/ou Instagram)
+    if (selectedPlatforms.length > 0) {
+      filtered = filtered.filter(book => {
+        return selectedPlatforms.every(platform => {
+          if (platform === 'babelio') return book.publishedOnBabelio
+          if (platform === 'instagram') return book.publishedOnInstagram
+          return false
+        })
+      })
+    }
+
     setBooks(filtered)
     setCurrentPage(1) // Reset to first page when filters change
-  }, [searchTerm, selectedTags, selectedCategory, selectedRating, selectedPublisher])
+  }, [searchTerm, selectedTags, selectedCategory, selectedRating, selectedPublisher, selectedPlatforms])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -152,6 +167,18 @@ const Library = () => {
     setSelectedPublisher(null)
   }
 
+  const handlePlatformToggle = (platform) => {
+    if (selectedPlatforms.includes(platform)) {
+      setSelectedPlatforms(selectedPlatforms.filter(p => p !== platform))
+    } else {
+      setSelectedPlatforms([...selectedPlatforms, platform])
+    }
+  }
+
+  const handleClearPlatforms = () => {
+    setSelectedPlatforms([])
+  }
+
   const handlePageChange = (page) => {
     setCurrentPage(page)
   }
@@ -187,56 +214,106 @@ const Library = () => {
           <SearchBar
             searchTerm={searchTerm}
             onSearchChange={handleSearchChange}
-            placeholder="Rechercher par titre, auteur, tag, note, maison d'édition..."
+            placeholder="Rechercher par titre, auteur, tags..."
           />
         </motion.div>
 
-        {/* Filters */}
+        {/* Advanced Filters - Collapsible */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="card-base p-6 mb-12 space-y-6"
+          className="card-base mb-12"
         >
-          {/* Category Filter */}
-          <CategoryFilter
-            selectedCategory={selectedCategory}
-            onCategoryClick={handleCategoryClick}
-            onClearCategory={handleClearCategory}
-          />
+          {/* Toggle Button */}
+          <button
+            onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+            className="w-full px-6 py-4 flex items-center justify-between text-text-light hover:bg-card-hover transition-colors rounded-lg"
+          >
+            <div className="flex items-center space-x-2">
+              <span className="text-lg font-semibold text-accent">Filtres</span>
+              {(selectedCategory || selectedTags.length > 0 || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0) && (
+                <span className="bg-accent bg-opacity-20 text-accent text-xs font-semibold px-2 py-1 rounded-full">
+                  {[
+                    selectedCategory ? 1 : 0,
+                    selectedTags.length,
+                    selectedRating !== null ? 1 : 0,
+                    selectedPublisher ? 1 : 0,
+                    selectedPlatforms.length
+                  ].reduce((a, b) => a + b, 0)} actif(s)
+                </span>
+              )}
+            </div>
+            {isFiltersOpen ? (
+              <ChevronUp className="w-5 h-5 text-accent" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-accent" />
+            )}
+          </button>
 
-          {/* Tags Filter */}
-          <div className="border-t border-text-light border-opacity-10 pt-6">
-            <TagList
-              tags={allTags}
-              selectedTags={selectedTags}
-              onTagClick={handleTagClick}
-              onClearTags={handleClearTags}
-            />
-          </div>
+          {/* Filters Content */}
+          <AnimatePresence>
+            {isFiltersOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="p-6 pt-2 space-y-6">
+                  {/* Category Filter */}
+                  <CategoryFilter
+                    selectedCategory={selectedCategory}
+                    onCategoryClick={handleCategoryClick}
+                    onClearCategory={handleClearCategory}
+                  />
 
-          {/* Rating Filter */}
-          <div className="border-t border-text-light border-opacity-10 pt-6">
-            <RatingFilter
-              selectedRating={selectedRating}
-              onRatingClick={handleRatingClick}
-              onClearRating={handleClearRating}
-            />
-          </div>
+                  {/* Tags Filter */}
+                  <div className="border-t border-text-light border-opacity-10 pt-6">
+                    <TagList
+                      tags={allTags}
+                      selectedTags={selectedTags}
+                      onTagClick={handleTagClick}
+                      onClearTags={handleClearTags}
+                    />
+                  </div>
 
-          {/* Publisher Filter */}
-          <div className="border-t border-text-light border-opacity-10 pt-6">
-            <PublisherFilter
-              publishers={allPublishers}
-              selectedPublisher={selectedPublisher}
-              onPublisherClick={handlePublisherClick}
-              onClearPublisher={handleClearPublisher}
-            />
-          </div>
+                  {/* Rating Filter */}
+                  <div className="border-t border-text-light border-opacity-10 pt-6">
+                    <RatingFilter
+                      selectedRating={selectedRating}
+                      onRatingClick={handleRatingClick}
+                      onClearRating={handleClearRating}
+                    />
+                  </div>
+
+                  {/* Publisher Filter */}
+                  <div className="border-t border-text-light border-opacity-10 pt-6">
+                    <PublisherFilter
+                      publishers={allPublishers}
+                      selectedPublisher={selectedPublisher}
+                      onPublisherClick={handlePublisherClick}
+                      onClearPublisher={handleClearPublisher}
+                    />
+                  </div>
+
+                  {/* Platform Filter */}
+                  <div className="border-t border-text-light border-opacity-10 pt-6">
+                    <PlatformFilter
+                      selectedPlatforms={selectedPlatforms}
+                      onPlatformToggle={handlePlatformToggle}
+                      onClearPlatforms={handleClearPlatforms}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         {/* Results Info */}
-        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher) && (
+        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -247,7 +324,7 @@ const Library = () => {
                 <span className="font-semibold text-accent">{books.length}</span>{' '}
                 {books.length > 1 ? 'résultats trouvés' : 'résultat trouvé'}
               </p>
-              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher) && (
+              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0) && (
                 <button
                   onClick={() => {
                     setSearchTerm('')
@@ -255,6 +332,7 @@ const Library = () => {
                     setSelectedCategory(null)
                     setSelectedRating(null)
                     setSelectedPublisher(null)
+                    setSelectedPlatforms([])
                   }}
                   className="text-sm text-accent hover:text-opacity-80 transition-colors"
                 >
@@ -308,6 +386,7 @@ const Library = () => {
                   setSelectedCategory(null)
                   setSelectedRating(null)
                   setSelectedPublisher(null)
+                  setSelectedPlatforms([])
                 }}
                 className="btn-primary"
               >

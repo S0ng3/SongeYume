@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Book, Library, BarChart3, User, BookOpen, Settings } from 'lucide-react'
+import { Book, Library, BarChart3, User, BookOpen } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Layout = ({ children }) => {
@@ -9,8 +9,7 @@ const Layout = ({ children }) => {
     { path: '/', label: 'Accueil', icon: BookOpen },
     { path: '/library', label: 'Bibliothèque', icon: Library },
     { path: '/stats', label: 'Statistiques', icon: BarChart3 },
-    { path: '/about', label: 'À propos', icon: User },
-    { path: '/admin', label: 'Admin', icon: Settings }
+    { path: '/about', label: 'À propos', icon: User }
   ]
 
   const isActive = (path) => location.pathname === path
