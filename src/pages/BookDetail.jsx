@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Star, StarHalf, Quote, Instagram, ExternalLink, Calendar, BookMarked } from 'lucide-react'
 import booksData from '../data/books.json'
 import BookCardCompact from '../components/BookCardCompact'
+import SimilarBooks from '../components/SimilarBooks'
+import SeriesTracker from '../components/SeriesTracker'
 
 const BookDetail = () => {
   const { id } = useParams()
@@ -256,6 +258,20 @@ const BookDetail = () => {
               )}
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Series Tracker */}
+      <section className="py-12">
+        <div className="container-custom">
+          <SeriesTracker currentBook={book} />
+        </div>
+      </section>
+
+      {/* Similar Books Recommendations */}
+      <section className="py-12 bg-card-bg bg-opacity-30">
+        <div className="container-custom">
+          <SimilarBooks currentBook={book} maxResults={4} />
         </div>
       </section>
 

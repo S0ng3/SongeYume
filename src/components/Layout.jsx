@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Book, Library, BarChart3, User, BookOpen } from 'lucide-react'
+import { Book, Library, BarChart3, User, BookOpen, Quote } from 'lucide-react'
 import { motion } from 'framer-motion'
+import BookWheel from './BookWheel'
 
 const Layout = ({ children }) => {
   const location = useLocation()
@@ -8,6 +9,7 @@ const Layout = ({ children }) => {
   const navItems = [
     { path: '/', label: 'Accueil', icon: BookOpen },
     { path: '/library', label: 'Bibliothèque', icon: Library },
+    { path: '/quotes', label: 'Citations', icon: Quote },
     { path: '/stats', label: 'Statistiques', icon: BarChart3 },
     { path: '/about', label: 'À propos', icon: User }
   ]
@@ -108,6 +110,9 @@ const Layout = ({ children }) => {
       <main className="flex-grow">
         {children}
       </main>
+
+      {/* Book Wheel Widget */}
+      <BookWheel />
 
       {/* Footer */}
       <footer className="bg-card-bg border-t border-accent border-opacity-20 py-8 mt-16">

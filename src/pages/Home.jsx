@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { BookOpen, TrendingUp, Star, ArrowRight } from 'lucide-react'
 import BookShelf from '../components/BookShelf'
+import QuoteOfTheDay from '../components/QuoteOfTheDay'
 import booksData from '../data/books.json'
 
 const Home = () => {
@@ -104,6 +105,13 @@ const Home = () => {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Quote of the Day Section */}
+      <section className="py-16 bg-card-bg bg-opacity-30">
+        <div className="container-custom">
+          <QuoteOfTheDay />
         </div>
       </section>
 

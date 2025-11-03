@@ -20,6 +20,8 @@
             "Cosmère",
             "Quête d'identité"
         ],
+        "series": "",
+        "seriesOrder": null,
         "publishedOnInstagram": false,
         "instagramLink": "",
         "publishedOnBabelio": true,
@@ -227,6 +229,8 @@
             "Fantasy",
             "Épique"
         ],
+        "series": "La Roue du Temps",
+        "seriesOrder": 3,
         "publishedOnInstagram": true,
         "instagramLink": "",
         "publishedOnBabelio": true,
@@ -248,6 +252,8 @@
             "Fantasy",
             "Épique"
         ],
+        "series": "La Roue du Temps",
+        "seriesOrder": 4,
         "publishedOnInstagram": false,
         "instagramLink": "",
         "publishedOnBabelio": false,
