@@ -82,7 +82,7 @@ const BookWheel = () => {
       {/* Bouton Flottant */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-40 bg-accent hover:bg-opacity-90 text-background rounded-full p-4 shadow-2xl flex items-center space-x-3 group"
+        className="fixed bottom-20 right-8 z-40 bg-accent hover:bg-opacity-90 text-background rounded-full p-4 shadow-2xl flex items-center space-x-3 group"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, scale: 0 }}
@@ -113,11 +113,11 @@ const BookWheel = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-4 sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl z-50"
+              className="fixed left-1/2 top-[5vh] -translate-x-1/2 w-[calc(100%-2rem)] sm:w-full max-w-2xl max-h-[90vh] z-50 flex flex-col"
             >
-              <div className="card-base h-full sm:h-auto max-h-[90vh] overflow-y-auto">
+              <div className="card-base flex flex-col max-h-full overflow-hidden">
                 {/* Header */}
-                <div className="sticky top-0 bg-card-bg z-10 p-6 border-b border-text-light border-opacity-10">
+                <div className="flex-shrink-0 bg-card-bg p-6 border-b border-text-light border-opacity-10">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="bg-accent bg-opacity-20 rounded-lg p-2">
@@ -139,7 +139,7 @@ const BookWheel = () => {
                   </p>
                 </div>
 
-                <div className="p-6 space-y-6">
+                <div className="p-6 space-y-6 overflow-y-auto flex-1">
                   {/* Filtres */}
                   <div className="card-base bg-card-hover p-4">
                     <button

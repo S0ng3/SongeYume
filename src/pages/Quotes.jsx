@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Quote, Book, User, Tag, Shuffle, Copy, Check, Share2, Filter } from 'lucide-react'
+import { Quote, Book, User, Tag, Shuffle, Copy, Check, Share2, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
 
@@ -34,6 +34,9 @@ const Quotes = () => {
   const [randomQuote, setRandomQuote] = useState(null)
   const [copiedIndex, setCopiedIndex] = useState(null)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  
+  const QUOTES_PER_PAGE = 18
 
   // Listes uniques pour les filtres
   const uniqueBooks = useMemo(() => 
@@ -67,7 +70,32 @@ const Quotes = () => {
     }
 
     setFilteredQuotes(filtered)
+    setCurrentPage(1) // Réinitialiser la page lors d'un changement de filtre
   }, [selectedBook, selectedAuthor, selectedTag, allQuotes])
+
+  // Pagination
+  const totalPages = Math.ceil(filteredQuotes.length / QUOTES_PER_PAGE)
+  const startIndex = (currentPage - 1) * QUOTES_PER_PAGE
+  const endIndex = startIndex + QUOTES_PER_PAGE
+  const currentQuotes = filteredQuotes.slice(startIndex, endIndex)
+
+  // Fonctions de navigation
+  const goToPage = (page) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      goToPage(currentPage - 1)
+    }
+  }
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      goToPage(currentPage + 1)
+    }
+  }
 
   // Citation aléatoire
   const getRandomQuote = () => {
@@ -110,6 +138,11 @@ const Quotes = () => {
           <h1 className="page-title">Mur de Citations</h1>
           <p className="page-subtitle">
             {filteredQuotes.length} {filteredQuotes.length > 1 ? 'citations' : 'citation'} qui m'ont marquée
+            {totalPages > 1 && (
+              <span className="text-sm text-text-light text-opacity-60 ml-2">
+                (Page {currentPage} sur {totalPages})
+              </span>
+            )}
           </p>
         </motion.div>
 
@@ -322,55 +355,131 @@ const Quotes = () => {
 
         {/* Grille de Citations */}
         {filteredQuotes.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredQuotes.map((quote, index) => (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {currentQuotes.map((quote, index) => (
+                <motion.div
+                  key={startIndex + index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="card-base card-hover p-6 flex flex-col justify-between"
+                >
+                  <div className="mb-4">
+                    <Quote className="w-6 h-6 text-accent opacity-50 mb-3" />
+                    <blockquote className="text-text-light leading-relaxed italic">
+                      "{quote.text}"
+                    </blockquote>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <Link 
+                      to={`/book/${quote.bookId}`}
+                      className="block group"
+                    >
+                      <p className="text-accent font-semibold text-sm group-hover:text-opacity-80 transition-colors">
+                        {quote.bookTitle}
+                      </p>
+                      <p className="text-text-light text-opacity-60 text-xs">
+                        {quote.author}
+                      </p>
+                    </Link>
+                    
+                    <button
+                      onClick={() => copyToClipboard(quote.text, startIndex + index)}
+                      className="flex items-center space-x-2 text-text-light text-opacity-60 hover:text-accent transition-colors text-sm"
+                    >
+                      {copiedIndex === startIndex + index ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          <span>Copié !</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copier</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
               <motion.div
-                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="card-base card-hover p-6 flex flex-col justify-between"
+                transition={{ delay: 0.3 }}
+                className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
               >
-                <div className="mb-4">
-                  <Quote className="w-6 h-6 text-accent opacity-50 mb-3" />
-                  <blockquote className="text-text-light leading-relaxed italic">
-                    "{quote.text}"
-                  </blockquote>
+                {/* Bouton Précédent */}
+                <button
+                  onClick={goToPreviousPage}
+                  disabled={currentPage === 1}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    currentPage === 1
+                      ? 'bg-card-bg text-text-light text-opacity-30 cursor-not-allowed'
+                      : 'bg-card-bg text-accent hover:bg-card-hover'
+                  }`}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                  <span>Précédent</span>
+                </button>
+
+                {/* Numéros de pages */}
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
+                    // Afficher la première page, la dernière, la page courante et les pages adjacentes
+                    if (
+                      page === 1 ||
+                      page === totalPages ||
+                      (page >= currentPage - 1 && page <= currentPage + 1)
+                    ) {
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => goToPage(page)}
+                          className={`w-10 h-10 rounded-lg transition-all ${
+                            page === currentPage
+                              ? 'bg-accent text-background font-bold'
+                              : 'bg-card-bg text-text-light hover:bg-card-hover'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      )
+                    } else if (
+                      page === currentPage - 2 ||
+                      page === currentPage + 2
+                    ) {
+                      return (
+                        <span key={page} className="text-text-light text-opacity-30">
+                          ...
+                        </span>
+                      )
+                    }
+                    return null
+                  })}
                 </div>
-                
-                <div className="space-y-3">
-                  <Link 
-                    to={`/book/${quote.bookId}`}
-                    className="block group"
-                  >
-                    <p className="text-accent font-semibold text-sm group-hover:text-opacity-80 transition-colors">
-                      {quote.bookTitle}
-                    </p>
-                    <p className="text-text-light text-opacity-60 text-xs">
-                      {quote.author}
-                    </p>
-                  </Link>
-                  
-                  <button
-                    onClick={() => copyToClipboard(quote.text, index)}
-                    className="flex items-center space-x-2 text-text-light text-opacity-60 hover:text-accent transition-colors text-sm"
-                  >
-                    {copiedIndex === index ? (
-                      <>
-                        <Check className="w-4 h-4" />
-                        <span>Copié !</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        <span>Copier</span>
-                      </>
-                    )}
-                  </button>
-                </div>
+
+                {/* Bouton Suivant */}
+                <button
+                  onClick={goToNextPage}
+                  disabled={currentPage === totalPages}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    currentPage === totalPages
+                      ? 'bg-card-bg text-text-light text-opacity-30 cursor-not-allowed'
+                      : 'bg-card-bg text-accent hover:bg-card-hover'
+                  }`}
+                >
+                  <span>Suivant</span>
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </motion.div>
-            ))}
-          </div>
+            )}
+          </>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}
