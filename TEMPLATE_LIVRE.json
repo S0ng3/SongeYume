@@ -13,6 +13,8 @@
     "Troisième citation si vous en avez"
   ],
   "tags": ["Genre1", "Genre2", "Genre3", "Thème"],
+  "spicyLevel": 0,
+  "format": "Poche",
   "series": "",
   "seriesOrder": null,
   "seriesTotalBooks": null,

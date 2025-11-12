@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Star, StarHalf } from 'lucide-react'
+import SpicyIndicator from './SpicyIndicator'
 
 const BookCard = ({ book }) => {
   // Calculate stars display
@@ -77,6 +78,13 @@ const BookCard = ({ book }) => {
             <div className="flex items-center space-x-1 mb-3">
               {renderStars()}
             </div>
+
+            {/* Spicy Level */}
+            {book.spicyLevel !== undefined && book.spicyLevel !== null && (
+              <div className="mb-3">
+                <SpicyIndicator level={book.spicyLevel} size="sm" />
+              </div>
+            )}
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-auto">

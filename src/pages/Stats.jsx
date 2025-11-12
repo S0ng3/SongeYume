@@ -1,11 +1,47 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { BookOpen, Star, TrendingUp, Award, Users, Tag, Building2 } from 'lucide-react'
-import TagCloud from '../components/TagCloud'
+import { BookOpen, Star, TrendingUp, Award, Users, Tag, Building2, Calendar, Book, BookMarked, BookCopy } from 'lucide-react'
 import booksData from '../data/books.json'
+import { CATEGORIES, getCategoryFromTags } from '../data/categories'
 
 const Stats = () => {
+  // État pour l'année sélectionnée
+  const currentYear = new Date().getFullYear()
+  const [selectedYear, setSelectedYear] = useState(currentYear)
+
+  // Obtenir les années disponibles dans les données
+  const availableYears = useMemo(() => {
+    const years = new Set()
+    booksData.forEach(book => {
+      const year = new Date(book.readDate).getFullYear()
+      years.add(year)
+    })
+    return Array.from(years).sort((a, b) => b - a)
+  }, [])
+
+  // Calculer les livres par mois pour l'année sélectionnée
+  const booksByMonth = useMemo(() => {
+    const monthsData = []
+    const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    
+    for (let month = 0; month < 12; month++) {
+      const books = booksData.filter(book => {
+        const bookDate = new Date(book.readDate)
+        return bookDate.getMonth() === month && bookDate.getFullYear() === selectedYear
+      }).sort((a, b) => new Date(a.readDate) - new Date(b.readDate))
+      
+      monthsData.push({
+        month: monthNames[month],
+        monthIndex: month,
+        books: books,
+        count: books.length
+      })
+    }
+    
+    return monthsData
+  }, [selectedYear])
+
   // Calculate statistics
   const statistics = useMemo(() => {
     const totalBooks = booksData.length
@@ -24,6 +60,7 @@ const Stats = () => {
     booksData.forEach(book => {
       authorCount[book.author] = (authorCount[book.author] || 0) + 1
     })
+    const uniqueAuthorsCount = Object.keys(authorCount).length
     const topAuthors = Object.entries(authorCount)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
@@ -40,10 +77,6 @@ const Stats = () => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 8)
       .map(([tag, count]) => ({ tag, count }))
-    
-    // Tags for word cloud (all tags)
-    const tagsWordCloud = Object.entries(tagCount)
-      .map(([tag, count]) => ({ value: tag, count: count }))
 
     // Publisher distribution (top 8, excluding empty publishers)
     const publisherCount = {}
@@ -75,17 +108,47 @@ const Stats = () => {
       monthsData.push({ month: monthName, livres: count })
     }
 
+    // Répartition par catégories
+    const categoryCount = {}
+    booksData.forEach(book => {
+      const categoryKey = getCategoryFromTags(book.tags)
+      const categoryName = CATEGORIES[categoryKey].name
+      categoryCount[categoryName] = (categoryCount[categoryName] || 0) + 1
+    })
+    
+    const categoryDistribution = Object.entries(categoryCount)
+      .map(([category, count]) => ({
+        category,
+        count,
+        icon: Object.values(CATEGORIES).find(c => c.name === category)?.icon || '/categories/autre.png'
+      }))
+      .sort((a, b) => b.count - a.count)
+
+    // Répartition par format
+    const formatCount = {}
+    booksData.forEach(book => {
+      if (book.format) {
+        formatCount[book.format] = (formatCount[book.format] || 0) + 1
+      }
+    })
+    
+    const formatDistribution = Object.entries(formatCount)
+      .map(([format, count]) => ({ format, count }))
+      .sort((a, b) => b.count - a.count)
+
     return {
       totalBooks,
       averageRating,
       ratingDistribution,
+      uniqueAuthorsCount,
       topAuthors,
       topTags,
-      tagsWordCloud,
       topPublishers,
       publishedOnInstagram,
       publishedOnBabelio,
-      monthsData
+      monthsData,
+      categoryDistribution,
+      formatDistribution
     }
   }, [])
 
@@ -182,7 +245,7 @@ const Stats = () => {
               </div>
             </div>
             <h3 className="text-3xl font-bold text-text-light mb-1">
-              {statistics.topAuthors.length}
+              {statistics.uniqueAuthorsCount}
             </h3>
             <p className="text-text-light text-opacity-60 text-sm">
               Auteurs différents
@@ -265,27 +328,208 @@ const Stats = () => {
           </motion.div>
         </div>
 
-        {/* Top Tags - Word Cloud */}
+        {/* Lectures par mois pour l'année sélectionnée */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="card-base p-6 mb-8"
+          className="card-base p-6 mb-12"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-3">
+              <Calendar className="w-6 h-6 text-accent" />
+              <h2 className="text-2xl font-bold text-text-light">
+                Lectures mensuelles
+              </h2>
+            </div>
+            <select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(Number(e.target.value))}
+              className="bg-card-hover text-text-light px-4 py-2 rounded-lg border border-accent border-opacity-30 focus:outline-none focus:border-accent transition-colors"
+            >
+              {availableYears.map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+            {booksByMonth.map((monthData, index) => (
+              monthData.count > 0 && (
+                <motion.div
+                  key={monthData.monthIndex}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  className="border-l-4 border-accent pl-4"
+                >
+                  <div className="flex items-center space-x-3 mb-3">
+                    <h3 className="text-lg font-bold text-text-light">
+                      {monthData.month}
+                    </h3>
+                    <span className="text-accent text-sm font-semibold">
+                      {monthData.count} {monthData.count > 1 ? 'livres' : 'livre'}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {monthData.books.map(book => (
+                      <motion.div
+                        key={book.id}
+                        whileHover={{ scale: 1.05 }}
+                        className="group relative"
+                      >
+                        <img
+                          src={book.cover}
+                          alt={book.title}
+                          className="w-20 h-28 object-cover rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:shadow-accent/30"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 rounded-lg transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <div className="text-center p-2">
+                            <p className="text-text-light text-xs font-semibold line-clamp-2">
+                              {book.title}
+                            </p>
+                            <p className="text-accent text-xs mt-1">
+                              {new Date(book.readDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            ))}
+          </div>
+
+          {booksByMonth.every(m => m.count === 0) && (
+            <div className="text-center py-8 text-text-light text-opacity-60">
+              <Calendar className="w-12 h-12 mx-auto mb-3 opacity-50" />
+              <p>Aucune lecture pour l'année {selectedYear}</p>
+            </div>
+          )}
+        </motion.div>
+
+        {/* Répartition par catégories */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="card-base p-6 mb-12"
         >
           <div className="flex items-center space-x-3 mb-6">
-            <Tag className="w-6 h-6 text-accent" />
+            <BookOpen className="w-6 h-6 text-accent" />
             <h2 className="text-2xl font-bold text-text-light">
-              Nuage de tags
+              Répartition par catégories
             </h2>
           </div>
-          <div className="py-4">
-            <TagCloud
-              tags={statistics.tagsWordCloud}
-              minSize={16}
-              maxSize={50}
-            />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {statistics.categoryDistribution.map((categoryData, index) => {
+              const percentage = ((categoryData.count / statistics.totalBooks) * 100).toFixed(1)
+              return (
+                <motion.div
+                  key={categoryData.category}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 * index }}
+                  className="card-hover p-4 flex items-center space-x-4"
+                >
+                  <div className="flex-shrink-0">
+                    <img
+                      src={categoryData.icon}
+                      alt={categoryData.category}
+                      className="w-12 h-12 object-contain"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-text-light font-semibold text-lg">
+                      {categoryData.category}
+                    </h3>
+                    <div className="flex items-center justify-between mt-1">
+                      <span className="text-accent font-bold">
+                        {categoryData.count} {categoryData.count > 1 ? 'livres' : 'livre'}
+                      </span>
+                      <span className="text-text-light text-opacity-60 text-sm">
+                        {percentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-card-base rounded-full h-2 mt-2">
+                      <div
+                        className="bg-accent h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </motion.div>
+
+        {/* Répartition par format */}
+        {statistics.formatDistribution.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.85 }}
+            className="card-base p-6 mb-12"
+          >
+            <div className="flex items-center space-x-3 mb-6">
+              <Book className="w-6 h-6 text-accent" />
+              <h2 className="text-2xl font-bold text-text-light">
+                Répartition par format
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {statistics.formatDistribution.map((formatData, index) => {
+                const percentage = ((formatData.count / statistics.totalBooks) * 100).toFixed(1)
+                
+                // Définir l'icône selon le format
+                let FormatIcon = BookOpen
+                if (formatData.format === 'Poche') FormatIcon = BookCopy
+                if (formatData.format === 'Broché') FormatIcon = Book
+                if (formatData.format === 'Relié') FormatIcon = BookMarked
+                
+                return (
+                  <motion.div
+                    key={formatData.format}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 * index }}
+                    className="card-hover p-6 text-center"
+                  >
+                    <div className="flex justify-center mb-4">
+                      <div className="bg-accent bg-opacity-20 rounded-full p-4">
+                        <FormatIcon className="w-12 h-12 text-accent" />
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-text-light mb-2">
+                      {formatData.format}
+                    </h3>
+                    <div className="flex items-center justify-center space-x-2 mb-3">
+                      <span className="text-3xl font-bold text-accent">
+                        {formatData.count}
+                      </span>
+                      <span className="text-text-light text-opacity-60">
+                        {formatData.count > 1 ? 'livres' : 'livre'}
+                      </span>
+                    </div>
+                    <div className="text-text-light text-opacity-60 text-sm mb-3">
+                      {percentage}% de votre collection
+                    </div>
+                    <div className="w-full bg-card-base rounded-full h-3">
+                      <div
+                        className="bg-accent h-3 rounded-full transition-all duration-500"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+        )}
 
         {/* Top Publishers */}
         {statistics.topPublishers.length > 0 && (

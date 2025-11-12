@@ -301,5 +301,76 @@ Vous aurez maintenant **vos propres photos** sur votre bibliothèque virtuelle, 
 
 ---
 
+## 🔥 Système de notation Spicy
+
+Pour les livres avec des tags **Romance** ou **MM**, vous pouvez ajouter un niveau "spicy" pour indiquer le degré de contenu romantique/sensuel :
+
+### Niveaux disponibles
+
+| Niveau | Indicateur | Description | Exemple |
+|--------|------------|-------------|---------|
+| **0** | 🔥○○ | Sous-entendus uniquement | Roi Sorcier, Demain et Demain |
+| **1** | 🔥🔥○ | Doux - Moments tendres, bisous | Yumi et le Peintre de Cauchemars |
+| **2** | 🔥🔥🔥 | Épicé - Scènes plus explicites | Tarot - Le Dernier Soleil |
+| **3** | 🔥🔥🔥 | Très épicé - Contenu explicite |  |
+
+*Note : Les flammes s'affichent dans la couleur dorée de votre charte graphique*
+
+### Comment l'utiliser
+
+Dans votre `books.json`, ajoutez le champ `spicyLevel` (optionnel) :
+
+```json
+{
+  "id": 13,
+  "title": "Roi Sorcier",
+  "tags": ["Fantasy", "MM"],
+  "spicyLevel": 0
+}
+```
+
+**Important :**
+- Ce champ est **optionnel** - ne l'ajoutez que pour les livres Romance/MM
+- Si le champ n'est pas présent, aucun indicateur ne s'affichera
+- Les flammes s'affichent automatiquement sur les cartes et la page détail
+
+---
+
+## 📚 Format des livres
+
+Vous pouvez maintenant indiquer le format physique de vos livres. Cette information apparaît sur la page de détail et génère des statistiques.
+
+### Formats disponibles
+
+| Format | Icône | Description |
+|--------|-------|-------------|
+| **Poche** | 📖 | Format de poche (petit format) |
+| **Broché** | 📚 | Couverture souple |
+| **Relié** | 📗 | Couverture rigide |
+
+*Note : Les icônes s'affichent dans la couleur dorée de votre charte graphique avec un fond semi-transparent*
+
+### Comment l'utiliser
+
+Dans votre `books.json`, ajoutez le champ `format` (optionnel) :
+
+```json
+{
+  "id": 1,
+  "title": "Yumi et le Peintre de Cauchemars",
+  "format": "Poche"
+}
+```
+
+**Options valides :** `"Poche"`, `"Broché"`, `"Relié"`
+
+### Où apparaît cette information ?
+
+- ✅ **Page de détail du livre** : Affiché avec les autres informations
+- ✅ **Page Statistiques** : Section "Répartition par format" avec graphiques et pourcentages
+- ❌ **Pas de filtre** : Cette information n'est pas utilisée pour filtrer dans la bibliothèque
+
+---
+
 **Besoin d'aide ?** Consultez `public/covers/README.md` pour plus de détails.
 

@@ -3,12 +3,12 @@ export const CATEGORIES = {
   fantasy: {
     name: 'Fantasy',
     icon: '/categories/fantasy.png',
-    tags: ['Fantasy', 'Épique', 'Science-Fiction', 'Cosmère', 'Sanderson', 'Anticipation', 'Grimdark', 'Militaire']
+    tags: ['Fantasy', 'Fantastique', 'Science-Fiction']
   },
   classique: {
     name: 'Classique',
     icon: '/categories/classique.png',
-    tags: ['Classique', 'Philosophie', 'Existentialisme', 'Conte', 'Poésie']
+    tags: ['Classique', 'Philosophie', 'Existentialisme', 'Poésie']
   },
   drame: {
     name: 'Drame',
@@ -18,7 +18,7 @@ export const CATEGORIES = {
   jeunesse: {
     name: 'Jeunesse',
     icon: '/categories/jeunesse.png',
-    tags: ['Jeunesse', 'Aventure', 'Conte']
+    tags: ['Jeunesse']
   },
   policier: {
     name: 'Policier',
@@ -28,12 +28,12 @@ export const CATEGORIES = {
   factuel: {
     name: 'Factuel',
     icon: '/categories/factuel.png',
-    tags: ['Biographie', 'Histoire', 'Essai', 'Documentaire', 'Science']
+    tags: ['Biographie', 'Histoire', 'Essai', 'Documentaire', 'Science', 'Géographie']
   },
   voyage: {
     name: 'Voyage',
     icon: '/categories/voyage.png',
-    tags: ['Voyage', 'Exploration', 'Littérature japonaise', 'Slice of life', 'Cozy', 'Librairie', 'Livres']
+    tags: ['Voyage', 'Exploration', 'Carnet de voyage', "Guide de voyage"]
   },
   favorite: {
     name: 'Favoris',
@@ -44,7 +44,7 @@ export const CATEGORIES = {
   autre: {
     name: 'Autre',
     icon: '/categories/autre.png',
-    tags: ['Autre', 'Divers', 'Politique', 'Écologie', 'Arts Martiaux', 'Réalisme magique']
+    tags: ['Autre', 'Divers', 'Politique', 'Écologie']
   }
 }
 
@@ -56,11 +56,20 @@ export const getCategoryNames = () => {
 
 // Helper function to get category from tags
 export const getCategoryFromTags = (bookTags) => {
+  // Parcourir toutes les catégories sauf "autre" et "favorite" en premier
   for (const [key, category] of Object.entries(CATEGORIES)) {
+    if (key === 'autre' || key === 'favorite') continue
     if (category.tags && bookTags.some(tag => category.tags.includes(tag))) {
       return key
     }
   }
+  
+  // Si aucune catégorie spécifique ne correspond, vérifier "autre"
+  if (CATEGORIES.autre.tags && bookTags.some(tag => CATEGORIES.autre.tags.includes(tag))) {
+    return 'autre'
+  }
+  
+  // Par défaut, retourner "autre"
   return 'autre'
 }
 

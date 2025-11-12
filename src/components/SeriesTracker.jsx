@@ -72,11 +72,11 @@ const SeriesTracker = ({ currentBook }) => {
     // Si pas de série détectée ou trouvée
     if (!seriesName || !currentVolume) return null
 
-    // S'il n'y a qu'un seul livre, ce n'est pas vraiment une série
-    if (seriesBooks.length <= 1) return null
-
     // Trier par numéro de tome
     seriesBooks.sort((a, b) => a.volumeNumber - b.volumeNumber)
+
+    // S'il n'y a qu'un seul livre et pas d'info sur le total de la série, ce n'est pas une vraie série
+    if (seriesBooks.length <= 1 && !currentBook.seriesTotalBooks) return null
 
     // Calculer les statistiques
     const readBooks = seriesBooks.filter(b => b.rating > 0).length

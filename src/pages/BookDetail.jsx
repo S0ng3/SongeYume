@@ -1,10 +1,11 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Star, StarHalf, Quote, Instagram, ExternalLink, Calendar, BookMarked } from 'lucide-react'
+import { ArrowLeft, Star, StarHalf, Quote, Instagram, ExternalLink, Calendar, BookMarked, BookOpen } from 'lucide-react'
 import booksData from '../data/books.json'
 import BookCardCompact from '../components/BookCardCompact'
 import SimilarBooks from '../components/SimilarBooks'
 import SeriesTracker from '../components/SeriesTracker'
+import SpicyIndicator from '../components/SpicyIndicator'
 
 const BookDetail = () => {
   const { id } = useParams()
@@ -186,6 +187,13 @@ const BookDetail = () => {
                   </span>
                 </div>
 
+                {/* Spicy Level */}
+                {book.spicyLevel !== undefined && book.spicyLevel !== null && (
+                  <div className="mb-4">
+                    <SpicyIndicator level={book.spicyLevel} showLabel={true} size="md" />
+                  </div>
+                )}
+
                 {/* Read Date */}
                 <div className="flex items-center space-x-2 text-text-light text-opacity-60">
                   <Calendar className="w-4 h-4" />
@@ -197,6 +205,14 @@ const BookDetail = () => {
                   <div className="flex items-center space-x-2 text-text-light text-opacity-60 mt-2">
                     <BookMarked className="w-4 h-4" />
                     <span className="text-sm">Maison d'édition : {book.publisher}</span>
+                  </div>
+                )}
+
+                {/* Format */}
+                {book.format && (
+                  <div className="flex items-center space-x-2 text-text-light text-opacity-60 mt-2">
+                    <BookOpen className="w-4 h-4" />
+                    <span className="text-sm">Format : {book.format}</span>
                   </div>
                 )}
               </div>

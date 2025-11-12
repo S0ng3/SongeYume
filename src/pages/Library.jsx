@@ -8,6 +8,7 @@ import CategoryFilter from '../components/CategoryFilter'
 import RatingFilter from '../components/RatingFilter'
 import PublisherFilter from '../components/PublisherFilter'
 import PlatformFilter from '../components/PlatformFilter'
+import SpicyFilter from '../components/SpicyFilter'
 import Pagination from '../components/Pagination'
 import { filterBooksByCategory, getCategoryNames } from '../data/categories'
 import booksData from '../data/books.json'
@@ -22,19 +23,56 @@ const Library = () => {
   const [selectedRating, setSelectedRating] = useState(null)
   const [selectedPublisher, setSelectedPublisher] = useState(null)
   const [selectedPlatforms, setSelectedPlatforms] = useState([])
+  const [selectedSpicyLevel, setSelectedSpicyLevel] = useState(null)
   const [allTags, setAllTags] = useState([])
   const [allPublishers, setAllPublishers] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
 
+  // Mettre à jour les options de filtres disponibles en fonction des filtres actifs
   useEffect(() => {
-    // Extract all unique tags, excluding only the exact category names
+    // Filtrer les livres disponibles en fonction des filtres déjà appliqués
+    let availableBooks = booksData
+
+    // 1. Appliquer le filtre de catégorie
+    if (selectedCategory) {
+      availableBooks = filterBooksByCategory(availableBooks, selectedCategory)
+    }
+
+    // 2. Appliquer le filtre de recherche
+    if (searchTerm) {
+      availableBooks = availableBooks.filter(book => {
+        const searchLower = searchTerm.toLowerCase()
+        return (
+          book.title.toLowerCase().includes(searchLower) ||
+          book.author.toLowerCase().includes(searchLower) ||
+          book.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
+          book.summary.toLowerCase().includes(searchLower) ||
+          book.rating.toString().includes(searchLower) ||
+          (book.publisher && book.publisher.toLowerCase().includes(searchLower))
+        )
+      })
+    }
+
+    // 3. Appliquer le filtre de tags
+    if (selectedTags.length > 0) {
+      availableBooks = availableBooks.filter(book =>
+        selectedTags.every(tag => book.tags.includes(tag))
+      )
+    }
+
+    // 4. Appliquer le filtre de note
+    if (selectedRating !== null) {
+      availableBooks = availableBooks.filter(book => 
+        book.rating === selectedRating || book.rating === selectedRating + 0.5
+      )
+    }
+
+    // Extraire les tags disponibles dans les livres filtrés
     const categoryNames = getCategoryNames()
     const tagsSet = new Set()
-    booksData.forEach(book => {
+    availableBooks.forEach(book => {
       book.tags.forEach(tag => {
-        // Only exclude tags that are exactly category names (Fantasy, Classique, etc.)
-        // Keep specific tags like "Science-Fiction", "Romance", etc.
         if (!categoryNames.includes(tag)) {
           tagsSet.add(tag)
         }
@@ -42,18 +80,26 @@ const Library = () => {
     })
     setAllTags(Array.from(tagsSet).sort())
 
-    // Extract all unique publishers with their counts
+    // Extraire les éditeurs disponibles dans les livres filtrés
     const publisherCount = {}
-    booksData.forEach(book => {
+    availableBooks.forEach(book => {
       if (book.publisher && book.publisher.trim() !== '') {
         publisherCount[book.publisher] = (publisherCount[book.publisher] || 0) + 1
       }
     })
     const publishersList = Object.entries(publisherCount)
       .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count) // Tri par nombre de livres (descendant)
+      .sort((a, b) => b.count - a.count)
     setAllPublishers(publishersList)
-  }, [])
+
+    // Réinitialiser l'éditeur sélectionné s'il n'est plus disponible
+    if (selectedPublisher) {
+      const availablePublisherNames = publishersList.map(p => p.name)
+      if (!availablePublisherNames.includes(selectedPublisher)) {
+        setSelectedPublisher(null)
+      }
+    }
+  }, [selectedCategory, searchTerm, selectedTags, selectedRating, selectedPublisher])
 
   useEffect(() => {
     // Filter books based on category, search term, tags, rating, publisher and platforms
@@ -109,9 +155,14 @@ const Library = () => {
       })
     }
 
+    // 7. Filter by spicy level
+    if (selectedSpicyLevel !== null) {
+      filtered = filtered.filter(book => book.spicyLevel === selectedSpicyLevel)
+    }
+
     setBooks(filtered)
     setCurrentPage(1) // Reset to first page when filters change
-  }, [searchTerm, selectedTags, selectedCategory, selectedRating, selectedPublisher, selectedPlatforms])
+  }, [searchTerm, selectedTags, selectedCategory, selectedRating, selectedPublisher, selectedPlatforms, selectedSpicyLevel])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -134,8 +185,9 @@ const Library = () => {
       setSelectedCategory(null)
     } else {
       setSelectedCategory(category)
-      // Clear tags when changing category for cleaner UX
+      // Clear tags and other filters when changing category for cleaner UX
       setSelectedTags([])
+      setSelectedPublisher(null)
     }
   }
 
@@ -177,6 +229,18 @@ const Library = () => {
 
   const handleClearPlatforms = () => {
     setSelectedPlatforms([])
+  }
+
+  const handleSpicyLevelClick = (level) => {
+    if (selectedSpicyLevel === level) {
+      setSelectedSpicyLevel(null)
+    } else {
+      setSelectedSpicyLevel(level)
+    }
+  }
+
+  const handleClearSpicyLevel = () => {
+    setSelectedSpicyLevel(null)
   }
 
   const handlePageChange = (page) => {
@@ -232,14 +296,15 @@ const Library = () => {
           >
             <div className="flex items-center space-x-2">
               <span className="text-lg font-semibold text-accent">Filtres</span>
-              {(selectedCategory || selectedTags.length > 0 || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0) && (
+              {(selectedCategory || selectedTags.length > 0 || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
                 <span className="bg-accent bg-opacity-20 text-accent text-xs font-semibold px-2 py-1 rounded-full">
                   {[
                     selectedCategory ? 1 : 0,
                     selectedTags.length,
                     selectedRating !== null ? 1 : 0,
                     selectedPublisher ? 1 : 0,
-                    selectedPlatforms.length
+                    selectedPlatforms.length,
+                    selectedSpicyLevel !== null ? 1 : 0
                   ].reduce((a, b) => a + b, 0)} actif(s)
                 </span>
               )}
@@ -306,6 +371,15 @@ const Library = () => {
                       onClearPlatforms={handleClearPlatforms}
                     />
                   </div>
+
+                  {/* Spicy Level Filter */}
+                  <div className="border-t border-text-light border-opacity-10 pt-6">
+                    <SpicyFilter
+                      selectedSpicyLevel={selectedSpicyLevel}
+                      onSpicyLevelClick={handleSpicyLevelClick}
+                      onClearSpicyLevel={handleClearSpicyLevel}
+                    />
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -313,7 +387,7 @@ const Library = () => {
         </motion.div>
 
         {/* Results Info */}
-        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0) && (
+        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -324,7 +398,7 @@ const Library = () => {
                 <span className="font-semibold text-accent">{books.length}</span>{' '}
                 {books.length > 1 ? 'résultats trouvés' : 'résultat trouvé'}
               </p>
-              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0) && (
+              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
                 <button
                   onClick={() => {
                     setSearchTerm('')
@@ -333,6 +407,7 @@ const Library = () => {
                     setSelectedRating(null)
                     setSelectedPublisher(null)
                     setSelectedPlatforms([])
+                    setSelectedSpicyLevel(null)
                   }}
                   className="text-sm text-accent hover:text-opacity-80 transition-colors"
                 >
@@ -387,6 +462,7 @@ const Library = () => {
                   setSelectedRating(null)
                   setSelectedPublisher(null)
                   setSelectedPlatforms([])
+                  setSelectedSpicyLevel(null)
                 }}
                 className="btn-primary"
               >
