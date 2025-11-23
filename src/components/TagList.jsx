@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { X } from 'lucide-react'
+import { X, Tag } from 'lucide-react'
+import { isSubgenre } from '../utils/subgenres'
 
 const TagList = ({ tags, selectedTags, onTagClick, onClearTags }) => {
   const isSelected = (tag) => selectedTags.includes(tag)
@@ -7,9 +8,12 @@ const TagList = ({ tags, selectedTags, onTagClick, onClearTags }) => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-text-light">
-          Filtrer par tags
-        </h3>
+        <div className="flex items-center space-x-2">
+          <Tag className="w-5 h-5 text-accent" />
+          <h3 className="text-lg font-semibold text-text-light">
+            Filtrer par tags
+          </h3>
+        </div>
         {selectedTags.length > 0 && (
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
@@ -32,7 +36,11 @@ const TagList = ({ tags, selectedTags, onTagClick, onClearTags }) => {
             onClick={() => onTagClick(tag)}
             className={`tag ${
               isSelected(tag)
-                ? 'bg-accent bg-opacity-100 text-background font-semibold'
+                ? isSubgenre(tag)
+                  ? 'bg-yellow-300 bg-opacity-100 text-background font-bold'
+                  : 'bg-accent bg-opacity-100 text-background font-semibold'
+                : isSubgenre(tag)
+                ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
                 : ''
             }`}
           >

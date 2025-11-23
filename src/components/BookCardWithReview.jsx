@@ -4,7 +4,7 @@ import { Star } from 'lucide-react'
 import SpicyIndicator from './SpicyIndicator'
 import { isSubgenre } from '../utils/subgenres'
 
-const BookCard = ({ book }) => {
+const BookCardWithReview = ({ book }) => {
 
   return (
     <motion.div
@@ -15,7 +15,7 @@ const BookCard = ({ book }) => {
     >
       <Link to={`/book/${book.id}`}>
         <div className="card-base card-hover overflow-hidden h-full flex flex-col group">
-          {/* Book Cover */}
+          {/* Couverture du livre */}
           <div className="relative overflow-hidden aspect-[2/3] bg-card-hover">
             <img
               src={book.cover}
@@ -31,7 +31,7 @@ const BookCard = ({ book }) => {
               </div>
             )}
             
-            {/* Rating Badge */}
+            {/* Badge de note */}
             <div className="absolute top-3 right-3 bg-background bg-opacity-90 rounded-full px-3 py-1.5 flex items-center space-x-1 shadow-lg">
               <Star className="w-4 h-4 text-accent fill-accent" />
               <span className="text-accent text-sm font-bold">
@@ -40,7 +40,7 @@ const BookCard = ({ book }) => {
             </div>
           </div>
 
-          {/* Book Info */}
+          {/* Informations du livre */}
           <div className="p-4 flex flex-col flex-grow">
             <h3 className="text-xl font-bold text-text-light mb-2 line-clamp-2 group-hover:text-accent transition-colors">
               {book.title}
@@ -53,6 +53,18 @@ const BookCard = ({ book }) => {
             {book.spicyLevel !== undefined && book.spicyLevel !== null && (
               <div className="mb-3">
                 <SpicyIndicator level={book.spicyLevel} size="sm" />
+              </div>
+            )}
+
+            {/* Avis personnel */}
+            {book.personalReview && (
+              <div className="mb-3 flex-grow">
+                <h4 className="text-accent font-semibold mb-2 text-xs uppercase tracking-wide">
+                  Mon avis
+                </h4>
+                <p className="text-text-light text-opacity-90 leading-relaxed text-sm line-clamp-4">
+                  {book.personalReview}
+                </p>
               </div>
             )}
 
@@ -83,5 +95,5 @@ const BookCard = ({ book }) => {
   )
 }
 
-export default BookCard
+export default BookCardWithReview
 

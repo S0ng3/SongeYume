@@ -17,14 +17,13 @@
             "Fantasy",
             "Science-Fiction",
             "Romance",
-            "Cosmère",
             "Quête d'identité"
         ],
         "spicyLevel": 0,
         "format": "Relié",
         "series": "",
         "seriesOrder": null,
-        "publishedOnInstagram": false,
+        "publishedOnInstagram": true,
         "instagramLink": "",
         "publishedOnBabelio": true,
         "babelioLink": "https://www.babelio.com/livres/Sanderson-Yumi-et-le-peintre-de-cauchemars/1540363",
@@ -36,28 +35,32 @@
         "title": "The Sword of Kaigen",
         "author": "M. L. Wang",
         "cover": "/covers/the-sword-of-kaigen.png",
-        "summary": "Dans un village montagneux isolé, Misaki était autrefois une guerrière redoutable. Aujourd'hui mère de famille, elle a enfoui son passé. Mais quand la guerre frappe à sa porte, elle doit reprendre son épée pour protéger les siens. Un récit épique mêlant arts martiaux, magie et drame familial dans un monde inspiré du Japon féodal.",
+        "summary": "Au sommet d`une montagne vivent les guerriers les plus puissants du monde, des surhommes capables de manier des lames de glace. Depuis des centaines d`années, les combattants de la péninsule de Kusanagi tiennent les ennemis de l`Empire à distance, ce qui a valu à leur bout de terre gelé le nom d`Épée de Kaigen. Lorsque les vents de la guerre commenceront à souffler, la famille Matsuda aura-t-elle la force de défendre les siens ? Ou ses membres s`entredéchireront-ils avant même que les vrais ennemis n`atteignent leurs côtes ?",
         "personalReview": "Un roman de fantasy absolument bouleversant. M.L. Wang crée un univers fascinant avec un système de magie basé sur les éléments, mais c'est l'exploration profonde des thèmes familiaux qui m'a le plus touchée. Les scènes de combat sont spectaculaires, les personnages incroyablement humains, et la fin... j'ai pleuré. Un coup de cœur absolu.",
-        "rating": 5,
+        "rating": 4,
         "maxRating": 5,
         "quotes": [
-            "A mother's love is the fiercest blade.",
-            "We are not defined by the traditions we follow, but by the choices we make when those traditions fail us."
+            "Un enfant n'a pas à assumer la responsabilité de ses décisions. Il peut faire confiance à ses parents pour lui dire ce qu'il doit faire. Un homme se fait confiance.",
+            "Une voix pour ceux qui sont réduits au silence, un abri pour ceux qui sont sans défense, des poings pour ceux qui sont sans pouvoir."
         ],
         "tags": [
             "Fantasy",
-            "Épique",
+            "Urban Fantasy",
             "Arts Martiaux",
             "Japon",
-            "Famille"
+            "Famille",
+            "Littérature américaine",
+            "Mère",
+            "Romance"
         ],
         "format": "Relié",
+        "spicyLevel": 1,
         "publishedOnInstagram": false,
         "instagramLink": "https://instagram.com/p/kaigen",
-        "publishedOnBabelio": false,
+        "publishedOnBabelio": true,
         "babelioLink": "https://www.babelio.com/livres/Wang-The-Sword-of-Kaigen/1170926",
-        "readDate": "2024-09-22",
-        "publisher": ""
+        "readDate": "2025-11-18",
+        "publisher": "Calix"
     },
     {
         "id": 3,
@@ -88,7 +91,7 @@
     },
     {
         "id": 4,
-        "title": "Les Poudremages, tome 2 : La Campagne Écarlate",
+        "title": "La Campagne Écarlate",
         "author": "Brian McClellan",
         "cover": "/covers/la-campagne-ecarlate.png",
         "summary": "Dans un monde ravagé par la guerre, une compagnie de mercenaires erre sur les routes désolées. Entre survivants et désespérés, ils tentent de garder leur humanité dans un univers de violence et de trahison. Une fresque épique et sombre qui explore les thèmes de la loyauté, de l'honneur et du prix de la survie.",
@@ -107,6 +110,9 @@
             "Révolution",
             "Favoris"
         ],
+        "series": "Les Poudremages",
+        "seriesOrder": 2,
+        "seriesTotalBooks": 3,
         "format": "Poche",
         "publishedOnInstagram": true,
         "instagramLink": "https://instagram.com/p/campagne-ecarlate",

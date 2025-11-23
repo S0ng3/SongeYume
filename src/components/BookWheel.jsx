@@ -15,7 +15,6 @@ const BookWheel = () => {
   const [showFilters, setShowFilters] = useState(false)
   
   // Filtres
-  const [minRating, setMinRating] = useState(0)
   const [selectedGenre, setSelectedGenre] = useState(null)
   const [onlyUnread, setOnlyUnread] = useState(false)
 
@@ -26,14 +25,11 @@ const BookWheel = () => {
   const getFilteredBooks = () => {
     let filtered = booksData.filter(book => book.rating > 0) // Seulement les livres lus
 
-    if (minRating > 0) {
-      filtered = filtered.filter(book => book.rating >= minRating)
-    }
     if (selectedGenre) {
       filtered = filtered.filter(book => book.tags.includes(selectedGenre))
     }
     if (onlyUnread) {
-      // Pour l'instant, on filtre sur rating === 0 (à adapter selon votre logique)
+      // Pour l'instant, on filtre sur rating === 0 (à adapter selon la logique souhaitée)
       filtered = booksData.filter(book => book.rating === 0 || !book.personalReview)
     }
 
@@ -70,12 +66,11 @@ const BookWheel = () => {
 
   // Réinitialiser les filtres
   const resetFilters = () => {
-    setMinRating(0)
     setSelectedGenre(null)
     setOnlyUnread(false)
   }
 
-  const hasActiveFilters = minRating > 0 || selectedGenre || onlyUnread
+  const hasActiveFilters = selectedGenre || onlyUnread
 
   return (
     <>
@@ -135,7 +130,7 @@ const BookWheel = () => {
                     </button>
                   </div>
                   <p className="text-text-light text-opacity-70 mt-2">
-                    Laissez le hasard choisir votre prochaine lecture !
+                    Laissez le hasard choisir la prochaine lecture !
                   </p>
                 </div>
 
@@ -151,7 +146,7 @@ const BookWheel = () => {
                         <span className="font-semibold">Filtres</span>
                         {hasActiveFilters && (
                           <span className="bg-accent bg-opacity-20 text-accent text-xs font-semibold px-2 py-1 rounded-full">
-                            {[minRating > 0, selectedGenre, onlyUnread].filter(Boolean).length}
+                            {[selectedGenre, onlyUnread].filter(Boolean).length}
                           </span>
                         )}
                       </div>
@@ -171,22 +166,6 @@ const BookWheel = () => {
                           exit={{ height: 0, opacity: 0 }}
                           className="mt-4 space-y-4 overflow-hidden"
                         >
-                          {/* Note minimale */}
-                          <div>
-                            <label className="text-text-light text-sm font-medium mb-2 block">
-                              Note minimale : {minRating > 0 ? `${minRating}⭐` : 'Toutes'}
-                            </label>
-                            <input
-                              type="range"
-                              min="0"
-                              max="5"
-                              step="0.5"
-                              value={minRating}
-                              onChange={(e) => setMinRating(parseFloat(e.target.value))}
-                              className="w-full accent-accent"
-                            />
-                          </div>
-
                           {/* Genre */}
                           <div>
                             <label className="text-text-light text-sm font-medium mb-2 block">
@@ -249,7 +228,7 @@ const BookWheel = () => {
                         >
                           <Sparkles className="w-12 h-12 text-accent mx-auto mb-3" />
                           <h3 className="text-2xl font-bold text-accent mb-2">
-                            Votre prochaine lecture !
+                            Prochaine lecture !
                           </h3>
                         </motion.div>
 

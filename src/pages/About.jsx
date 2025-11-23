@@ -61,7 +61,7 @@ const About = () => {
                   Ce site est né de mon envie d'archiver mes lectures, de conserver mes impressions et de partager mes coups de cœur avec d'autres passionnés de livres. Chaque livre que je lis laisse une trace, une émotion, une réflexion, et j'ai voulu créer un lieu où toutes ces expériences puissent vivre et être partagées.
                 </p>
                 <p>
-                  Ici, vous trouverez mes critiques honnêtes, mes citations préférées, et mes réflexions sur les œuvres qui ont marqué mon parcours de lectrice. De la littérature classique à la science-fiction, en passant par la fantasy et la philosophie, chaque genre trouve sa place dans mon univers.
+                  Ici, vous trouverez les critiques honnêtes de Songe, ses citations préférées, et ses réflexions sur les œuvres qui ont marqué son parcours de lectrice. De la littérature classique à la science-fiction, en passant par la fantasy et la philosophie, chaque genre trouve sa place dans son univers.
                 </p>
                 <p>
                   J'espère que vous prendrez autant de plaisir à explorer cette bibliothèque que j'en ai eu à la construire.

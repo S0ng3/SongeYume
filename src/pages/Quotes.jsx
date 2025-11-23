@@ -488,7 +488,7 @@ const Quotes = () => {
           >
             <Quote className="w-16 h-16 text-text-light text-opacity-30 mx-auto mb-4" />
             <p className="text-text-light text-opacity-60 text-lg">
-              Aucune citation ne correspond à vos filtres
+              Aucune citation ne correspond aux filtres
             </p>
             <button onClick={clearFilters} className="btn-primary mt-6">
               Réinitialiser les filtres

@@ -118,11 +118,6 @@ const SeriesTracker = ({ currentBook }) => {
               </h2>
               <p className="text-text-light text-opacity-60 text-sm">
                 Série en {seriesInfo.totalBooks} {seriesInfo.totalBooks > 1 ? 'tomes' : 'tome'}
-                {seriesInfo.ownedBooks < seriesInfo.totalBooks && (
-                  <span className="text-accent ml-2">
-                    (vous en possédez {seriesInfo.ownedBooks})
-                  </span>
-                )}
               </p>
             </div>
           </div>
@@ -284,11 +279,9 @@ const SeriesTracker = ({ currentBook }) => {
           className="mt-6 p-4 bg-accent bg-opacity-10 rounded-lg border-l-4 border-accent"
         >
           <p className="text-text-light text-sm">
-            Vous avez lu <strong className="text-accent">{seriesInfo.readBooks} tome{seriesInfo.readBooks > 1 ? 's' : ''}</strong> sur {seriesInfo.totalBooks}.
-            {seriesInfo.ownedBooks < seriesInfo.totalBooks ? (
-              <span> Vous possédez <strong className="text-accent">{seriesInfo.ownedBooks} tome{seriesInfo.ownedBooks > 1 ? 's' : ''}</strong> de la série.</span>
-            ) : seriesInfo.nextBook && (
-              <span> Il ne vous reste que <strong className="text-accent">{seriesInfo.totalBooks - seriesInfo.readBooks} tome{(seriesInfo.totalBooks - seriesInfo.readBooks) > 1 ? 's' : ''}</strong> pour terminer la série !</span>
+            Songe a lu <strong className="text-accent">{seriesInfo.readBooks} tome{seriesInfo.readBooks > 1 ? 's' : ''}</strong> sur {seriesInfo.totalBooks}.
+            {seriesInfo.nextBook && seriesInfo.totalBooks > seriesInfo.readBooks && (
+              <span> Il ne reste que <strong className="text-accent">{seriesInfo.totalBooks - seriesInfo.readBooks} tome{(seriesInfo.totalBooks - seriesInfo.readBooks) > 1 ? 's' : ''}</strong> pour terminer la série !</span>
             )}
           </p>
         </motion.div>
@@ -302,7 +295,7 @@ const SeriesTracker = ({ currentBook }) => {
           className="mt-6 p-4 bg-green-500 bg-opacity-10 rounded-lg border-l-4 border-green-500"
         >
           <p className="text-text-light text-sm">
-            Bravo ! Vous avez terminé toute la série <strong className="text-green-500">{seriesInfo.name}</strong> !
+            Bravo ! Songe a terminé toute la série <strong className="text-green-500">{seriesInfo.name}</strong> !
           </p>
         </motion.div>
       )}

@@ -353,25 +353,25 @@ const Stats = () => {
             </select>
           </div>
 
-          <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {booksByMonth.map((monthData, index) => (
               monthData.count > 0 && (
                 <motion.div
                   key={monthData.monthIndex}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className="border-l-4 border-accent pl-4"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.05 * index }}
+                  className="card-hover p-4 flex flex-col h-full"
                 >
-                  <div className="flex items-center space-x-3 mb-3">
-                    <h3 className="text-lg font-bold text-text-light">
+                  <div className="flex items-center justify-between mb-3 border-b border-accent border-opacity-30 pb-2">
+                    <h3 className="text-base font-bold text-text-light">
                       {monthData.month}
                     </h3>
-                    <span className="text-accent text-sm font-semibold">
-                      {monthData.count} {monthData.count > 1 ? 'livres' : 'livre'}
+                    <span className="text-accent text-xs font-semibold bg-accent bg-opacity-10 px-2 py-1 rounded-full">
+                      {monthData.count}
                     </span>
                   </div>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2 justify-center">
                     {monthData.books.map(book => (
                       <motion.div
                         key={book.id}
@@ -381,14 +381,14 @@ const Stats = () => {
                         <img
                           src={book.cover}
                           alt={book.title}
-                          className="w-20 h-28 object-cover rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:shadow-accent/30"
+                          className="w-16 h-24 object-cover rounded shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:shadow-accent/30"
                         />
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 rounded-lg transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                          <div className="text-center p-2">
-                            <p className="text-text-light text-xs font-semibold line-clamp-2">
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 rounded transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <div className="text-center px-1">
+                            <p className="text-text-light text-[10px] font-semibold line-clamp-3 leading-tight">
                               {book.title}
                             </p>
-                            <p className="text-accent text-xs mt-1">
+                            <p className="text-accent text-[9px] mt-1">
                               {new Date(book.readDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
                             </p>
                           </div>
@@ -516,7 +516,7 @@ const Stats = () => {
                       </span>
                     </div>
                     <div className="text-text-light text-opacity-60 text-sm mb-3">
-                      {percentage}% de votre collection
+                      {percentage}% de la collection
                     </div>
                     <div className="w-full bg-card-base rounded-full h-3">
                       <div

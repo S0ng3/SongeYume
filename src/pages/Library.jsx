@@ -5,7 +5,6 @@ import BookCardCompact from '../components/BookCardCompact'
 import SearchBar from '../components/SearchBar'
 import TagList from '../components/TagList'
 import CategoryFilter from '../components/CategoryFilter'
-import RatingFilter from '../components/RatingFilter'
 import PublisherFilter from '../components/PublisherFilter'
 import PlatformFilter from '../components/PlatformFilter'
 import SpicyFilter from '../components/SpicyFilter'
@@ -20,7 +19,6 @@ const Library = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTags, setSelectedTags] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const [selectedRating, setSelectedRating] = useState(null)
   const [selectedPublisher, setSelectedPublisher] = useState(null)
   const [selectedPlatforms, setSelectedPlatforms] = useState([])
   const [selectedSpicyLevel, setSelectedSpicyLevel] = useState(null)
@@ -61,13 +59,6 @@ const Library = () => {
       )
     }
 
-    // 4. Appliquer le filtre de note
-    if (selectedRating !== null) {
-      availableBooks = availableBooks.filter(book => 
-        book.rating === selectedRating || book.rating === selectedRating + 0.5
-      )
-    }
-
     // Extraire les tags disponibles dans les livres filtrés
     const categoryNames = getCategoryNames()
     const tagsSet = new Set()
@@ -99,7 +90,7 @@ const Library = () => {
         setSelectedPublisher(null)
       }
     }
-  }, [selectedCategory, searchTerm, selectedTags, selectedRating, selectedPublisher])
+  }, [selectedCategory, searchTerm, selectedTags, selectedPublisher])
 
   useEffect(() => {
     // Filter books based on category, search term, tags, rating, publisher and platforms
@@ -132,14 +123,7 @@ const Library = () => {
       )
     }
 
-    // 4. Filter by rating (inclut la note et la note +0.5)
-    if (selectedRating !== null) {
-      filtered = filtered.filter(book => 
-        book.rating === selectedRating || book.rating === selectedRating + 0.5
-      )
-    }
-
-    // 5. Filter by publisher
+    // 4. Filter by publisher
     if (selectedPublisher) {
       filtered = filtered.filter(book => book.publisher === selectedPublisher)
     }
@@ -162,7 +146,7 @@ const Library = () => {
 
     setBooks(filtered)
     setCurrentPage(1) // Reset to first page when filters change
-  }, [searchTerm, selectedTags, selectedCategory, selectedRating, selectedPublisher, selectedPlatforms, selectedSpicyLevel])
+  }, [searchTerm, selectedTags, selectedCategory, selectedPublisher, selectedPlatforms, selectedSpicyLevel])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -193,18 +177,6 @@ const Library = () => {
 
   const handleClearCategory = () => {
     setSelectedCategory(null)
-  }
-
-  const handleRatingClick = (rating) => {
-    if (selectedRating === rating) {
-      setSelectedRating(null)
-    } else {
-      setSelectedRating(rating)
-    }
-  }
-
-  const handleClearRating = () => {
-    setSelectedRating(null)
   }
 
   const handlePublisherClick = (publisher) => {
@@ -296,12 +268,11 @@ const Library = () => {
           >
             <div className="flex items-center space-x-2">
               <span className="text-lg font-semibold text-accent">Filtres</span>
-              {(selectedCategory || selectedTags.length > 0 || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
+              {(selectedCategory || selectedTags.length > 0 || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
                 <span className="bg-accent bg-opacity-20 text-accent text-xs font-semibold px-2 py-1 rounded-full">
                   {[
                     selectedCategory ? 1 : 0,
                     selectedTags.length,
-                    selectedRating !== null ? 1 : 0,
                     selectedPublisher ? 1 : 0,
                     selectedPlatforms.length,
                     selectedSpicyLevel !== null ? 1 : 0
@@ -344,15 +315,6 @@ const Library = () => {
                     />
                   </div>
 
-                  {/* Rating Filter */}
-                  <div className="border-t border-text-light border-opacity-10 pt-6">
-                    <RatingFilter
-                      selectedRating={selectedRating}
-                      onRatingClick={handleRatingClick}
-                      onClearRating={handleClearRating}
-                    />
-                  </div>
-
                   {/* Publisher Filter */}
                   <div className="border-t border-text-light border-opacity-10 pt-6">
                     <PublisherFilter
@@ -387,7 +349,7 @@ const Library = () => {
         </motion.div>
 
         {/* Results Info */}
-        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
+        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -398,13 +360,12 @@ const Library = () => {
                 <span className="font-semibold text-accent">{books.length}</span>{' '}
                 {books.length > 1 ? 'résultats trouvés' : 'résultat trouvé'}
               </p>
-              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedRating !== null || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
+              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
                 <button
                   onClick={() => {
                     setSearchTerm('')
                     setSelectedTags([])
                     setSelectedCategory(null)
-                    setSelectedRating(null)
                     setSelectedPublisher(null)
                     setSelectedPlatforms([])
                     setSelectedSpicyLevel(null)
@@ -449,17 +410,16 @@ const Library = () => {
           >
             <div className="card-base p-12 max-w-md mx-auto">
               <p className="text-text-light text-lg mb-4">
-                Aucun livre ne correspond à votre recherche
+                Aucun livre ne correspond à cette recherche
               </p>
               <p className="text-text-light text-opacity-60 mb-6">
-                Essayez de modifier vos critères de recherche ou de filtrage
+                Essayez de modifier les critères de recherche ou de filtrage
               </p>
               <button
                 onClick={() => {
                   setSearchTerm('')
                   setSelectedTags([])
                   setSelectedCategory(null)
-                  setSelectedRating(null)
                   setSelectedPublisher(null)
                   setSelectedPlatforms([])
                   setSelectedSpicyLevel(null)

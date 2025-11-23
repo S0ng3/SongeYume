@@ -138,3 +138,57 @@
   background: #e09e29;
 }
 
+/* Styles pour le slider de notation */
+input[type="range"].rating-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Track (barre de fond) */
+input[type="range"].rating-slider::-webkit-slider-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgb(26, 26, 32);
+}
+
+input[type="range"].rating-slider::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgb(26, 26, 32);
+}
+
+/* Thumb (curseur) - invisible mais fonctionnel */
+input[type="range"].rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+input[type="range"].rating-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+/* Progress (partie remplie) - Chrome/Safari */
+input[type="range"].rating-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 4px;
+}
+

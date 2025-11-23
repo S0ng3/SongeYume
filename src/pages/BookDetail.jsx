@@ -6,6 +6,7 @@ import BookCardCompact from '../components/BookCardCompact'
 import SimilarBooks from '../components/SimilarBooks'
 import SeriesTracker from '../components/SeriesTracker'
 import SpicyIndicator from '../components/SpicyIndicator'
+import { isSubgenre } from '../utils/subgenres'
 
 const BookDetail = () => {
   const { id } = useParams()
@@ -190,7 +191,7 @@ const BookDetail = () => {
                 {/* Spicy Level */}
                 {book.spicyLevel !== undefined && book.spicyLevel !== null && (
                   <div className="mb-4">
-                    <SpicyIndicator level={book.spicyLevel} showLabel={true} size="md" />
+                    <SpicyIndicator level={book.spicyLevel} size="md" />
                   </div>
                 )}
 
@@ -220,7 +221,14 @@ const BookDetail = () => {
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-8">
                 {book.tags.map((tag, index) => (
-                  <span key={index} className="tag">
+                  <span 
+                    key={index} 
+                    className={`tag ${
+                      isSubgenre(tag)
+                        ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
+                        : ''
+                    }`}
+                  >
                     {tag}
                   </span>
                 ))}

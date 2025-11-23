@@ -1,45 +1,10 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Star, StarHalf } from 'lucide-react'
+import { Star } from 'lucide-react'
 import SpicyIndicator from './SpicyIndicator'
+import { isSubgenre } from '../utils/subgenres'
 
 const BookCardCompact = ({ book }) => {
-  // Calculate stars display
-  const renderStars = () => {
-    const fullStars = Math.floor(book.rating)
-    const hasHalfStar = book.rating % 1 !== 0
-    const stars = []
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(
-        <Star
-          key={`full-${i}`}
-          className="w-3 h-3 fill-accent text-accent"
-        />
-      )
-    }
-
-    if (hasHalfStar) {
-      stars.push(
-        <StarHalf
-          key="half"
-          className="w-3 h-3 fill-accent text-accent"
-        />
-      )
-    }
-
-    const emptyStars = book.maxRating - Math.ceil(book.rating)
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(
-        <Star
-          key={`empty-${i}`}
-          className="w-3 h-3 text-accent text-opacity-30"
-        />
-      )
-    }
-
-    return stars
-  }
 
   return (
     <motion.div
@@ -59,9 +24,19 @@ const BookCardCompact = ({ book }) => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
             
-            {/* Rating Badge - Smaller */}
-            <div className="absolute top-2 right-2 bg-accent text-background px-2 py-0.5 rounded-full font-bold text-xs shadow-lg">
-              {book.rating}
+            {/* Badge Favoris */}
+            {book.tags && book.tags.includes('Favoris') && (
+              <div className="absolute top-2 left-2 bg-accent text-background p-1.5 rounded-full shadow-lg">
+                <Star className="w-4 h-4 fill-accent" />
+              </div>
+            )}
+            
+            {/* Rating Badge */}
+            <div className="absolute top-2 right-2 bg-background bg-opacity-90 rounded-full px-2 py-1 flex items-center space-x-1 shadow-lg">
+              <Star className="w-3 h-3 text-accent fill-accent" />
+              <span className="text-accent text-xs font-bold">
+                {book.rating}
+              </span>
             </div>
           </div>
 
@@ -73,11 +48,6 @@ const BookCardCompact = ({ book }) => {
             <p className="text-text-light text-opacity-70 text-xs mb-2 line-clamp-1">
               {book.author}
             </p>
-
-            {/* Stars - Smaller */}
-            <div className="flex items-center space-x-0.5 mb-2">
-              {renderStars()}
-            </div>
 
             {/* Spicy Level */}
             {book.spicyLevel !== undefined && book.spicyLevel !== null && (
@@ -91,7 +61,11 @@ const BookCardCompact = ({ book }) => {
               {book.tags.slice(0, 2).map((tag, index) => (
                 <span
                   key={index}
-                  className="text-xs bg-accent bg-opacity-10 text-accent px-1.5 py-0.5 rounded-full"
+                  className={`text-xs px-1.5 py-0.5 rounded-full ${
+                    isSubgenre(tag)
+                      ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
+                      : 'bg-accent bg-opacity-10 text-accent'
+                  }`}
                 >
                   {tag}
                 </span>

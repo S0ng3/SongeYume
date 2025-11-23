@@ -58,7 +58,7 @@ const SpicyFilter = ({ selectedSpicyLevel, onSpicyLevelClick, onClearSpicyLevel 
       </div>
 
       <p className="text-xs text-text-light text-opacity-50 mt-3">
-        Filtre les livres Romance/MM par intensité
+        Filtre les livres Romance par intensité
       </p>
     </div>
   )

@@ -1,13 +1,11 @@
-import { Star } from 'lucide-react'
+import { Star, XCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 /**
  * Composant de filtre par note (étoiles)
- * Permet de sélectionner une note pour filtrer les livres
+ * Permet de sélectionner une note maximale pour filtrer les livres
  */
 const RatingFilter = ({ selectedRating, onRatingClick, onClearRating }) => {
-  const ratings = [5, 4, 3, 2, 1]
-
   // Fonction pour afficher les étoiles selon la note
   const renderStars = (rating) => {
     const stars = []
@@ -50,59 +48,78 @@ const RatingFilter = ({ selectedRating, onRatingClick, onClearRating }) => {
     return stars
   }
 
+  const displayRating = selectedRating !== null ? selectedRating : 5
+
   return (
-    <div>
-      <div className="flex items-center justify-between mb-2">
+    <div className="filter-section">
+      <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-text-light flex items-center space-x-2">
           <Star className="w-5 h-5 text-accent" />
           <span>Filtrer par note</span>
         </h3>
-        {selectedRating !== null && (
+        {selectedRating !== null && selectedRating < 5 && (
           <button
             onClick={onClearRating}
-            className="text-sm text-accent hover:text-opacity-80 transition-colors"
+            className="text-sm text-accent hover:text-opacity-80 transition-colors flex items-center space-x-1"
           >
-            Effacer
+            <XCircle className="w-4 h-4" />
+            <span>Effacer</span>
           </button>
         )}
       </div>
-      <p className="text-xs text-text-light text-opacity-50 mb-4 italic">
-        Chaque note inclut aussi les demi-étoiles (ex: 4⭐ = 4 et 4.5)
-      </p>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-        {ratings.map((rating) => (
-          <motion.button
-            key={rating}
-            onClick={() => onRatingClick(rating)}
-            className={`
-              px-4 py-3 rounded-lg transition-all duration-200
-              flex items-center justify-between space-x-2
-              ${
-                selectedRating === rating
-                  ? 'bg-accent bg-opacity-20 border-2 border-accent text-accent'
-                  : 'bg-card-hover border-2 border-transparent text-text-light hover:border-accent hover:border-opacity-30'
-              }
-            `}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="font-semibold text-sm">{rating}</span>
-            <div className="flex items-center space-x-0.5">
-              {renderStars(rating)}
-            </div>
-          </motion.button>
-        ))}
+      <div className="mb-4">
+        <label className="text-text-light text-sm font-medium mb-3 block">
+          Note maximale : {displayRating < 5 ? `${displayRating}⭐` : 'Toutes'}
+        </label>
+        <div className="relative">
+          {/* Barre de progression jaune */}
+          <div className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full pointer-events-none w-full">
+            <div 
+              className="absolute h-full bg-accent rounded-full transition-all duration-200"
+              style={{
+                left: '0%',
+                width: `${(displayRating / 5) * 100}%`
+              }}
+            />
+          </div>
+          {/* Slider */}
+          <input
+            type="range"
+            min="0"
+            max="5"
+            step="0.5"
+            value={displayRating}
+            onChange={(e) => {
+              const value = parseFloat(e.target.value)
+              onRatingClick(value === 5 ? null : value)
+            }}
+            className="rating-slider relative z-10"
+          />
+        </div>
+        <div className="flex justify-between text-xs text-text-light text-opacity-50 mt-2">
+          <span>0</span>
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+        </div>
       </div>
 
-      {selectedRating !== null && (
-        <motion.p
+      {displayRating < 5 && (
+        <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-3 text-sm text-text-light text-opacity-60"
+          className="card-base bg-card-hover p-4 rounded-lg"
         >
-          Filtré par note : <span className="text-accent font-medium">{selectedRating} et {selectedRating}.5 ⭐</span>
-        </motion.p>
+          <div className="flex items-center justify-center space-x-2 mb-2">
+            {renderStars(displayRating)}
+          </div>
+          <p className="text-center text-sm text-text-light text-opacity-70">
+            Livres avec une note <span className="text-accent font-semibold">≤ {displayRating}⭐</span>
+          </p>
+        </motion.div>
       )}
     </div>
   )

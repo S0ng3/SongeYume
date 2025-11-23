@@ -2,24 +2,19 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { BookOpen, TrendingUp, Star, ArrowRight } from 'lucide-react'
-import BookShelf from '../components/BookShelf'
+import BookCardWithReview from '../components/BookCardWithReview'
 import QuoteOfTheDay from '../components/QuoteOfTheDay'
 import booksData from '../data/books.json'
 
 const Home = () => {
   const [recentBooks, setRecentBooks] = useState([])
-  const [topRatedBooks, setTopRatedBooks] = useState([])
 
   useEffect(() => {
-    // Get recent books (sorted by read date)
+    // Récupération des lectures récentes (triées par date de lecture)
     const sortedByDate = [...booksData].sort((a, b) => 
       new Date(b.readDate) - new Date(a.readDate)
     )
     setRecentBooks(sortedByDate.slice(0, 4))
-
-    // Get top rated books
-    const sortedByRating = [...booksData].sort((a, b) => b.rating - a.rating)
-    setTopRatedBooks(sortedByRating.slice(0, 4))
   }, [])
 
   const stats = {
@@ -121,10 +116,10 @@ const Home = () => {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-3xl font-bold text-text-light mb-2">
-                Lectures récentes
+                Mes dernières lectures
               </h2>
               <p className="text-text-light text-opacity-70">
-                Mes dernières découvertes littéraires
+                Mes toutes dernières découvertes littéraires avec mes avis
               </p>
             </div>
             <Link
@@ -136,7 +131,16 @@ const Home = () => {
             </Link>
           </div>
 
-          <BookShelf books={recentBooks} />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {recentBooks.map((book) => (
+              <BookCardWithReview key={book.id} book={book} />
+            ))}
+          </motion.div>
 
           <Link
             to="/library"
@@ -144,24 +148,6 @@ const Home = () => {
           >
             Voir toute la bibliothèque
           </Link>
-        </div>
-      </section>
-
-      {/* Top Rated Section */}
-      <section className="py-16 bg-card-bg bg-opacity-30">
-        <div className="container-custom">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-text-light mb-2">
-                Mes meilleurs coups de cœur
-              </h2>
-              <p className="text-text-light text-opacity-70">
-                Les livres qui ont marqué mon parcours
-              </p>
-            </div>
-          </div>
-
-          <BookShelf books={topRatedBooks} />
         </div>
       </section>
 

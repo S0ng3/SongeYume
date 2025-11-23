@@ -1,10 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Book, Library, BarChart3, User, BookOpen, Quote } from 'lucide-react'
+import { Book, Library, BarChart3, User, BookOpen, Quote, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import BookWheel from './BookWheel'
 
 const Layout = ({ children }) => {
   const location = useLocation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
     { path: '/', label: 'Accueil', icon: BookOpen },
@@ -15,6 +17,22 @@ const Layout = ({ children }) => {
   ]
 
   const isActive = (path) => location.pathname === path
+
+  // Fermer le menu lors du changement de page
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [location.pathname])
+
+  // Fermer le menu si on clique en dehors
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('nav')) {
+        setIsMenuOpen(false)
+      }
+    }
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [isMenuOpen])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -63,46 +81,51 @@ const Layout = ({ children }) => {
             </ul>
 
             {/* Navigation Mobile - Hamburger menu */}
-            <div className="md:hidden">
-              <details className="dropdown">
-                <summary className="btn btn-ghost">
-                  <svg
-                    className="w-6 h-6 text-text-light"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M4 6h16M4 12h16M4 18h16"></path>
-                  </svg>
-                </summary>
-              </details>
-            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsMenuOpen(!isMenuOpen)
+              }}
+              className="md:hidden p-2 rounded-lg hover:bg-card-bg transition-colors"
+              aria-label="Menu"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-text-light" />
+              ) : (
+                <Menu className="w-6 h-6 text-text-light" />
+              )}
+            </button>
           </div>
 
           {/* Mobile Navigation */}
-          <ul className="md:hidden mt-4 space-y-2">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                      isActive(item.path)
-                        ? 'bg-accent text-background font-semibold'
-                        : 'text-text-light hover:bg-card-bg'
-                    }`}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span>{item.label}</span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+          {isMenuOpen && (
+            <motion.ul
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden mt-4 space-y-2 overflow-hidden"
+            >
+              {navItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                        isActive(item.path)
+                          ? 'bg-accent text-background font-semibold'
+                          : 'text-text-light hover:bg-card-bg'
+                      }`}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </motion.ul>
+          )}
         </nav>
       </header>
 

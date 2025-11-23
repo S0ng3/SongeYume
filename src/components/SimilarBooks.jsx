@@ -69,7 +69,7 @@ const SimilarBooks = ({ currentBook, maxResults = 4 }) => {
           <Sparkles className="w-6 h-6 text-accent" />
         </div>
         <h2 className="text-2xl font-bold text-text-light">
-          Vous pourriez aussi aimer
+          À découvrir également
         </h2>
       </div>
 
@@ -97,7 +97,7 @@ const SimilarBooks = ({ currentBook, maxResults = 4 }) => {
                 </div> */}
                 
                 {/* Note */}
-                <div className="absolute bottom-2 left-2 bg-background bg-opacity-90 rounded-full px-2 py-1 flex items-center space-x-1">
+                <div className="absolute top-2 right-2 bg-background bg-opacity-90 rounded-full px-2 py-1 flex items-center space-x-1">
                   <Star className="w-3 h-3 text-accent fill-accent" />
                   <span className="text-accent text-xs font-bold">
                     {book.rating}
