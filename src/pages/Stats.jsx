@@ -4,6 +4,7 @@ import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Toolti
 import { BookOpen, Star, TrendingUp, Award, Users, Tag, Building2, Calendar, Book, BookMarked, BookCopy } from 'lucide-react'
 import booksData from '../data/books.json'
 import { CATEGORIES, getCategoryFromTags } from '../data/categories'
+import { isSubgenre, getSubgenreCategory } from '../utils/subgenres'
 
 const Stats = () => {
   // État pour l'année sélectionnée
@@ -136,6 +137,34 @@ const Stats = () => {
       .map(([format, count]) => ({ format, count }))
       .sort((a, b) => b.count - a.count)
 
+    // Répartition par sous-genres (uniquement Fantasy)
+    const subgenreCount = {}
+    booksData.forEach(book => {
+      book.tags.forEach(tag => {
+        if (isSubgenre(tag)) {
+          const category = getSubgenreCategory(tag)
+          // Filtrer uniquement les sous-genres de Fantasy
+          if (category === 'Fantasy') {
+            if (!subgenreCount[tag]) {
+              subgenreCount[tag] = {
+                count: 0,
+                category: category
+              }
+            }
+            subgenreCount[tag].count++
+          }
+        }
+      })
+    })
+    
+    const subgenreDistribution = Object.entries(subgenreCount)
+      .map(([subgenre, data]) => ({
+        subgenre,
+        count: data.count,
+        category: data.category
+      }))
+      .sort((a, b) => b.count - a.count)
+
     return {
       totalBooks,
       averageRating,
@@ -148,7 +177,8 @@ const Stats = () => {
       publishedOnBabelio,
       monthsData,
       categoryDistribution,
-      formatDistribution
+      formatDistribution,
+      subgenreDistribution
     }
   }, [])
 
@@ -521,6 +551,66 @@ const Stats = () => {
                     <div className="w-full bg-card-base rounded-full h-3">
                       <div
                         className="bg-accent h-3 rounded-full transition-all duration-500"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Sous-genres Distribution */}
+        {statistics.subgenreDistribution.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            className="card-base p-6 mb-12"
+          >
+            <div className="flex items-center space-x-3 mb-6">
+              <Tag className="w-6 h-6 text-accent" />
+              <h2 className="text-2xl font-bold text-text-light">
+                Répartition par sous-genres Fantasy
+              </h2>
+            </div>
+            <p className="text-text-light text-opacity-60 text-sm mb-6">
+              Découvrez les différents types de Fantasy présents dans la collection
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {statistics.subgenreDistribution.map((subgenreData, index) => {
+                const percentage = ((subgenreData.count / statistics.totalBooks) * 100).toFixed(1)
+                return (
+                  <motion.div
+                    key={subgenreData.subgenre}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.05 * index }}
+                    className="card-hover p-4"
+                  >
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-text-light font-bold text-lg bg-yellow-300 bg-opacity-20 text-yellow-200 px-3 py-1 rounded-full inline-block">
+                          {subgenreData.subgenre}
+                        </h3>
+                        <span className="text-xs text-accent font-bold">
+                          {percentage}%
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-accent font-bold text-2xl">
+                        {subgenreData.count}
+                      </span>
+                      <span className="text-text-light text-opacity-60 text-sm">
+                        {subgenreData.count > 1 ? 'livres' : 'livre'}
+                      </span>
+                    </div>
+                    <div className="w-full bg-card-base rounded-full h-2 mt-3">
+                      <div
+                        className="bg-yellow-300 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>

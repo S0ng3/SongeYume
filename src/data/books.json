@@ -36,7 +36,7 @@
         "author": "M. L. Wang",
         "cover": "/covers/the-sword-of-kaigen.png",
         "summary": "Au sommet d`une montagne vivent les guerriers les plus puissants du monde, des surhommes capables de manier des lames de glace. Depuis des centaines d`années, les combattants de la péninsule de Kusanagi tiennent les ennemis de l`Empire à distance, ce qui a valu à leur bout de terre gelé le nom d`Épée de Kaigen. Lorsque les vents de la guerre commenceront à souffler, la famille Matsuda aura-t-elle la force de défendre les siens ? Ou ses membres s`entredéchireront-ils avant même que les vrais ennemis n`atteignent leurs côtes ?",
-        "personalReview": "Un roman de fantasy absolument bouleversant. M.L. Wang crée un univers fascinant avec un système de magie basé sur les éléments, mais c'est l'exploration profonde des thèmes familiaux qui m'a le plus touchée. Les scènes de combat sont spectaculaires, les personnages incroyablement humains, et la fin... j'ai pleuré. Un coup de cœur absolu.",
+        "personalReview": "Je lis rarement de la fantasy asiatique, car j’en trouve peu qui me convainquent vraiment. Pourtant, j’ai voulu tenter The Sword of Kaigen, notamment grâce à la très jolie édition reliée de Calix. Petit aparté : je crois être de moins en moins fan des reliées. C’est beau, oui, mais aussi fragile, peu confortable à lire, et absolument pas pratique à transporter… Bref ! The Sword of Kaigen m’a réellement surprise, et de manière très positive. Je ne m’attendais pas du tout aux thématiques que j’y ai découvertes. Mention spéciale à Misaki, un personnage que j’ai adoré, autant pour ses forces que pour ses faiblesses. J’ai particulièrement apprécié la façon dont elle défend les valeurs et traditions de son pays tout en restant ouverte au monde et au changement.",
         "rating": 4,
         "maxRating": 5,
         "quotes": [
@@ -51,10 +51,11 @@
             "Famille",
             "Littérature américaine",
             "Mère",
-            "Romance"
+            "Romance",
+            "Fantasy asiatique"
         ],
         "format": "Relié",
-        "spicyLevel": 1,
+        "spicyLevel": 0,
         "publishedOnInstagram": false,
         "instagramLink": "https://instagram.com/p/kaigen",
         "publishedOnBabelio": true,
@@ -242,7 +243,7 @@
         "quotes": ["L'homme est l'animal le plus facile à capturer, et le plus difficile à tenir en laisse.","Les hommes se battent alors qu'ils devraient détaler, et les idiots se battent lorsqu'ils devraient détaler.","Les hommes oublient mais ne pardonnent jamais. Les femmes, en revanche, pardonnent mais n'oublient jamais.","Une jolie fille, gigue gentille ! Deux jolies filles, et la maison vacille ! Trois jolies filles, et il vaut mieux que tu files !"],
         "tags": [
             "Fantasy",
-            "Épique",
+            "High fantasy",
             "Elu",
             "Littérature américaine"
         ],
@@ -269,7 +270,7 @@
         "quotes": ["L'esprit humain est conçu pour lutter, douter, choisir... et changer."],
         "tags": [
             "Fantasy",
-            "Épique",
+            "High fantasy",
             "Elu",
             "Littérature américaine"
         ],
@@ -484,11 +485,9 @@
         "quotes": ["Pas la peine de devenir vieux si tu ne gagnes pas en ruse.", "Parfois, il est difficile de voir ce qui nous crève les yeux.","Sache, mon garçon, que les sentiments violents s'expriment parfois par des actes violents.","L’orgueil est un maître corruptible.","C'est mon fils, mon sang, mon cœur, ma joie, mon souffle. Personne n'a besoin de me demander quoi que ce soit. Je ferai n'importe quoi pour lui. Le protéger, combattre, mourir pour lui, s'il le faut."],
         "tags": [
             "Fantasy",
-            "Épique",
             "Littérature britannique",
             "High fantasy",
-            "Elu",
-            "Fantasy épique"
+            "Elu"
         ],
         "format": "Poche",
         "publishedOnInstagram": true,
@@ -577,5 +576,24 @@
         "babelioLink": "https://www.babelio.com/livres/Zevin-Demain-et-demain-et-demain/1522819",
         "readDate": "2023-09-21",
         "publisher": "Fleuve"
+    },
+    {
+        "id": 23,
+        "title": "Les Diables",
+        "author": "Joe Abercrombie",
+        "cover": "/covers/les_diables.png",
+        "summary": "L'Europe est au bord du gouffre. La peste et la famine la ravagent, des monstres rôdent dans l'ombre et des princes avides ne songent qu'à leurs dévorantes ambitions. Une seule certitude demeure : les elfes reviendront, et ils mangeront tout le monde. Mais parfois, les chemins les plus sombres mènent à la lumière. Des routes sur lesquelles les Justes n'ont pas l'audace de s'engager. Enfouie dans les entrailles du splendide Palais Céleste, le fief de la foi, la Chapelle des Saints Expédients est un secret jalousement gardé. Car pour sa congrégation - un ramassis de monstres condamnés -, il n'existe pas de crimes interdits, de ligne rouge infranchissable... ni de mission qui finisse autrement que dans un bain de sang.Pour l'infortuné frère Diaz, bombardé vicaire de la chapelle, le défi est de convertir au bien la lie de la terre afin qu'elle défende une noble cause : asseoir une voleuse sur le trône de Troie et réunifier les Églises d'Occident et d'Orient avant l'apocalypse à venir. Quand on s'aventure en Enfer, mieux vaut avoir les Diables à ses côtés.",
+        "personalReview": "",
+        "rating": 4,
+        "maxRating": 5,
+        "quotes": [],
+        "tags": ["Fantasy", "Grimdark", "Humour", "Littérature britannique", "Uchronie"],
+        "format": "Broché",
+        "publishedOnInstagram": false,
+        "instagramLink": "",
+        "publishedOnBabelio": false,
+        "babelioLink": "",
+        "readDate": "2023-09-21",
+        "publisher": "Bragelonne"
     }
 ]

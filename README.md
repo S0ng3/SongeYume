@@ -187,15 +187,36 @@ npm run build
 
 The optimized production build will be in the `dist/` folder.
 
-## 🌐 Deployment
+## 🌐 Déploiement sur GitHub Pages
 
-This project can be deployed to:
-- Vercel
-- Netlify
-- GitHub Pages
-- Any static hosting service
+Ce projet est configuré pour être hébergé gratuitement sur **GitHub Pages** avec déploiement automatique.
 
-Simply upload the contents of the `dist/` folder after building.
+### Déploiement en 3 étapes
+
+1. **Configurez `base` dans `vite.config.js`** :
+   ```js
+   base: '/SongeYume/',  // Remplacez par le nom de votre dépôt
+   ```
+
+2. **Activez GitHub Pages** :
+   - Settings → Pages → Source : "GitHub Actions"
+
+3. **Poussez sur GitHub** :
+   ```bash
+   git push origin main
+   ```
+
+**C'est tout !** Votre site sera accessible à : `https://votreusername.github.io/SongeYume/`
+
+### Mises à jour automatiques
+
+Chaque `git push` sur `main` redéploie automatiquement votre site en 2-3 minutes.
+
+### Guide complet
+
+Consultez le guide détaillé : **[DEPLOIEMENT.md](./DEPLOIEMENT.md)**
+
+**Workflow GitHub Actions** : `.github/workflows/deploy.yml`
 
 ## 📝 License
 

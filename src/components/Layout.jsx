@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { Book, Library, BarChart3, User, BookOpen, Quote, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import BookWheel from './BookWheel'
 
 const Layout = ({ children }) => {
   const location = useLocation()
@@ -133,9 +132,6 @@ const Layout = ({ children }) => {
       <main className="flex-grow">
         {children}
       </main>
-
-      {/* Book Wheel Widget */}
-      <BookWheel />
 
       {/* Footer */}
       <footer className="bg-card-bg border-t border-accent border-opacity-20 py-8 mt-16">
