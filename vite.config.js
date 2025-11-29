@@ -14,7 +14,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     // Optimisation pour la production
-    minify: 'terser',
+    minify: 'esbuild',
     sourcemap: false
   }
 })
