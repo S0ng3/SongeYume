@@ -5,6 +5,7 @@ import { BookOpen, Star, TrendingUp, Award, Users, Tag, Building2, Calendar, Boo
 import booksData from '../data/books.json'
 import { CATEGORIES, getCategoryFromTags } from '../data/categories'
 import { isSubgenre, getSubgenreCategory } from '../utils/subgenres'
+import { getImagePath } from '../utils/helpers'
 
 const Stats = () => {
   // État pour l'année sélectionnée
@@ -409,7 +410,7 @@ const Stats = () => {
                         className="group relative"
                       >
                         <img
-                          src={book.cover}
+                          src={getImagePath(book.cover)}
                           alt={book.title}
                           className="w-16 h-24 object-cover rounded shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:shadow-accent/30"
                         />

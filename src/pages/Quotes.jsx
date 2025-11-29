@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Quote, Book, User, Tag, Shuffle, Copy, Check, Share2, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
+import { getImagePath } from '../utils/helpers'
 
 const Quotes = () => {
   // Extraire toutes les citations avec leurs métadonnées
@@ -177,7 +178,7 @@ const Quotes = () => {
                   className="flex items-center space-x-3 group"
                 >
                   <img 
-                    src={randomQuote.cover} 
+                    src={getImagePath(randomQuote.cover)} 
                     alt={randomQuote.bookTitle}
                     className="w-12 h-16 object-cover rounded shadow-lg group-hover:scale-105 transition-transform"
                   />

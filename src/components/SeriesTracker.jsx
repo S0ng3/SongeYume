@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { BookMarked, CheckCircle2, Circle, TrendingUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
+import { getImagePath } from '../utils/helpers'
 
 /**
  * Composant de suivi de série pour un livre
@@ -171,7 +172,7 @@ const SeriesTracker = ({ currentBook }) => {
               </p>
               <div className="flex items-center space-x-3">
                 <img
-                  src={seriesInfo.previousBook.cover}
+                  src={getImagePath(seriesInfo.previousBook.cover)}
                   alt={seriesInfo.previousBook.title}
                   className="w-12 h-16 object-cover rounded shadow-md group-hover:scale-105 transition-transform"
                 />
@@ -199,7 +200,7 @@ const SeriesTracker = ({ currentBook }) => {
               </p>
               <div className="flex items-center space-x-3">
                 <img
-                  src={seriesInfo.nextBook.cover}
+                  src={getImagePath(seriesInfo.nextBook.cover)}
                   alt={seriesInfo.nextBook.title}
                   className="w-12 h-16 object-cover rounded shadow-md group-hover:scale-105 transition-transform"
                 />
@@ -233,7 +234,7 @@ const SeriesTracker = ({ currentBook }) => {
             >
               <div className="relative">
                 <img
-                  src={book.cover}
+                  src={getImagePath(book.cover)}
                   alt={book.title}
                   className="w-full aspect-[2/3] object-cover rounded shadow-md group-hover:scale-105 transition-transform"
                 />

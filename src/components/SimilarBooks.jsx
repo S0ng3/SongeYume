@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Sparkles, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
+import { getImagePath } from '../utils/helpers'
 
 /**
  * Composant de recommandations de livres similaires
@@ -86,7 +87,7 @@ const SimilarBooks = ({ currentBook, maxResults = 4 }) => {
               {/* Couverture */}
               <div className="relative mb-3">
                 <img
-                  src={book.cover}
+                  src={getImagePath(book.cover)}
                   alt={book.title}
                   className="w-full aspect-[2/3] object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform"
                 />

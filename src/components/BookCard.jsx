@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 import SpicyIndicator from './SpicyIndicator'
 import { isSubgenre } from '../utils/subgenres'
+import { getImagePath } from '../utils/helpers'
 
 const BookCard = ({ book }) => {
 
@@ -18,7 +19,7 @@ const BookCard = ({ book }) => {
           {/* Book Cover */}
           <div className="relative overflow-hidden aspect-[2/3] bg-card-hover">
             <img
-              src={book.cover}
+              src={getImagePath(book.cover)}
               alt={`Couverture de ${book.title}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />

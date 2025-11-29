@@ -125,3 +125,13 @@ export const generateStarRating = (rating, maxRating) => {
   }
 }
 
+// Obtenir le chemin complet d'une image en tenant compte du BASE_URL
+export const getImagePath = (path) => {
+  if (!path) return ''
+  // Si le chemin commence par /, on ajoute le BASE_URL
+  if (path.startsWith('/')) {
+    return import.meta.env.BASE_URL + path.substring(1)
+  }
+  return path
+}
+

@@ -7,6 +7,7 @@ import SimilarBooks from '../components/SimilarBooks'
 import SeriesTracker from '../components/SeriesTracker'
 import SpicyIndicator from '../components/SpicyIndicator'
 import { isSubgenre } from '../utils/subgenres'
+import { getImagePath } from '../utils/helpers'
 
 const BookDetail = () => {
   const { id } = useParams()
@@ -112,7 +113,7 @@ const BookDetail = () => {
               <div className="sticky top-24">
                 <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-book-hover">
                   <img
-                    src={book.cover}
+                    src={getImagePath(book.cover)}
                     alt={`Couverture de ${book.title}`}
                     className="w-full h-full object-cover"
                   />

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Quote, Sparkles, Shuffle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
+import { getImagePath } from '../utils/helpers'
 
 /**
  * Composant Citation du Jour
@@ -113,7 +114,7 @@ const QuoteOfTheDay = () => {
           className="flex items-center space-x-3 group w-fit"
         >
           <img 
-            src={quote.cover} 
+            src={getImagePath(quote.cover)} 
             alt={quote.bookTitle}
             className="w-10 h-14 object-cover rounded shadow-md group-hover:scale-105 transition-transform"
           />
