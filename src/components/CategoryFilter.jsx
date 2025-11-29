@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { CATEGORIES } from '../data/categories'
+import { getImagePath } from '../utils/helpers'
 
 const CategoryFilter = ({ selectedCategory, onCategoryClick, onClearCategory }) => {
   const categories = Object.entries(CATEGORIES)
@@ -40,7 +41,7 @@ const CategoryFilter = ({ selectedCategory, onCategoryClick, onClearCategory }) 
             >
               <div className="w-16 h-16 mb-2 flex items-center justify-center">
                 <img
-                  src={category.icon}
+                  src={getImagePath(category.icon)}
                   alt={category.name}
                   className={`w-full h-full object-contain transition-all duration-300 ${
                     isSelected ? 'brightness-110' : 'brightness-90 hover:brightness-100'

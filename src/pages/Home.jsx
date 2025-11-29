@@ -5,6 +5,7 @@ import { BookOpen, TrendingUp, Star, ArrowRight } from 'lucide-react'
 import BookCardWithReview from '../components/BookCardWithReview'
 import QuoteOfTheDay from '../components/QuoteOfTheDay'
 import booksData from '../data/books.json'
+import { getImagePath } from '../utils/helpers'
 
 const Home = () => {
   const [recentBooks, setRecentBooks] = useState([])
@@ -41,7 +42,7 @@ const Home = () => {
               className="mb-8"
             >
               <img 
-                src="/SongeYume_HomePage.png" 
+                src={getImagePath('/SongeYume_HomePage.png')} 
                 alt="Songe Yume - Ma Bibliothèque Virtuelle"
                 className="mx-auto max-w-full h-auto"
                 style={{ maxHeight: '400px' }}

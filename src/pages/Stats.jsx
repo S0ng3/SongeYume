@@ -467,7 +467,7 @@ const Stats = () => {
                 >
                   <div className="flex-shrink-0">
                     <img
-                      src={categoryData.icon}
+                      src={getImagePath(categoryData.icon)}
                       alt={categoryData.category}
                       className="w-12 h-12 object-contain"
                     />
