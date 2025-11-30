@@ -65,7 +65,7 @@ titre-du-livre.jpg
 
 Copiez toutes vos images dans le dossier :
 ```
-/Users/chloelecointe/Documents/Dev/SongeYume/public/covers/
+public/covers/
 ```
 
 **Structure finale :**
@@ -169,26 +169,33 @@ Répétez pour chaque livre dans votre `books.json` :
 
 ---
 
-## 🎨 Optimisation des images (optionnel)
+## ⚡ Optimisation des images (AUTOMATIQUE)
 
-Pour améliorer les performances :
+Les images sont **automatiquement optimisées** lors du `npm run build` !
 
-### Outils gratuits en ligne :
-1. **TinyPNG** - https://tinypng.com
-   - Glissez-déposez vos images
-   - Téléchargez les versions compressées
+### Optimisation Automatique
 
-2. **Squoosh** - https://squoosh.app
-   - Application web de Google
-   - Compression avancée
+Le projet inclut `vite-plugin-image-optimizer` qui compresse automatiquement :
+- **Réduction de 65-75%** de la taille
+- **Sans perte visible de qualité**
+- **Cache intelligent** (optimise uniquement les images modifiées)
 
-3. **CompressJPEG** - https://compressjpeg.com
+**Vous n'avez rien à faire !** Ajoutez simplement vos images PNG/JPG dans `public/covers/` et lancez `npm run build`.
 
-### Tailles recommandées :
-- **Largeur** : 400-600px
-- **Hauteur** : 600-900px
-- **Poids** : < 300KB par image (idéal)
-- **Format** : JPG pour les photos, PNG pour la qualité
+### Tailles Recommandées (pour les originaux)
+
+- **Largeur** : 400-800px
+- **Hauteur** : 600-1200px
+- **Format** : PNG ou JPG (sera optimisé automatiquement)
+
+### Optimisation Manuelle (Optionnel)
+
+Si vous souhaitez pré-optimiser avant d'ajouter au projet :
+
+**Outils en ligne gratuits :**
+- **TinyPNG** - https://tinypng.com
+- **Squoosh** - https://squoosh.app
+- **CompressJPEG** - https://compressjpeg.com
 
 ---
 
@@ -230,7 +237,7 @@ letranger.jpg
 
 ### 3. Copiez dans :
 ```
-/Users/chloelecointe/Documents/Dev/SongeYume/public/covers/letranger.jpg
+public/covers/letranger.jpg
 ```
 
 ### 4. Modifiez books.json :

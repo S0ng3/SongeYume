@@ -1,221 +1,77 @@
-# 📚 Songe Yume - Virtual Library
+# 📚 Songe Yume - Bibliothèque Virtuelle
 
-A modern and elegant personal virtual library built with React, TailwindCSS, and Framer Motion.
+Bibliothèque virtuelle personnelle moderne et élégante construite avec React, TailwindCSS et Framer Motion.
 
 ![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-5.1-646CFF?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-## ✨ Features
+## ✨ Fonctionnalités
 
-- 🎨 **Modern Design**: Beautiful dark theme with warm accent colors
-- 📖 **Book Management**: Display books with covers, ratings, reviews, and quotes
-- 🔍 **Smart Search**: Search books by title, author, or keywords
-- 🏷️ **Tag Filtering**: Filter books dynamically by tags
-- 📊 **Statistics Dashboard**: Visual analytics with charts (Recharts)
-- 📱 **Fully Responsive**: Optimized for mobile, tablet, and desktop
-- ✨ **Smooth Animations**: Enhanced UX with Framer Motion
-- 🌐 **Multi-page Application**: React Router navigation
+- 🎨 **Design moderne** : Thème sombre élégant avec couleurs chaleureuses
+- 📖 **Gestion de livres** : Couvertures, notes, critiques et citations
+- 🔍 **Recherche intelligente** : Par titre, auteur ou mots-clés
+- 🏷️ **Filtres multiples** : Catégories, éditeurs, plateformes, notes, niveau "spicy"
+- 📊 **Tableau de bord** : Statistiques visuelles avec graphiques (Recharts)
+- 📱 **Responsive** : Optimisé mobile, tablette et desktop
+- ✨ **Animations fluides** : Transitions élégantes (Framer Motion)
+- 🌐 **Multi-pages** : Navigation React Router
+- ⚡ **Images optimisées** : Compression automatique (-68% de taille)
 
-## 🎨 Design Theme
+## 🚀 Installation & Lancement
 
-- Background: `#151823`
-- Text: `#dde5f2`
-- Accent: `#e09e29`
+### Prérequis
 
-## 🚀 Quick Start
+- Node.js 18+ et npm installés
 
-### Prerequisites
+### Démarrage rapide (3 commandes)
 
-- Node.js 18+ and npm/yarn installed
-
-### Installation
-
-1. **Clone the repository**
 ```bash
-cd /Users/chloelecointe/Documents/Dev/SongeYume
-```
-
-2. **Install dependencies**
-```bash
+# 1. Installer les dépendances
 npm install
-```
 
-3. **Start development server**
-```bash
+# 2. Lancer le serveur de développement
 npm run dev
+
+# 3. Le site s'ouvre automatiquement à http://localhost:3000
 ```
 
-The application will open automatically at `http://localhost:3000`
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
-## 📁 Project Structure
-
-```
-SongeYume/
-├── public/                  # Static assets
-├── src/
-│   ├── components/          # Reusable components
-│   │   ├── Layout.jsx       # Main layout with header/footer
-│   │   ├── BookCard.jsx     # Book card component
-│   │   ├── BookShelf.jsx    # Book grid display
-│   │   ├── SearchBar.jsx    # Search component
-│   │   └── TagList.jsx      # Tag filtering component
-│   ├── pages/               # Page components
-│   │   ├── Home.jsx         # Homepage
-│   │   ├── Library.jsx      # Full library view
-│   │   ├── BookDetail.jsx   # Individual book page
-│   │   ├── Stats.jsx        # Statistics dashboard
-│   │   └── About.jsx        # About page
-│   ├── data/
-│   │   └── books.json       # Books database
-│   ├── App.jsx              # Main App component
-│   ├── main.jsx             # Entry point
-│   └── index.css            # Global styles
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── vite.config.js
-└── README.md
-```
-
-## 📚 Book Data Structure
-
-Each book in `src/data/books.json` contains:
-
-```json
-{
-  "id": 1,
-  "title": "Book Title",
-  "author": "Author Name",
-  "cover": "https://image-url.jpg",
-  "summary": "Book summary...",
-  "personalReview": "My personal review...",
-  "rating": 4.5,
-  "maxRating": 5,
-  "quotes": ["Quote 1", "Quote 2"],
-  "tags": ["Tag1", "Tag2"],
-  "publishedOnInstagram": true,
-  "instagramLink": "https://instagram.com/...",
-  "publishedOnBabelio": true,
-  "babelioLink": "https://www.babelio.com/...",
-  "readDate": "2024-01-15"
-}
-```
-
-## 🛠️ Tech Stack
-
-- **Frontend Framework**: React 18.2
-- **Build Tool**: Vite 5.1
-- **Styling**: TailwindCSS 3.4
-- **Animations**: Framer Motion 11.0
-- **Charts**: Recharts 2.12
-- **Icons**: Lucide React 0.344
-- **Routing**: React Router DOM 6.22
-
-## 🎯 Key Features Explained
-
-### Homepage
-- Quick statistics overview
-- Recent books section
-- Top-rated books showcase
-- Call-to-action sections
-
-### Library Page
-- Complete book collection
-- Search functionality
-- Tag-based filtering
-- Responsive grid layout
-
-### Book Detail Page
-- Full book information
-- Cover image display
-- Personal review section
-- Favorite quotes
-- External links (Instagram, Babelio)
-- Reading date
-
-### Statistics Page
-- Total books count
-- Average rating
-- Reading timeline (last 6 months)
-- Rating distribution chart
-- Top tags visualization
-- Favorite authors
-- Publication status tracking
-
-### About Page
-- Personal introduction
-- Reading philosophy
-- Features overview
-- Technologies used
-
-## 🎨 Customization
-
-### Adding a New Book
-
-1. Open `src/data/books.json`
-2. Add a new book object following the data structure
-3. The book will automatically appear in the library
-
-### Changing Colors
-
-Edit `tailwind.config.js`:
-
-```js
-colors: {
-  'background': '#151823',    // Main background
-  'text-light': '#dde5f2',    // Text color
-  'accent': '#e09e29',        // Accent color
-  'card-bg': '#1e2230',       // Card background
-  'card-hover': '#252938'     // Card hover state
-}
-```
-
-## 📦 Building for Production
+### Scripts disponibles
 
 ```bash
-npm run build
+npm run dev      # Serveur de développement
+npm run build    # Build de production avec optimisation des images
+npm run preview  # Prévisualiser le build
+npm run lint     # Vérifier le code
 ```
-
-The optimized production build will be in the `dist/` folder.
 
 ## ⚡ Optimisation Automatique des Images
 
-### 🎯 Configuration
+Le projet inclut **l'optimisation automatique des images** lors du build.
 
-Le projet inclut **l'optimisation automatique des images** lors du build grâce au plugin `vite-plugin-image-optimizer`.
-
-### 📊 Résultats
+### Résultats
 
 - **Réduction de 65-75%** de la taille des images
 - **Site 10× plus rapide** sur GitHub Pages
-- **Économie totale** : ~30 Mo sur ~45 Mo d'images
+- **Économie totale** : ~30 Mo économisés
 
 **Exemple :**
 ```
-Image originale  : 2.0 Mo
-Image optimisée  : 650 Ko (-68%)
+Image originale  : 2.0 Mo → Image optimisée : 650 Ko (-68%)
 ```
 
-### 🚀 Comment ça fonctionne ?
+### Fonctionnement
 
 **Mode développement** (`npm run dev`) :
-- ❌ Images **NON optimisées** (chargement rapide en dev)
+- Images NON optimisées (chargement rapide en dev)
 
 **Mode production** (`npm run build`) :
-- ✅ Images **automatiquement compressées** sans perte visible
-- ✅ Cache intelligent (optimise uniquement les images modifiées)
-- ✅ Prêt pour le déploiement
+- Images **automatiquement compressées** sans perte visible
+- Cache intelligent (optimise uniquement les images modifiées)
+- Prêt pour le déploiement
 
-### 💡 Aucune action requise
+### Aucune action requise
 
 L'optimisation est **entièrement automatique** ! Continuez à :
 1. Ajouter vos images PNG/JPG dans `public/covers/`
@@ -224,15 +80,98 @@ L'optimisation est **entièrement automatique** ! Continuez à :
 
 Les images dans `dist/` seront **automatiquement optimisées** à chaque build.
 
+## 📁 Structure du Projet
+
+```
+SongeYume/
+├── public/
+│   ├── covers/              # Images de couvertures
+│   └── categories/          # Icônes de catégories
+├── src/
+│   ├── components/          # Composants réutilisables
+│   ├── pages/               # Pages de l'application
+│   ├── data/
+│   │   └── books.json       # Base de données des livres
+│   ├── utils/               # Utilitaires
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── package.json
+├── vite.config.js
+└── tailwind.config.js
+```
+
+## 📚 Structure des Données
+
+Chaque livre dans `src/data/books.json` :
+
+```json
+{
+  "id": 1,
+  "title": "Titre du livre",
+  "author": "Auteur",
+  "cover": "/covers/nom-du-livre.png",
+  "summary": "Résumé...",
+  "personalReview": "Critique personnelle...",
+  "rating": 5,
+  "maxRating": 5,
+  "quotes": ["Citation 1", "Citation 2"],
+  "tags": ["Fantasy", "Romance"],
+  "spicyLevel": 0,
+  "format": "Poche",
+  "series": "Nom de la série",
+  "seriesOrder": 1,
+  "publisher": "Éditeur",
+  "platform": "Kindle",
+  "category": "fantasy",
+  "readDate": "2024-11-30"
+}
+```
+
+## 🛠️ Technologies
+
+- **React** 18.2 - Framework frontend
+- **Vite** 5.1 - Build tool ultra-rapide
+- **TailwindCSS** 3.4 - Styling utilitaire
+- **Framer Motion** 11.0 - Animations
+- **Recharts** 2.12 - Graphiques
+- **Lucide React** 0.344 - Icônes
+- **React Router** 6.22 - Routing
+- **vite-plugin-image-optimizer** - Optimisation automatique des images
+
+## 🎨 Personnalisation
+
+### Ajouter un livre
+
+1. Ajoutez l'image dans `public/covers/`
+2. Ajoutez l'entrée dans `src/data/books.json`
+3. Le livre apparaît automatiquement
+
+📖 **Guide complet** : [GUIDE_IMAGES.md](./GUIDE_IMAGES.md)
+
+### Changer les couleurs
+
+Modifiez `tailwind.config.js` :
+
+```js
+colors: {
+  'background': '#151823',
+  'text-light': '#dde5f2',
+  'accent': '#e09e29',
+  'card-bg': '#1e2230',
+  'card-hover': '#252938'
+}
+```
+
 ## 🌐 Déploiement sur GitHub Pages
 
-Ce projet est configuré pour être hébergé gratuitement sur **GitHub Pages** avec déploiement automatique.
+Le projet est configuré pour un déploiement automatique sur GitHub Pages.
 
 ### Déploiement en 3 étapes
 
-1. **Configurez `base` dans `vite.config.js`** :
+1. **Configurez `vite.config.js`** :
    ```js
-   base: '/SongeYume/',  // Remplacez par le nom de votre dépôt
+   base: '/SongeYume/',  // Nom de votre dépôt
    ```
 
 2. **Activez GitHub Pages** :
@@ -243,33 +182,58 @@ Ce projet est configuré pour être hébergé gratuitement sur **GitHub Pages** 
    git push origin main
    ```
 
-**C'est tout !** Votre site sera accessible à : `https://votreusername.github.io/SongeYume/`
+**C'est tout !** Votre site sera en ligne en 2-3 minutes à :
+```
+https://votreusername.github.io/SongeYume/
+```
 
-### Mises à jour automatiques
+Chaque `git push` sur `main` redéploie automatiquement le site avec les images optimisées.
 
-Chaque `git push` sur `main` redéploie automatiquement votre site en 2-3 minutes.
+📖 **Guide complet** : [DEPLOIEMENT.md](./DEPLOIEMENT.md)
 
-### Guide complet
+## 🔧 Résolution de Problèmes
 
-Consultez le guide détaillé : **[DEPLOIEMENT.md](./DEPLOIEMENT.md)**
+### `npm install` échoue
 
-**Workflow GitHub Actions** : `.github/workflows/deploy.yml`
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Les images ne s'affichent pas
+
+- Vérifiez que les images sont dans `public/covers/`
+- Vérifiez les chemins dans `books.json` : `/covers/nom.png`
+- Noms de fichiers : minuscules, sans espaces, sans accents
+
+### Le site est lent
+
+- Lancez `npm run build` pour optimiser les images
+- Les images sont automatiquement compressées à -68%
+
+### Modifications non visibles
+
+- Assurez-vous que `npm run dev` est actif
+- Rafraîchissez avec Cmd+Shift+R (vider le cache)
+
+## 📖 Pages de l'Application
+
+- **/** - Accueil avec livres récents et top-rated
+- **/library** - Bibliothèque complète avec recherche et filtres
+- **/book/:id** - Page détaillée d'un livre
+- **/quotes** - Citations favorites
+- **/stats** - Statistiques et graphiques
+- **/about** - À propos
 
 ## 📝 License
 
-MIT License - Feel free to use this project for your own personal library!
+MIT License - Utilisez librement pour votre propre bibliothèque !
 
-## 🙏 Acknowledgments
+## 🙏 Remerciements
 
-- Images from Unsplash
-- Icons from Lucide React
-- Fonts from Google Fonts (Inter, Merriweather)
-
-## 📧 Contact
-
-Created with ❤️ by a book lover for book lovers.
+- Icônes : Lucide React
+- Polices : Google Fonts (Inter, Merriweather)
 
 ---
 
-**Happy Reading! 📖✨**
-
+**Bonne lecture ! 📖✨**

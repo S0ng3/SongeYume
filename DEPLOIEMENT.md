@@ -1,324 +1,258 @@
-# 🚀 Guide de Déploiement GitHub Pages - SongeYume
+# 🚀 Guide de Déploiement GitHub Pages
 
-Ce guide vous accompagne pour héberger votre bibliothèque virtuelle gratuitement sur GitHub Pages.
+Guide complet pour héberger SongeYume gratuitement sur GitHub Pages avec déploiement automatique.
 
 ## 📋 Prérequis
 
 - Compte GitHub
 - Code versionné sur GitHub
-- Node.js 18+ installé localement
+- Node.js 18+ installé
 
 ## 🌟 Pourquoi GitHub Pages ?
 
 - ✅ **Gratuit et illimité**
-- ✅ **Intégré à GitHub** (aucune inscription supplémentaire)
 - ✅ **HTTPS automatique** avec certificat SSL
 - ✅ **Déploiement automatique** à chaque push
-- ✅ **Workflow CI/CD** configuré automatiquement
-- ✅ **Parfait pour les projets open-source**
+- ✅ **CI/CD intégré** via GitHub Actions
+- ✅ **Images optimisées automatiquement** (-68% de taille)
 
 ---
 
-## 🚀 Déploiement en 5 étapes
+## 🚀 Configuration Initiale
 
-### Étape 1 : Vérifier la configuration
+### Étape 1 : Configurer Vite
 
-Le fichier `vite.config.js` doit être configuré avec le bon chemin de base.
-
-**Ouvrez `vite.config.js` et modifiez la ligne `base`** :
+Ouvrez `vite.config.js` et vérifiez le `base` :
 
 ```js
 export default defineConfig({
-  plugins: [react()],
-  base: '/SongeYume/',  // ⚠️ Remplacez par le nom exact de votre dépôt GitHub
-  server: {
-    port: 3000,
-    open: true
-  },
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    minify: 'terser',
-    sourcemap: false
-  }
+  base: '/SongeYume/',  // ⚠️ IMPORTANT : Nom exact de votre dépôt GitHub
+  // ...
 })
 ```
 
-**Important** : Si votre dépôt s'appelle différemment, ajustez le chemin :
-- Dépôt : `MonProjet` → `base: '/MonProjet/'`
-- Dépôt : `ma-bibliotheque` → `base: '/ma-bibliotheque/'`
+**Exemples :**
+- Dépôt : `MaBibliotheque` → `base: '/MaBibliotheque/'`
+- Dépôt : `livres` → `base: '/livres/'`
 
 ### Étape 2 : Activer GitHub Pages
 
-1. **Allez sur votre dépôt GitHub** : `https://github.com/VotreUsername/SongeYume`
+1. Allez sur votre dépôt : `https://github.com/VotreUsername/SongeYume`
+2. **Settings** → **Pages**
+3. **Source** : Sélectionnez **"GitHub Actions"** (pas "Deploy from a branch")
 
-2. **Cliquez sur "Settings"** (⚙️ Paramètres)
+### Étape 3 : Pousser le Workflow
 
-3. **Dans le menu latéral, cliquez sur "Pages"**
-
-4. **Dans la section "Source"** :
-   - Sélectionnez : **"GitHub Actions"**
-   - (Pas "Deploy from a branch")
-
-### Étape 3 : Pousser le workflow
-
-Le workflow GitHub Actions est déjà configuré dans `.github/workflows/deploy.yml`.
-
-**Poussez-le sur GitHub** :
+Le workflow `.github/workflows/deploy.yml` est déjà configuré.
 
 ```bash
 git add .
-git commit -m "ci: configuration du déploiement GitHub Pages"
+git commit -m "Configuration déploiement GitHub Pages"
 git push origin main
 ```
 
-### Étape 4 : Vérifier le déploiement
+### Étape 4 : Vérifier le Déploiement
 
-1. **Allez dans l'onglet "Actions"** de votre dépôt GitHub
-
-2. **Vous verrez le workflow "Déploiement GitHub Pages" en cours**
-   - 🟡 En cours d'exécution
-   - ✅ Succès (après 2-3 minutes)
-   - ❌ Échec (vérifiez les logs)
-
-3. **Une fois terminé avec succès**, votre site est en ligne ! 🎉
-
-### Étape 5 : Accéder à votre site
-
-Votre site sera accessible à l'URL suivante :
-
-```
-https://VotreUsername.github.io/SongeYume/
-```
-
-**Exemple** :
-- Username : `SongeYume`
-- Dépôt : `SongeYume`
-- URL : `https://songeyume.github.io/SongeYume/`
+1. Allez dans l'onglet **Actions**
+2. Le workflow "Déploiement GitHub Pages" s'exécute
+3. ✅ Succès en 2-3 minutes
+4. Site accessible à : `https://votreusername.github.io/SongeYume/`
 
 ---
 
-## 🔄 Mises à jour automatiques
+## 🔄 Workflow Quotidien
 
-C'est le grand avantage ! Une fois configuré, **chaque push sur la branche `main` redéploie automatiquement** votre site.
-
-### Workflow quotidien
+Une fois configuré, chaque push redéploie automatiquement :
 
 ```bash
-# 1. Ajoutez un nouveau livre dans src/data/books.json
-# 2. Testez localement
+# 1. Modifier des livres, images, code...
+
+# 2. Tester localement
 npm run dev
 
-# 3. Commitez et poussez
+# 3. Committer et pousser
 git add .
-git commit -m "feat: ajout de 3 nouveaux livres"
+git commit -m "Ajout de 3 nouveaux livres"
 git push origin main
 
 # 🎉 GitHub Actions va automatiquement :
 #    - Installer les dépendances
-#    - Construire le projet
+#    - Builder le projet (avec optimisation des images)
 #    - Déployer sur GitHub Pages
-#    - Votre site est à jour en 2-3 minutes !
+#    - Site à jour en 2-3 minutes !
 ```
 
 ---
 
-## 🔍 Comprendre le workflow
+## 🔍 Comprendre le Workflow
 
-Le fichier `.github/workflows/deploy.yml` automatise tout le processus :
+Le fichier `.github/workflows/deploy.yml` automatise :
 
 ```yaml
-# Déclencheurs
 on:
   push:
-    branches: ['main']  # À chaque push sur main
+    branches: ['main']  # Déclenchement à chaque push sur main
   workflow_dispatch:     # Ou manuellement depuis Actions
 
-# Jobs
 jobs:
-  build:
-    # Installe Node.js, npm, construit le projet
-  deploy:
-    # Déploie sur GitHub Pages
+  build:   # Installation Node.js + build du projet
+  deploy:  # Déploiement sur GitHub Pages
 ```
 
-### Exécution manuelle
+### Exécution Manuelle
 
-Vous pouvez aussi déclencher le déploiement manuellement :
-
-1. Allez dans **Actions**
-2. Cliquez sur **"Déploiement GitHub Pages"**
-3. Cliquez sur **"Run workflow"** → **"Run workflow"**
+1. **Actions** → **"Déploiement GitHub Pages"**
+2. **"Run workflow"** → **"Run workflow"**
 
 ---
 
-## 🛠️ Commandes utiles
+## 🛠️ Commandes Utiles
 
-### Build local
-
-Toujours tester avant de pousser :
+### Build Local
 
 ```bash
-# Construire pour la production
+# Build de production
 npm run build
 
-# Prévisualiser la version de production
+# Les images sont automatiquement optimisées (-68%)
+
+# Prévisualiser
 npm run preview
+# → http://localhost:4173
 ```
 
-Le site sera accessible à `http://localhost:4173`
-
-### Vérifications avant déploiement
+### Vérifications Avant Déploiement
 
 ```bash
-# Vérifier le linting
+# Linter
 npm run lint
 
-# Vérifier que le build fonctionne
+# Build (teste aussi l'optimisation des images)
 npm run build
 
-# Si tout est OK, pousser
+# Si OK, pousser
 git push origin main
 ```
 
-### Nettoyage
-
-```bash
-# Supprimer les artefacts de build
-rm -rf dist
-
-# Windows PowerShell
-Remove-Item -Recurse -Force dist
-```
-
 ---
 
-## 🔧 Configuration avancée
+## 🔧 Configuration Avancée
 
-### Domaine personnalisé
+### Domaine Personnalisé
 
-Vous pouvez utiliser votre propre domaine (ex : `www.ma-bibliotheque.fr`) :
+Pour utiliser votre propre domaine (ex : `www.ma-bibliotheque.fr`) :
 
-1. **Dans les paramètres GitHub Pages** :
+1. **GitHub Pages Settings** :
    - Ajoutez votre domaine dans "Custom domain"
-   - GitHub créera un fichier `CNAME` automatiquement
+   - GitHub crée un fichier `CNAME` automatiquement
 
-2. **Chez votre registrar de domaine** :
-   - Ajoutez un enregistrement CNAME pointant vers `votreusername.github.io`
-   - Ou 4 enregistrements A pour les IPs de GitHub
+2. **Chez votre registrar** :
+   - Enregistrement CNAME : `votreusername.github.io`
+   - Ou 4 enregistrements A pour les IPs GitHub
 
-3. **Activez "Enforce HTTPS"** (après propagation DNS)
+3. **Activer "Enforce HTTPS"** (après propagation DNS ~24h)
 
-📚 [Documentation officielle GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
+📚 [Documentation officielle](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
 
-### Variables d'environnement
+### Variables d'Environnement
 
-Si vous avez besoin de variables d'environnement :
+Si besoin de secrets/variables :
 
 1. **Settings** → **Secrets and variables** → **Actions**
 2. Ajoutez vos variables
-3. Utilisez-les dans le workflow :
+3. Utilisez dans le workflow :
 
 ```yaml
 env:
-  VITE_API_URL: ${{ secrets.API_URL }}
+  VITE_API_KEY: ${{ secrets.API_KEY }}
 ```
 
 ---
 
 ## 🔍 Dépannage
 
-### ❌ Le workflow échoue
+### ❌ Workflow échoue
 
-**Vérifiez les logs dans Actions** :
+**Vérifier les logs :**
+1. **Actions** → Cliquez sur le workflow échoué
+2. Lisez les erreurs détaillées
 
-1. Cliquez sur le workflow qui a échoué
-2. Cliquez sur "build" ou "deploy"
-3. Lisez les erreurs
+**Causes fréquentes :**
+- Erreur de build → Testez `npm run build` localement
+- Erreur de lint → Corrigez avec `npm run lint`
+- Dépendances manquantes → Vérifiez `package.json`
 
-**Causes fréquentes** :
-- Erreur de build : testez `npm run build` localement
-- Erreur de linting : corrigez avec `npm run lint`
-- Dépendances manquantes : vérifiez `package.json`
+### ❌ Page blanche
 
-### ❌ Le site affiche une page blanche
+**Problème :** Assets ne se chargent pas
 
-**Problème** : Les assets ne se chargent pas
-
-**Solution** :
-- Vérifiez que `base: '/SongeYume/'` est correct dans `vite.config.js`
-- Le nom doit correspondre **exactement** au nom du dépôt
+**Solution :**
+- Vérifiez `base: '/NomDepot/'` dans `vite.config.js`
+- Le nom doit correspondre **EXACTEMENT** au nom du dépôt
 - N'oubliez pas les slashes : `/NomDepot/`
 
-### ❌ Les images ne s'affichent pas
+### ❌ Images ne s'affichent pas
 
-**Problème** : Images en 404
-
-**Solution** :
-- Les images doivent être dans `public/`
+**Solution :**
+- Images doivent être dans `public/covers/`
 - Utilisez des chemins absolus : `/covers/image.png`
-- Après modification, reconstruisez : `npm run build`
+- Vérifiez que `npm run build` optimise les images (voir logs)
 
-### ❌ Le routing ne fonctionne pas (404 sur les routes)
+### ❌ Routing ne fonctionne pas (404)
 
-**Problème** : Erreur 404 en accédant directement à `/library` ou `/stats`
+**Problème :** Erreur 404 en accédant directement à `/library` ou `/stats`
 
-**Solution** : C'est normal avec GitHub Pages pour les SPA. Les utilisateurs doivent :
+**C'est normal avec GitHub Pages pour les SPA.**
+
+Les utilisateurs doivent :
 - Commencer par la page d'accueil
 - Naviguer via les liens internes
-- Ou utiliser un service worker (configuration avancée)
 
-### ❌ "Permission denied" lors du déploiement
+### ❌ "Permission denied"
 
-**Solution** :
+**Solution :**
 1. **Settings** → **Actions** → **General**
-2. Section "Workflow permissions"
-3. Sélectionnez **"Read and write permissions"**
-4. Cochez **"Allow GitHub Actions to create and approve pull requests"**
-5. Sauvegardez
+2. **Workflow permissions** : "Read and write permissions"
+3. Cochez "Allow GitHub Actions to create and approve pull requests"
+4. Sauvegardez
 
-### ⚠️ Le déploiement prend beaucoup de temps
+### ⏱️ Déploiement long
 
-C'est normal pour le premier déploiement (3-5 minutes).
-
-Les suivants sont plus rapides (1-2 minutes) car :
-- Les dépendances sont en cache
-- Seuls les fichiers modifiés sont déployés
+- Premier déploiement : 3-5 minutes (normal)
+- Suivants : 1-2 minutes (dépendances en cache)
 
 ---
 
-## 📊 Monitoring et statistiques
+## 📊 Monitoring
 
-### Voir l'historique des déploiements
+### Historique des Déploiements
 
-1. **Actions** → **All workflows**
-2. Vous voyez tous les déploiements passés
-3. Verts = succès, Rouges = échecs
+**Actions** → **All workflows**
+- Verts = succès
+- Rouges = échecs
 
-### Badges de statut
+### Badge de Statut
 
-Ajoutez un badge de build dans votre README :
+Ajoutez dans votre README :
 
 ```markdown
-![Deploy Status](https://github.com/VotreUsername/SongeYume/actions/workflows/deploy.yml/badge.svg)
+![Deploy](https://github.com/VotreUsername/SongeYume/actions/workflows/deploy.yml/badge.svg)
 ```
 
 ---
 
 ## 📈 Optimisations
 
-### Performance
+### Performance (Déjà Configuré)
 
-✅ **Déjà configuré dans le workflow** :
-- Compression automatique des assets
-- Minification du code (Terser)
-- Cache des dépendances npm
-- Optimisation des images par Vite
+✅ Compression automatique des assets
+✅ Minification du code (esbuild)
+✅ **Optimisation automatique des images (-68%)**
+✅ Cache des dépendances npm
 
-### SEO
+### SEO (Optionnel)
 
-Ajoutez un fichier `public/robots.txt` :
-
+**`public/robots.txt`** :
 ```txt
 User-agent: *
 Allow: /
@@ -326,8 +260,7 @@ Allow: /
 Sitemap: https://votreusername.github.io/SongeYume/sitemap.xml
 ```
 
-Ajoutez un fichier `public/sitemap.xml` :
-
+**`public/sitemap.xml`** :
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -341,60 +274,39 @@ Ajoutez un fichier `public/sitemap.xml` :
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://votreusername.github.io/SongeYume/stats</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
 </urlset>
 ```
 
 ---
 
-## 📚 Ressources
+## 🎯 Checklist de Déploiement
 
-- 📖 [Documentation GitHub Pages](https://docs.github.com/en/pages)
-- 📖 [Documentation GitHub Actions](https://docs.github.com/en/actions)
-- 📖 [Documentation Vite](https://vitejs.dev/guide/static-deploy.html#github-pages)
-- 🛠️ [Workflow de déploiement](.github/workflows/deploy.yml)
+Avant le premier déploiement :
+
+- [ ] `base` configuré correctement dans `vite.config.js`
+- [ ] Code poussé sur GitHub
+- [ ] GitHub Pages activé (Source: GitHub Actions)
+- [ ] Permissions du workflow correctes
+- [ ] `npm run build` fonctionne localement
+- [ ] Pas d'erreurs de lint
 
 ---
 
-## 🎯 Checklist finale
+## 📚 Ressources
 
-Avant de déployer, assurez-vous que :
-
-- [ ] `base` est correctement configuré dans `vite.config.js`
-- [ ] Le code est poussé sur GitHub
-- [ ] GitHub Pages est activé (Source: GitHub Actions)
-- [ ] Les permissions du workflow sont correctes
-- [ ] Le build fonctionne localement (`npm run build`)
-- [ ] Pas d'erreurs de linting (`npm run lint`)
+- [Documentation GitHub Pages](https://docs.github.com/en/pages)
+- [Documentation GitHub Actions](https://docs.github.com/en/actions)
+- [Documentation Vite](https://vitejs.dev/guide/static-deploy.html#github-pages)
+- [Workflow de déploiement](.github/workflows/deploy.yml)
 
 ---
 
 ## 🎉 Félicitations !
 
-Votre bibliothèque virtuelle **SongeYume** est maintenant en ligne et accessible au monde entier ! 
-
-### Prochaines étapes
-
-- ✅ Partagez votre site avec vos amis
-- ✅ Ajoutez de nouveaux livres régulièrement
-- ✅ Personnalisez avec votre domaine (optionnel)
-- ✅ Explorez les statistiques dans l'onglet Actions
+Votre bibliothèque **SongeYume** est maintenant en ligne avec :
+- ✅ Déploiement automatique à chaque push
+- ✅ Images optimisées automatiquement (-68%)
+- ✅ HTTPS sécurisé
+- ✅ Performances optimales
 
 **Chaque mise à jour est automatiquement déployée. Profitez ! 📚✨**
-
----
-
-## 📧 Support
-
-En cas de problème :
-- 🐛 Ouvrez une issue sur GitHub
-- 📚 Consultez la [documentation officielle](https://docs.github.com/en/pages)
-- 💬 Vérifiez les logs dans l'onglet Actions
-
----
-
-**Bonne lecture et bon hébergement ! 📖✨**
