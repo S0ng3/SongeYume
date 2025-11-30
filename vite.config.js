@@ -1,9 +1,30 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    ViteImageOptimizer({
+      // Optimisation automatique des images au build
+      png: {
+        quality: 80,
+      },
+      jpeg: {
+        quality: 80,
+      },
+      jpg: {
+        quality: 80,
+      },
+      webp: {
+        quality: 85,
+      },
+      // Convertir aussi en WebP pour les navigateurs modernes
+      cache: true,
+      cacheLocation: '.cache',
+    }),
+  ],
   // Base URL pour GitHub Pages - Remplacez 'SongeYume' par le nom de votre dépôt
   base: '/SongeYume/',
   server: {
