@@ -522,7 +522,7 @@
     {
         "id": 20,
         "title": "Méduse",
-        "author": "Marine Desjardins",
+        "author": "Martine Desjardins",
         "cover": "/covers/meduse.png",
         "summary": "On la surnomme Méduse depuis si longtemps qu'elle en a oublié son véritable prénom. Elle marche tête baissée, le visage caché derrière ses cheveux, pour épargner aux autres la vue de ses Difformités. Elle-même n'a jamais osé se regarder dans un miroir. Placée dans un institut pour jeunes filles à la merci d'adultes peu scrupuleux, Méduse n'a de cesse d'accéder à la bibliothèque des lieux, seul moyen pour elle de s'ouvrir à la connaissance du monde. A force de ruse et de prise de conscience des pouvoirs de ses globes oculaires, qu'elle se garde longtemps de dévoiler, elle nous entraîne dans sa croisade contre l'oppression et la honte du corps. Roman d'apprentissage, roman gothique féministe, conte cruel ? Méduse est tout ça à la fois, et surtout un ouvrage tellement finement brodé littérairement qu'on ne peut en manquer un mot ni un propos : Martine Desjardins, tout autant que Méduse, nous prend dans ses filaments.",
         "personalReview": "Quelle lecture ! Je n'ai pas pu m'arrêter de lire, complètement hypnotisée par Méduse. L'ambiance du livre est vraiment unique ; l'univers est très perturbant, assez malsain, et cela se reflète bien durement dans le regard de notre héroïne. le combat qu'elle mène est touchant et révoltant. Vraiment, ce fut une lecture -on peut le dire !- très originale, mais ô combien captivante. J'en suis encore toute médusée.",
@@ -583,7 +583,7 @@
         "author": "Joe Abercrombie",
         "cover": "/covers/les-diables.png",
         "summary": "L'Europe est au bord du gouffre. La peste et la famine la ravagent, des monstres rôdent dans l'ombre et des princes avides ne songent qu'à leurs dévorantes ambitions. Une seule certitude demeure : les elfes reviendront, et ils mangeront tout le monde. Mais parfois, les chemins les plus sombres mènent à la lumière. Des routes sur lesquelles les Justes n'ont pas l'audace de s'engager. Enfouie dans les entrailles du splendide Palais Céleste, le fief de la foi, la Chapelle des Saints Expédients est un secret jalousement gardé. Car pour sa congrégation - un ramassis de monstres condamnés -, il n'existe pas de crimes interdits, de ligne rouge infranchissable... ni de mission qui finisse autrement que dans un bain de sang.Pour l'infortuné frère Diaz, bombardé vicaire de la chapelle, le défi est de convertir au bien la lie de la terre afin qu'elle défende une noble cause : asseoir une voleuse sur le trône de Troie et réunifier les Églises d'Occident et d'Orient avant l'apocalypse à venir. Quand on s'aventure en Enfer, mieux vaut avoir les Diables à ses côtés.",
-        "personalReview": "",
+        "personalReview": "Embarquez dans une épopée où la bonne bidoche, les blagues à la pelle et les bastons sanguinolentes s'enchaînent sans interruption. Tout d'ailleurs fait penser à une blague de taverne, une qui commencerait par : “C'est l'histoire d'un chevalier pragmatique, d'un moine perdu, d'une elfe discrète, d'une barbare violente, d'une mercenaire à tout faire qui a vraiment tout fait, d'un nécromancien mélomane et d'un vampire qui aime les boulettes à la viande, qui escortent une princesse voleuse…” Et la blague continue, d'autant plus que les ennemis déboulent à la queue leu leu pour affronter notre bande. Je ne pensais pas tomber sous le charme de cet univers aussi déjanté que sombre, mais franchement, quelle bonne surprise ! Ici, les dialogues fusent, chacun balance sa meilleure réplique (et ils sont nombreux les bougres, à vouloir parler !). Mais ça me va, les punchlines sont vraiment drôles. Les personnages sont caricaturaux à outrance, et ça le fait, car c'est clairement souhaité. Bref : un joyeux carnage sanguinolent comme je les aime.",
         "rating": 4,
         "maxRating": 5,
         "quotes": ["Ce qui passe pour de la lâcheté aux yeux d'un homme, est simplement de la prudence pour un autre. Et ce qu'un       troisième nomme trahison, un quatrième le qualifiera de courage. Enfin, ce qui est le destin pour l'un peut être un désastre pour un autre.","La sincérité, c’était l’état d’esprit dans lequel on inventait les plus beaux mensonges.","Chez un chef, personne ne voulait sentir de doutes…"],
@@ -591,8 +591,8 @@
         "format": "Broché",
         "publishedOnInstagram": false,
         "instagramLink": "",    
-        "publishedOnBabelio": false,
-        "babelioLink": "",
+        "publishedOnBabelio": true,
+        "babelioLink": "https://www.babelio.com/livres/Abercrombie-Les-Diables-tome-1/1812523#!",
         "readDate": "2025-11-29",
         "publisher": "Bragelonne"
     }
