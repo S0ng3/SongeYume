@@ -47,7 +47,8 @@ const Library = () => {
           book.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
           book.summary.toLowerCase().includes(searchLower) ||
           book.rating.toString().includes(searchLower) ||
-          (book.publisher && book.publisher.toLowerCase().includes(searchLower))
+          (book.publisher && book.publisher.toLowerCase().includes(searchLower)) ||
+          (book.series && book.series.toLowerCase().includes(searchLower))
         )
       })
     }
@@ -111,7 +112,8 @@ const Library = () => {
           book.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
           book.summary.toLowerCase().includes(searchLower) ||
           book.rating.toString().includes(searchLower) ||
-          (book.publisher && book.publisher.toLowerCase().includes(searchLower))
+          (book.publisher && book.publisher.toLowerCase().includes(searchLower)) ||
+          (book.series && book.series.toLowerCase().includes(searchLower))
         )
       })
     }
@@ -250,7 +252,7 @@ const Library = () => {
           <SearchBar
             searchTerm={searchTerm}
             onSearchChange={handleSearchChange}
-            placeholder="Rechercher par titre, auteur, tags..."
+            placeholder="Rechercher par titre, auteur, série, tags..."
           />
         </motion.div>
 
