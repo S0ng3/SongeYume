@@ -148,7 +148,7 @@ const Layout = ({ children }) => {
             <div className="flex items-center space-x-4">
               <Book className="w-6 h-6 text-accent" />
               <span className="text-text-light text-opacity-70">
-                Créé avec passion pour les livres, par un livre. Cette phrase ne veut strictement rien dire, mais habille bien cette partie du site un peu vide.
+                Créé avec passion pour les livres, par un livre.
               </span>
             </div>
           </div>
