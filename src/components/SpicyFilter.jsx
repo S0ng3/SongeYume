@@ -6,7 +6,7 @@ const SpicyFilter = ({ selectedSpicyLevel, onSpicyLevelClick, onClearSpicyLevel 
     { value: 0, label: 'Sous-entendus' },
     { value: 1, label: 'Doux' },
     { value: 2, label: 'Épicé' },
-    { value: 3, label: 'Très épicé' }
+    { value: 3, label: 'Hard' }
   ]
 
   return (

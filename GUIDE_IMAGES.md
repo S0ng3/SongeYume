@@ -316,10 +316,10 @@ Pour les livres avec des tags **Romance** ou **MM**, vous pouvez ajouter un nive
 
 | Niveau | Indicateur | Description | Exemple |
 |--------|------------|-------------|---------|
-| **0** | 🔥○○ | Sous-entendus uniquement | Roi Sorcier, Demain et Demain |
-| **1** | 🔥🔥○ | Doux - Moments tendres, bisous | Yumi et le Peintre de Cauchemars |
-| **2** | 🔥🔥🔥 | Épicé - Scènes plus explicites | Tarot - Le Dernier Soleil |
-| **3** | 🔥🔥🔥 | Très épicé - Contenu explicite |  |
+| **0** | ○○○ | Sous-entendus uniquement | Roi Sorcier, Demain et Demain |
+| **1** | 🔥○○ | Doux - Moments tendres | Yumi et le Peintre de Cauchemars |
+| **2** | 🔥🔥○ | Épicé - Scènes explicites | Tarot - Le Dernier Soleil |
+| **3** | 🔥🔥🔥 | Hard - Contenu très explicite |  |
 
 *Note : Les flammes s'affichent dans la couleur dorée de votre charte graphique*
 

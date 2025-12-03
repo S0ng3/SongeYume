@@ -19,11 +19,22 @@ const SpicyIndicator = ({ level, showLabel = false, size = 'sm' }) => {
     0: 'Sous-entendus',
     1: 'Doux',
     2: 'Épicé',
-    3: 'Très épicé'
+    3: 'Hard'
   }
 
+  // Descriptions complètes pour le tooltip de chaque flamme
+  // index 0 = 1ère flamme, index 1 = 2ème, index 2 = 3ème
+  const tooltips = {
+    0: '🔥 = Doux',
+    1: '🔥🔥 = Épicé',
+    2: '🔥🔥🔥 = Hard'
+  }
+
+  // Tooltip global montrant le niveau actuel et la légende
+  const globalTooltip = `${labels[level]} (${level}/3)\n\n○○○ Sous-entendus\n🔥○○ Doux\n🔥🔥○ Épicé\n🔥🔥🔥 Hard`
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2" title={globalTooltip}>
       <div className="flex items-center gap-0.5">
         {[...Array(3)].map((_, index) => (
           <motion.div
@@ -31,7 +42,7 @@ const SpicyIndicator = ({ level, showLabel = false, size = 'sm' }) => {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 }}
-            title={labels[level]}
+            title={tooltips[index]}
           >
             <Flame
               className={`${iconSize} ${
