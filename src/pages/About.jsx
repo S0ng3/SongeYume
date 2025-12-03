@@ -16,7 +16,7 @@ const About = () => {
     {
       icon: Target,
       title: 'Organisation minutieuse',
-      description: 'Une bibliothèque soigneusement organisée avec tags, notes et citations pour retrouver facilement mes lectures.'
+      description: 'Une bibliothèque soigneusement organisée avec tags, notes et citations pour retrouver facilement mes recommandations.'
     },
     {
       icon: Coffee,
@@ -58,13 +58,13 @@ const About = () => {
                   Bienvenue dans ma bibliothèque virtuelle personnelle, un espace où je partage ma passion pour la lecture et mes découvertes littéraires.
                 </p>
                 <p>
-                  Ce site est né de mon envie d'archiver mes lectures, de conserver mes impressions et de partager mes coups de cœur avec d'autres passionnés de livres. Chaque livre que je lis laisse une trace, une émotion, une réflexion, et j'ai voulu créer un lieu où toutes ces expériences puissent vivre et être partagées.
+                  Ce site est né de mon envie d'archiver mes lectures, de conserver mes impressions et de les organiser. J'aime beaucoup les applications existantes de gestion de livre, mais aucune ne correspondait à mon besoin de personnalisation. C'est ainsi que ce site est né !
                 </p>
                 <p>
-                  Ici, vous trouverez les critiques honnêtes de Songe, ses citations préférées, et ses réflexions sur les œuvres qui ont marqué son parcours de lectrice. De la littérature classique à la science-fiction, en passant par la fantasy et la philosophie, chaque genre trouve sa place dans son univers.
+                  Je lis essentiellement de la fantasy adulte, car j'aime m'évader dans des mondes imaginaires, beaux et cruels à la fois. J'apprécie les univers bien travaillés, et les personnages forts et bien développés. S'ils sont un peu torturés par le destin, c'est encore mieux !
                 </p>
                 <p>
-                  J'espère que vous prendrez autant de plaisir à explorer cette bibliothèque que j'en ai eu à la construire.
+                  J'espère que vous prendrez autant de plaisir à explorer cette bibliothèque que j'en ai eu à la construire. Et n'hésitez pas à me contacter sur Instagram ou Babelio pour échanger : je suis timide, mais toujours ouverte à la discussion.
                 </p>
               </div>
             </div>
@@ -74,7 +74,7 @@ const About = () => {
                 ✨ Ma philosophie de lecture
               </h3>
               <p className="text-text-light text-opacity-80 leading-relaxed italic">
-                "Un livre est une fenêtre ouverte sur l'infini. Chaque page tournée est une invitation à voyager, à rêver, à grandir. La lecture n'est pas un passe-temps, c'est une aventure de l'esprit et du cœur."
+                "Un livre est une fenêtre ouverte sur l'infini."
               </p>
             </div>
           </motion.div>
@@ -152,13 +152,13 @@ const About = () => {
             Envie d'échanger sur nos lectures ?
           </h2>
           <p className="text-text-light text-opacity-70 mb-6 max-w-2xl mx-auto">
-            N'hésitez pas à me suivre sur mes réseaux sociaux pour découvrir mes dernières lectures et partager vos recommandations !
+            N'hésitez pas à me suivre sur mes réseaux sociaux pour échanger avec moi sur mes dernières lectures et partager vos recommandations !
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#" className="btn-primary">
+            <a href="https://www.instagram.com/songeyume/" className="btn-primary">
               Instagram
             </a>
-            <a href="#" className="btn-secondary">
+            <a href="https://www.babelio.com/monprofil.php?id_user=1167978" className="btn-secondary">
               Babelio
             </a>
           </div>
