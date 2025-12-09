@@ -586,7 +586,7 @@
         "personalReview": "Embarquez dans une épopée où la bonne bidoche, les blagues à la pelle et les bastons sanguinolentes s'enchaînent sans interruption. Tout d'ailleurs fait penser à une blague de taverne, une qui commencerait par : “C'est l'histoire d'un chevalier pragmatique, d'un moine perdu, d'une elfe discrète, d'une barbare violente, d'une mercenaire à tout faire qui a vraiment tout fait, d'un nécromancien mélomane et d'un vampire qui aime les boulettes à la viande, qui escortent une princesse voleuse…” Et la blague continue, d'autant plus que les ennemis déboulent à la queue leu leu pour affronter notre bande. Je ne pensais pas tomber sous le charme de cet univers aussi déjanté que sombre, mais franchement, quelle bonne surprise ! Ici, les dialogues fusent, chacun balance sa meilleure réplique (et ils sont nombreux les bougres, à vouloir parler !). Mais ça me va, les punchlines sont vraiment drôles. Les personnages sont caricaturaux à outrance, et ça le fait, car c'est clairement souhaité. Bref : un joyeux carnage sanguinolent comme je les aime.",
         "rating": 4,
         "maxRating": 5,
-        "quotes": ["Ce qui passe pour de la lâcheté aux yeux d'un homme, est simplement de la prudence pour un autre. Et ce qu'un       troisième nomme trahison, un quatrième le qualifiera de courage. Enfin, ce qui est le destin pour l'un peut être un désastre pour un autre.","La sincérité, c’était l’état d’esprit dans lequel on inventait les plus beaux mensonges.","Chez un chef, personne ne voulait sentir de doutes…"],
+        "quotes": ["Ce qui passe pour de la lâcheté aux yeux d'un homme, est simplement de la prudence pour un autre. Et ce qu'un troisième nomme trahison, un quatrième le qualifiera de courage. Enfin, ce qui est le destin pour l'un peut être un désastre pour un autre.","La sincérité, c’était l’état d’esprit dans lequel on inventait les plus beaux mensonges.","Chez un chef, personne ne voulait sentir de doutes…"],
         "tags": ["Fantasy", "Grimdark", "Humour", "Littérature britannique", "Uchronie"],
         "format": "Broché",
         "publishedOnInstagram": false,
@@ -595,5 +595,24 @@
         "babelioLink": "https://www.babelio.com/livres/Abercrombie-Les-Diables-tome-1/1812523#!",
         "readDate": "2025-11-29",
         "publisher": "Bragelonne"
+    },
+    {
+        "id": 24,
+        "title": "Et que désirez-vous ce soir ?",
+        "author": "Premee Mohamed",
+        "cover": "/covers/et-que-desirez-vous-ce-soir.png",
+        "summary": "Dans une ville future, Joyau est une courtisane travaillant pour le compte de la Maison des Bicchieri. Son monde vacille quand Winfield, son amie et collègue, est tuée par un riche client avant de mystérieusement revenir à la vie. Guidées par la vengeance, elles font face aux limites de la loyauté, de la justice et de la culpabilité.",
+        "personalReview": "Et que désirez-vous ce soir est un court récit qui nous plonge, sans trop en dévoiler, dans un univers cyberpunk où violence, danger et pauvreté sont bien présents, mais abordés de façon détournée. Joyau est préservée de tout cela, et c'est à travers sa peur d'y être confrontée que l'on découvre progressivement ce monde. L'injustice et la vengeance sont les maîtres mots de ce livre, et j'ai beaucoup apprécié la manière dont le lecteur est entraîné dans une intrigue qui vient bouleverser le quotidien de notre héroïne, elle-même simple spectatrice des événements.",
+        "rating": 4,
+        "maxRating": 5,
+        "quotes": ["On devrait s'habituer à vivre dans un monde où la victime est punie au lieu du coupable, mais une voix en nous continue de crier à l'injustice, non d'un point de vue logique, causal ou chronologique, mais intrinsèquement. C'est plus profond. Cellulaire.","Mais si c'est la souffrance qu'elle veut pour sa revanche, pourquoi ne pas les laisser souffrir comme seule la vie peut faire souffrir ?"],
+        "tags": ["Science-Fiction", "Justice", "Cyberpunk", "Littérature canadienne"],
+        "format": "Broché",
+        "publishedOnInstagram": false,
+        "instagramLink": "",    
+        "publishedOnBabelio": true,
+        "babelioLink": "https://www.babelio.com/livres/Mohamed-Et-que-desirez-vous-ce-soir/1864692",
+        "readDate": "2025-12-04",
+        "publisher": "L'Atalante"
     }
 ]
