@@ -25,8 +25,8 @@ export default defineConfig({
       cacheLocation: '.cache',
     }),
   ],
-  // Base URL pour GitHub Pages - Remplacez 'SongeYume' par le nom de votre dépôt
-  base: '/SongeYume/',
+  // Base URL pour domaine personnalisé
+  base: '/',
   server: {
     port: 3000,
     open: true
