@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 import SpicyIndicator from './SpicyIndicator'
+import ImageWithPlaceholder from './ImageWithPlaceholder'
 import { isSubgenre } from '../utils/subgenres'
 import { getImagePath } from '../utils/helpers'
 
@@ -17,11 +18,12 @@ const BookCard = ({ book }) => {
       <Link to={`/book/${book.id}`}>
         <div className="card-base card-hover overflow-hidden h-full flex flex-col group">
           {/* Book Cover */}
-          <div className="relative overflow-hidden aspect-[2/3] bg-card-hover">
-            <img
+          <div className="relative">
+            <ImageWithPlaceholder
               src={getImagePath(book.cover)}
               alt={`Couverture de ${book.title}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              aspectRatio="aspect-[2/3]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
             

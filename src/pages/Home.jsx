@@ -5,6 +5,7 @@ import { BookOpen, Users, Star, ArrowRight } from 'lucide-react'
 import BookCardWithReview from '../components/BookCardWithReview'
 import QuoteOfTheDay from '../components/QuoteOfTheDay'
 import ParallaxBackground from '../components/ParallaxBackground'
+import ImageWithPlaceholder from '../components/ImageWithPlaceholder'
 import booksData from '../data/books.json'
 import { getImagePath } from '../utils/helpers'
 
@@ -43,13 +44,15 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="mb-8"
+              className="mb-8 max-w-full mx-auto"
+              style={{ maxHeight: '400px', maxWidth: '100%' }}
             >
-              <img 
+              <ImageWithPlaceholder
                 src={getImagePath('/SongeYume_HomePage.png')} 
                 alt="Songe Yume - Ma Bibliothèque Virtuelle"
-                className="mx-auto max-w-full h-auto"
-                style={{ maxHeight: '400px' }}
+                className="mx-auto max-w-full h-auto object-contain"
+                aspectRatio=""
+                placeholderClassName="!bg-transparent"
               />
             </motion.div>
             

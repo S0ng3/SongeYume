@@ -6,6 +6,7 @@ import BookCardCompact from '../components/BookCardCompact'
 import SimilarBooks from '../components/SimilarBooks'
 import SeriesTracker from '../components/SeriesTracker'
 import SpicyIndicator from '../components/SpicyIndicator'
+import ImageWithPlaceholder from '../components/ImageWithPlaceholder'
 import { isSubgenre } from '../utils/subgenres'
 import { getImagePath } from '../utils/helpers'
 
@@ -111,11 +112,12 @@ const BookDetail = () => {
               className="lg:col-span-1"
             >
               <div className="sticky top-24">
-                <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-book-hover">
-                  <img
+                <div className="rounded-lg overflow-hidden shadow-book-hover">
+                  <ImageWithPlaceholder
                     src={getImagePath(book.cover)}
                     alt={`Couverture de ${book.title}`}
                     className="w-full h-full object-cover"
+                    aspectRatio="aspect-[2/3]"
                   />
                 </div>
 

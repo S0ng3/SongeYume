@@ -73,12 +73,12 @@ const ParallaxBackground = ({ books }) => {
             <motion.div
               key={index}
               style={{ y: yTransform }}
-              className={`aspect-[2/3] transform ${rotation} ${opacity}`}
+              className={`aspect-[2/3] transform ${rotation} ${opacity} bg-card-bg rounded-lg overflow-hidden shadow-2xl`}
             >
               <img
                 src={getImagePath(book.cover)}
                 alt=""
-                className="w-full h-full object-cover rounded-lg shadow-2xl"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </motion.div>
