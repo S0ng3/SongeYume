@@ -621,7 +621,7 @@
         "author": "RSF",
         "cover": "/covers/studio-ghibli.png",
         "summary": "Mon voisin Totoro, Le Tombeau des lucioles, Princesse Mononoké, Le Voyage de Chihiro... Les chefs-d'œuvres du Studio Ghibli sont réunis pour la première fois dans le nouvel album de Reporters sans frontières. Avec ce 80e opus exceptionnel, la collection 100 photos pour la liberté de la presse fait une nouvelle entorse à sa tradition photographique pour se décliner en 100 dessins. Une rareté qui coïncide avec un double anniversaire : les 40 ans du Studio Ghibli et ceux de Reporters sans frontières, tous deux fondés en 1985.",
-        "personalReview": "",
+        "personalReview": "RSF a été fondé la même année que le Studio Ghibli et a choisi de lui rendre hommage à travers cet ouvrage. Ainsi, 100 % des bénéfices financent des actions de défense du droit à l’information. Offrir ce magazine à Noël est, à mon sens, une très belle idée. Non seulement il soutient une cause juste (l’information est la clé d’une société saine), mais j’ai également trouvé ce numéro spécial Ghibli très réussi. Dès l’avant-propos, j’ai été intriguée et intéressée. Cette notion de « troisième courage », la tendresse féroce, est un concept que je trouve particulièrement fascinant. Le portfolio est lui aussi intéressant, même s’il est dommage que toutes les œuvres ne soient pas aussi détaillées que certaines, et que seules les œuvres des fondateurs soient présentées, plutôt que le catalogue complet.",
         "rating": 5,
         "maxRating": 5,
         "quotes": ["Pour tenir, relâcher. Pour faire face, s'effacer. Pour contenir la vague, se laisser traverser."],
@@ -629,8 +629,8 @@
         "format": "Broché",
         "publishedOnInstagram": false,
         "instagramLink": "",    
-        "publishedOnBabelio": false,
-        "babelioLink": "",
+        "publishedOnBabelio": true,
+        "babelioLink": "https://www.babelio.com/livres/Miyazaki-Studio-Ghibli--100-photos-pour-la-liberte-de-la-p/1942221",
         "readDate": "2025-12-09",
         "publisher": "Reporters sans frontières"
     }
