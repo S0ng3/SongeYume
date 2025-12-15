@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { BookOpen, Users, Star, ArrowRight } from 'lucide-react'
 import BookCardWithReview from '../components/BookCardWithReview'
 import QuoteOfTheDay from '../components/QuoteOfTheDay'
+import ParallaxBackground from '../components/ParallaxBackground'
 import booksData from '../data/books.json'
 import { getImagePath } from '../utils/helpers'
 
@@ -26,9 +27,12 @@ const Home = () => {
 
   return (
     <div className="page-transition">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-card-bg to-background py-20">
-        <div className="container-custom">
+      {/* Hero Section avec Parallaxe */}
+      <section className="relative bg-gradient-to-b from-card-bg to-background py-20 overflow-hidden">
+        {/* Arrière-plan parallaxe avec couvertures */}
+        <ParallaxBackground books={booksData} />
+        
+        <div className="container-custom relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -59,7 +63,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="card-base p-6"
+                className="card-base p-6 backdrop-blur-sm bg-card-bg/90"
               >
                 <BookOpen className="w-8 h-8 text-accent mx-auto mb-3" />
                 <p className="text-3xl font-bold text-text-light mb-1">
@@ -74,7 +78,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="card-base p-6"
+                className="card-base p-6 backdrop-blur-sm bg-card-bg/90"
               >
                 <Star className="w-8 h-8 text-accent mx-auto mb-3 fill-accent" />
                 <p className="text-3xl font-bold text-text-light mb-1">
@@ -89,7 +93,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="card-base p-6"
+                className="card-base p-6 backdrop-blur-sm bg-card-bg/90"
               >
                 <Users className="w-8 h-8 text-accent mx-auto mb-3" />
                 <p className="text-3xl font-bold text-text-light mb-1">
@@ -105,7 +109,7 @@ const Home = () => {
       </section>
 
       {/* Quote of the Day Section */}
-      <section className="py-16 bg-card-bg bg-opacity-30">
+      <section className="py-16 bg-gradient-to-b from-background to-card-bg to-opacity-20">
         <div className="container-custom">
           <QuoteOfTheDay />
         </div>
