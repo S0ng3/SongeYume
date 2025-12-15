@@ -20,16 +20,16 @@ const ParallaxBackground = ({ books }) => {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Sélectionner 30 livres aléatoires pour l'arrière-plan (divisible par 3, 4, 6, 10)
+  // Sélectionner 4 livres aléatoires pour l'arrière-plan (une seule ligne, pas de chevauchement)
   const [backgroundBooks] = useState(() => {
     const shuffled = [...books].sort(() => Math.random() - 0.5)
-    return shuffled.slice(0, 30)
+    return shuffled.slice(0, 4)
   })
 
-  // Effet parallaxe : mouvement visible mais contrôlé pour éviter les chevauchements
-  const y1 = useTransform(scrollY, [0, 1000], [0, 60])   // Lent
-  const y2 = useTransform(scrollY, [0, 1000], [0, 90])   // Moyen
-  const y3 = useTransform(scrollY, [0, 1000], [0, 120])  // Rapide
+  // Effet parallaxe : mouvement bien visible et dynamique
+  const y1 = useTransform(scrollY, [0, 1000], [0, 70])   // Lent
+  const y2 = useTransform(scrollY, [0, 1000], [0, 120])  // Moyen
+  const y3 = useTransform(scrollY, [0, 1000], [0, 170])  // Rapide
 
   // Sur mobile, pas de parallaxe
   if (isMobile) {
@@ -39,7 +39,7 @@ const ParallaxBackground = ({ books }) => {
         <div className="absolute inset-0 bg-background opacity-80 z-10" />
         
         {/* Grille de couvertures statique (mobile) - responsive */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-1 p-2 opacity-30">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 opacity-30">
           {backgroundBooks.map((book, index) => (
             <div key={index} className="aspect-[2/3]">
               <img
@@ -61,7 +61,7 @@ const ParallaxBackground = ({ books }) => {
       <div className="absolute inset-0 bg-background opacity-75 z-10" />
       
       {/* Grille de couvertures avec effet parallaxe individuel - responsive */}
-      <div className="relative w-full h-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4 p-6">
+      <div className="relative w-full h-full grid grid-cols-2 sm:grid-cols-4 gap-6 p-6">
         {backgroundBooks.map((book, index) => {
           // Assigner une vitesse de parallax différente selon la position
           const parallaxSpeed = index % 3
