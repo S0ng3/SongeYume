@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Library from './pages/Library'
 import BookDetail from './pages/BookDetail'
@@ -10,6 +11,7 @@ import Quotes from './pages/Quotes'
 function App() {
   return (
     <Layout>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/library" element={<Library />} />
