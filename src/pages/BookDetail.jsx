@@ -224,16 +224,18 @@ const BookDetail = () => {
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-8">
                 {book.tags.map((tag, index) => (
-                  <span 
-                    key={index} 
-                    className={`tag ${
+                  <Link
+                    key={index}
+                    to={`/library?tag=${encodeURIComponent(tag)}`}
+                    className={`tag cursor-pointer hover:opacity-80 transition-opacity ${
                       isSubgenre(tag)
-                        ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
-                        : ''
+                        ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold hover:bg-opacity-30'
+                        : 'hover:bg-opacity-20'
                     }`}
+                    title={`Voir tous les livres avec le tag "${tag}"`}
                   >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
 

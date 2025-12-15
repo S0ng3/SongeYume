@@ -26,10 +26,10 @@ const ParallaxBackground = ({ books }) => {
     return shuffled.slice(0, 30)
   })
 
-  // Effet parallaxe : mouvement modéré au scroll pour éviter les chevauchements
-  const y1 = useTransform(scrollY, [0, 800], [0, 50])   // Lent
-  const y2 = useTransform(scrollY, [0, 800], [0, 100])   // Moyen
-  const y3 = useTransform(scrollY, [0, 800], [0, 150])  // Rapide
+  // Effet parallaxe : mouvement visible mais contrôlé pour éviter les chevauchements
+  const y1 = useTransform(scrollY, [0, 1000], [0, 60])   // Lent
+  const y2 = useTransform(scrollY, [0, 1000], [0, 90])   // Moyen
+  const y3 = useTransform(scrollY, [0, 1000], [0, 120])  // Rapide
 
   // Sur mobile, pas de parallaxe
   if (isMobile) {
@@ -61,19 +61,18 @@ const ParallaxBackground = ({ books }) => {
       <div className="absolute inset-0 bg-background opacity-75 z-10" />
       
       {/* Grille de couvertures avec effet parallaxe individuel - responsive */}
-      <div className="relative w-full h-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 p-4">
+      <div className="relative w-full h-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4 p-6">
         {backgroundBooks.map((book, index) => {
           // Assigner une vitesse de parallax différente selon la position
           const parallaxSpeed = index % 3
           const yTransform = parallaxSpeed === 0 ? y1 : parallaxSpeed === 1 ? y2 : y3
           const opacity = parallaxSpeed === 0 ? 'opacity-40' : parallaxSpeed === 1 ? 'opacity-35' : 'opacity-30'
-          const rotation = index % 4 === 0 ? 'rotate-1' : index % 4 === 1 ? '-rotate-1' : index % 4 === 2 ? 'rotate-[0.5deg]' : '-rotate-[0.5deg]'
           
           return (
             <motion.div
               key={index}
               style={{ y: yTransform }}
-              className={`aspect-[2/3] transform ${rotation} ${opacity} bg-card-bg rounded-lg overflow-hidden shadow-2xl`}
+              className={`aspect-[2/3] ${opacity} bg-card-bg rounded-lg overflow-hidden shadow-2xl`}
             >
               <img
                 src={getImagePath(book.cover)}

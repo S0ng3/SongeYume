@@ -163,9 +163,10 @@ const Home = () => {
       <section className="py-16">
         <div className="container-custom">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
             className="card-base p-12 text-center bg-gradient-to-br from-card-bg to-card-hover"
           >
             <h2 className="text-3xl font-bold text-text-light mb-4">

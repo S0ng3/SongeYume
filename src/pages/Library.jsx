@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import BookCardCompact from '../components/BookCardCompact'
@@ -14,6 +15,7 @@ import booksData from '../data/books.json'
 const BOOKS_PER_PAGE = 48 // 4 rows of 12 on large screens
 
 const Library = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [books, setBooks] = useState(booksData)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTags, setSelectedTags] = useState([])
@@ -25,6 +27,17 @@ const Library = () => {
   const [categoryCounts, setCategoryCounts] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+
+  // Charger le filtre de tag depuis l'URL au montage du composant
+  useEffect(() => {
+    const tagFromUrl = searchParams.get('tag')
+    if (tagFromUrl) {
+      setSelectedTags([tagFromUrl])
+      setIsFiltersOpen(true) // Ouvrir les filtres pour montrer le tag sélectionné
+      // Nettoyer l'URL après avoir appliqué le filtre
+      setSearchParams({})
+    }
+  }, []) // Uniquement au montage
 
   // Mettre à jour les options de filtres disponibles en fonction des filtres actifs
   useEffect(() => {

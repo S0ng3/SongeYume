@@ -579,7 +579,7 @@
     },
     {
         "id": 23,
-        "title": "Les Diables",
+        "title": "Les Diables, tome 1",
         "author": "Joe Abercrombie",
         "cover": "/covers/les-diables.png",
         "summary": "L'Europe est au bord du gouffre. La peste et la famine la ravagent, des monstres rôdent dans l'ombre et des princes avides ne songent qu'à leurs dévorantes ambitions. Une seule certitude demeure : les elfes reviendront, et ils mangeront tout le monde. Mais parfois, les chemins les plus sombres mènent à la lumière. Des routes sur lesquelles les Justes n'ont pas l'audace de s'engager. Enfouie dans les entrailles du splendide Palais Céleste, le fief de la foi, la Chapelle des Saints Expédients est un secret jalousement gardé. Car pour sa congrégation - un ramassis de monstres condamnés -, il n'existe pas de crimes interdits, de ligne rouge infranchissable... ni de mission qui finisse autrement que dans un bain de sang.Pour l'infortuné frère Diaz, bombardé vicaire de la chapelle, le défi est de convertir au bien la lie de la terre afin qu'elle défende une noble cause : asseoir une voleuse sur le trône de Troie et réunifier les Églises d'Occident et d'Orient avant l'apocalypse à venir. Quand on s'aventure en Enfer, mieux vaut avoir les Diables à ses côtés.",
@@ -594,7 +594,10 @@
         "publishedOnBabelio": true,
         "babelioLink": "https://www.babelio.com/livres/Abercrombie-Les-Diables-tome-1/1812523#!",
         "readDate": "2025-11-29",
-        "publisher": "Bragelonne"
+        "publisher": "Bragelonne",
+        "series": "Les Diables",
+        "seriesOrder": 1,
+        "seriesTotalBooks": 3
     },
     {
         "id": 24,
