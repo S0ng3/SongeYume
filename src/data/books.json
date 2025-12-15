@@ -614,5 +614,24 @@
         "babelioLink": "https://www.babelio.com/livres/Mohamed-Et-que-desirez-vous-ce-soir/1864692",
         "readDate": "2025-12-04",
         "publisher": "L'Atalante"
+    },
+    {
+        "id": 25,
+        "title": "Studio Ghibli 100 dessins pour la liberté de la presse",
+        "author": "RSF",
+        "cover": "/covers/studio-ghibli.png",
+        "summary": "Mon voisin Totoro, Le Tombeau des lucioles, Princesse Mononoké, Le Voyage de Chihiro... Les chefs-d'œuvres du Studio Ghibli sont réunis pour la première fois dans le nouvel album de Reporters sans frontières. Avec ce 80e opus exceptionnel, la collection 100 photos pour la liberté de la presse fait une nouvelle entorse à sa tradition photographique pour se décliner en 100 dessins. Une rareté qui coïncide avec un double anniversaire : les 40 ans du Studio Ghibli et ceux de Reporters sans frontières, tous deux fondés en 1985.",
+        "personalReview": "",
+        "rating": 5,
+        "maxRating": 5,
+        "quotes": ["Pour tenir, relâcher. Pour faire face, s'effacer. Pour contenir la vague, se laisser traverser."],
+        "tags": ["Favoris", "Factuel", "Cinéma japonais", "Documentaire"],
+        "format": "Broché",
+        "publishedOnInstagram": false,
+        "instagramLink": "",    
+        "publishedOnBabelio": false,
+        "babelioLink": "",
+        "readDate": "2025-12-09",
+        "publisher": "Reporters sans frontières"
     }
 ]
