@@ -39,7 +39,7 @@ export const CATEGORIES = {
     name: 'Favoris',
     icon: '/categories/favorite.png',
     description: 'Mes coups de cœur',
-    special: 'rating >= 4.5' // Filtre spécial pour les favoris
+    tags: ['Favoris']
   },
   autre: {
     name: 'Autre',
@@ -78,11 +78,6 @@ export const filterBooksByCategory = (books, categoryKey) => {
   if (!categoryKey) return books
   
   const category = CATEGORIES[categoryKey]
-  
-  // Special case for favorites
-  if (category.special === 'rating >= 4.5') {
-    return books.filter(book => book.rating >= 4.5)
-  }
   
   // Filter by tags
   if (category.tags) {

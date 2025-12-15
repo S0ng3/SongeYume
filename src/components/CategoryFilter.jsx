@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { CATEGORIES } from '../data/categories'
 import { getImagePath } from '../utils/helpers'
 
-const CategoryFilter = ({ selectedCategory, onCategoryClick, onClearCategory }) => {
+const CategoryFilter = ({ selectedCategory, onCategoryClick, onClearCategory, categoryCounts = {} }) => {
   const categories = Object.entries(CATEGORIES)
 
   return (
@@ -39,7 +39,7 @@ const CategoryFilter = ({ selectedCategory, onCategoryClick, onClearCategory }) 
                   : 'bg-card-bg hover:bg-card-hover'
               }`}
             >
-              <div className="w-16 h-16 mb-2 flex items-center justify-center">
+              <div className="w-16 h-16 mb-2 flex items-center justify-center relative">
                 <img
                   src={getImagePath(category.icon)}
                   alt={category.name}
@@ -47,6 +47,19 @@ const CategoryFilter = ({ selectedCategory, onCategoryClick, onClearCategory }) 
                     isSelected ? 'brightness-110' : 'brightness-90 hover:brightness-100'
                   }`}
                 />
+                {categoryCounts[key] !== undefined && (
+                  <span className={`
+                    absolute -top-1 -right-1
+                    px-1.5 py-0.5 rounded-full text-[10px] font-bold
+                    shadow-md transition-all duration-300
+                    ${isSelected 
+                      ? 'bg-accent text-background' 
+                      : 'bg-accent bg-opacity-80 text-background'
+                    }
+                  `}>
+                    {categoryCounts[key]}
+                  </span>
+                )}
               </div>
               <span className={`text-xs text-center font-medium ${
                 isSelected ? 'text-accent' : 'text-text-light text-opacity-80'

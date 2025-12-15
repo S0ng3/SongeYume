@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { BookOpen, TrendingUp, Star, ArrowRight } from 'lucide-react'
+import { BookOpen, Users, Star, ArrowRight } from 'lucide-react'
 import BookCardWithReview from '../components/BookCardWithReview'
 import QuoteOfTheDay from '../components/QuoteOfTheDay'
 import booksData from '../data/books.json'
@@ -21,7 +21,7 @@ const Home = () => {
   const stats = {
     totalBooks: booksData.length,
     averageRating: (booksData.reduce((acc, book) => acc + book.rating, 0) / booksData.length).toFixed(1),
-    publishedOnInstagram: booksData.filter(book => book.publishedOnInstagram).length
+    uniqueAuthors: new Set(booksData.map(book => book.author)).size
   }
 
   return (
@@ -50,7 +50,7 @@ const Home = () => {
             </motion.div>
             
             <p className="page-subtitle">
-              Découvrez ma collection personnelle de livres, mes critiques et mes coups de cœur
+              Découvrez ma collection personnelle de livres, mes critiques et mes favoris
             </p>
 
             {/* Quick Stats */}
@@ -66,7 +66,7 @@ const Home = () => {
                   {stats.totalBooks}
                 </p>
                 <p className="text-text-light text-opacity-70 text-sm">
-                  Livres lus
+                  Livres disponibles
                 </p>
               </motion.div>
 
@@ -91,12 +91,12 @@ const Home = () => {
                 transition={{ delay: 0.5 }}
                 className="card-base p-6"
               >
-                <TrendingUp className="w-8 h-8 text-accent mx-auto mb-3" />
+                <Users className="w-8 h-8 text-accent mx-auto mb-3" />
                 <p className="text-3xl font-bold text-text-light mb-1">
-                  {stats.publishedOnInstagram}
+                  {stats.uniqueAuthors}
                 </p>
                 <p className="text-text-light text-opacity-70 text-sm">
-                  Publiés sur Instagram
+                  Auteurs différents
                 </p>
               </motion.div>
             </div>

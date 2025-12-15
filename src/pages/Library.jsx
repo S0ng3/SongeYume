@@ -6,10 +6,9 @@ import SearchBar from '../components/SearchBar'
 import TagList from '../components/TagList'
 import CategoryFilter from '../components/CategoryFilter'
 import PublisherFilter from '../components/PublisherFilter'
-import PlatformFilter from '../components/PlatformFilter'
 import SpicyFilter from '../components/SpicyFilter'
 import Pagination from '../components/Pagination'
-import { filterBooksByCategory, getCategoryNames } from '../data/categories'
+import { filterBooksByCategory, getCategoryNames, CATEGORIES } from '../data/categories'
 import booksData from '../data/books.json'
 
 const BOOKS_PER_PAGE = 48 // 4 rows of 12 on large screens
@@ -20,15 +19,23 @@ const Library = () => {
   const [selectedTags, setSelectedTags] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedPublisher, setSelectedPublisher] = useState(null)
-  const [selectedPlatforms, setSelectedPlatforms] = useState([])
   const [selectedSpicyLevel, setSelectedSpicyLevel] = useState(null)
   const [allTags, setAllTags] = useState([])
   const [allPublishers, setAllPublishers] = useState([])
+  const [categoryCounts, setCategoryCounts] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
 
   // Mettre à jour les options de filtres disponibles en fonction des filtres actifs
   useEffect(() => {
+    // Calculer le nombre de livres par catégorie (sans filtres)
+    const categoryCountMap = {}
+    Object.keys(CATEGORIES).forEach(categoryKey => {
+      const booksInCategory = filterBooksByCategory(booksData, categoryKey)
+      categoryCountMap[categoryKey] = booksInCategory.length
+    })
+    setCategoryCounts(categoryCountMap)
+
     // Filtrer les livres disponibles en fonction des filtres déjà appliqués
     let availableBooks = booksData
 
@@ -130,25 +137,14 @@ const Library = () => {
       filtered = filtered.filter(book => book.publisher === selectedPublisher)
     }
 
-    // 6. Filter by platforms (Babelio et/ou Instagram)
-    if (selectedPlatforms.length > 0) {
-      filtered = filtered.filter(book => {
-        return selectedPlatforms.every(platform => {
-          if (platform === 'babelio') return book.publishedOnBabelio
-          if (platform === 'instagram') return book.publishedOnInstagram
-          return false
-        })
-      })
-    }
-
-    // 7. Filter by spicy level
+    // 5. Filter by spicy level
     if (selectedSpicyLevel !== null) {
       filtered = filtered.filter(book => book.spicyLevel === selectedSpicyLevel)
     }
 
     setBooks(filtered)
     setCurrentPage(1) // Reset to first page when filters change
-  }, [searchTerm, selectedTags, selectedCategory, selectedPublisher, selectedPlatforms, selectedSpicyLevel])
+  }, [searchTerm, selectedTags, selectedCategory, selectedPublisher, selectedSpicyLevel])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -191,18 +187,6 @@ const Library = () => {
 
   const handleClearPublisher = () => {
     setSelectedPublisher(null)
-  }
-
-  const handlePlatformToggle = (platform) => {
-    if (selectedPlatforms.includes(platform)) {
-      setSelectedPlatforms(selectedPlatforms.filter(p => p !== platform))
-    } else {
-      setSelectedPlatforms([...selectedPlatforms, platform])
-    }
-  }
-
-  const handleClearPlatforms = () => {
-    setSelectedPlatforms([])
   }
 
   const handleSpicyLevelClick = (level) => {
@@ -270,13 +254,12 @@ const Library = () => {
           >
             <div className="flex items-center space-x-2">
               <span className="text-lg font-semibold text-accent">Filtres</span>
-              {(selectedCategory || selectedTags.length > 0 || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
+              {(selectedCategory || selectedTags.length > 0 || selectedPublisher || selectedSpicyLevel !== null) && (
                 <span className="bg-accent bg-opacity-20 text-accent text-xs font-semibold px-2 py-1 rounded-full">
                   {[
                     selectedCategory ? 1 : 0,
                     selectedTags.length,
                     selectedPublisher ? 1 : 0,
-                    selectedPlatforms.length,
                     selectedSpicyLevel !== null ? 1 : 0
                   ].reduce((a, b) => a + b, 0)} actif(s)
                 </span>
@@ -305,6 +288,7 @@ const Library = () => {
                     selectedCategory={selectedCategory}
                     onCategoryClick={handleCategoryClick}
                     onClearCategory={handleClearCategory}
+                    categoryCounts={categoryCounts}
                   />
 
                   {/* Tags Filter */}
@@ -327,15 +311,6 @@ const Library = () => {
                     />
                   </div>
 
-                  {/* Platform Filter */}
-                  <div className="border-t border-text-light border-opacity-10 pt-6">
-                    <PlatformFilter
-                      selectedPlatforms={selectedPlatforms}
-                      onPlatformToggle={handlePlatformToggle}
-                      onClearPlatforms={handleClearPlatforms}
-                    />
-                  </div>
-
                   {/* Spicy Level Filter */}
                   <div className="border-t border-text-light border-opacity-10 pt-6">
                     <SpicyFilter
@@ -351,7 +326,7 @@ const Library = () => {
         </motion.div>
 
         {/* Results Info */}
-        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
+        {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedPublisher || selectedSpicyLevel !== null) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -362,14 +337,13 @@ const Library = () => {
                 <span className="font-semibold text-accent">{books.length}</span>{' '}
                 {books.length > 1 ? 'résultats trouvés' : 'résultat trouvé'}
               </p>
-              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedPublisher || selectedPlatforms.length > 0 || selectedSpicyLevel !== null) && (
+              {(searchTerm || selectedTags.length > 0 || selectedCategory || selectedPublisher || selectedSpicyLevel !== null) && (
                 <button
                   onClick={() => {
                     setSearchTerm('')
                     setSelectedTags([])
                     setSelectedCategory(null)
                     setSelectedPublisher(null)
-                    setSelectedPlatforms([])
                     setSelectedSpicyLevel(null)
                   }}
                   className="text-sm text-accent hover:text-opacity-80 transition-colors"
@@ -423,7 +397,6 @@ const Library = () => {
                   setSelectedTags([])
                   setSelectedCategory(null)
                   setSelectedPublisher(null)
-                  setSelectedPlatforms([])
                   setSelectedSpicyLevel(null)
                 }}
                 className="btn-primary"
