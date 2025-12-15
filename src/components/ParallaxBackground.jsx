@@ -26,10 +26,10 @@ const ParallaxBackground = ({ books }) => {
     return shuffled.slice(0, 4)
   })
 
-  // Effet parallaxe : mouvement bien visible et dynamique
-  const y1 = useTransform(scrollY, [0, 1000], [0, 70])   // Lent
-  const y2 = useTransform(scrollY, [0, 1000], [0, 120])  // Moyen
-  const y3 = useTransform(scrollY, [0, 1000], [0, 170])  // Rapide
+  // Effet parallaxe : mouvement très prononcé pour un effet spectaculaire
+  const y1 = useTransform(scrollY, [0, 800], [0, 100])   // Lent
+  const y2 = useTransform(scrollY, [0, 800], [0, 180])   // Moyen
+  const y3 = useTransform(scrollY, [0, 800], [0, 260])   // Rapide - très visible
 
   // Sur mobile, pas de parallaxe
   if (isMobile) {
