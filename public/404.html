@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirection - Songe Yume</title>
+    <script>
+      // Single Page Apps pour GitHub Pages
+      // Solution de redirection pour gérer les routes React Router
+      // https://github.com/rafgraph/spa-github-pages
+      
+      // Sauvegarder le chemin actuel dans sessionStorage
+      // pour que index.html puisse le restaurer
+      sessionStorage.redirect = location.href;
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'"></meta>
+  </head>
+  <body>
+    <!-- Cette page redirige automatiquement vers l'app React -->
+  </body>
+</html>
+

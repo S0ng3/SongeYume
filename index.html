@@ -10,6 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     <!-- Preload de l'image principale de la homepage pour un chargement prioritaire -->
     <link rel="preload" as="image" href="/SongeYume_HomePage.png">
+    
+    <!-- Script pour gérer les redirections depuis 404.html (Single Page App sur GitHub Pages) -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
