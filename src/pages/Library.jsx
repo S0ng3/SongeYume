@@ -8,11 +8,12 @@ import TagList from '../components/TagList'
 import CategoryFilter from '../components/CategoryFilter'
 import PublisherFilter from '../components/PublisherFilter'
 import SpicyFilter from '../components/SpicyFilter'
+import SortSelector from '../components/SortSelector'
 import Pagination from '../components/Pagination'
 import { filterBooksByCategory, getCategoryNames, CATEGORIES } from '../data/categories'
 import booksData from '../data/books.json'
 
-const BOOKS_PER_PAGE = 48 // 4 rows of 12 on large screens
+const BOOKS_PER_PAGE = 24 // 2 rows of 12 on large screens
 
 const Library = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -27,6 +28,7 @@ const Library = () => {
   const [categoryCounts, setCategoryCounts] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+  const [sortBy, setSortBy] = useState('readDate') // Par défaut : date de lecture
 
   // Charger le filtre de tag depuis l'URL au montage du composant
   useEffect(() => {
@@ -80,17 +82,25 @@ const Library = () => {
       )
     }
 
-    // Extraire les tags disponibles dans les livres filtrés
+    // Extraire les tags disponibles avec leur fréquence d'utilisation
     const categoryNames = getCategoryNames()
-    const tagsSet = new Set()
+    const tagFrequency = {}
     availableBooks.forEach(book => {
       book.tags.forEach(tag => {
         if (!categoryNames.includes(tag)) {
-          tagsSet.add(tag)
+          tagFrequency[tag] = (tagFrequency[tag] || 0) + 1
         }
       })
     })
-    setAllTags(Array.from(tagsSet).sort())
+    
+    // Trier les tags par fréquence décroissante, puis alphabétiquement
+    const sortedTags = Object.keys(tagFrequency).sort((a, b) => {
+      const freqDiff = tagFrequency[b] - tagFrequency[a]
+      if (freqDiff !== 0) return freqDiff
+      return a.localeCompare(b)
+    })
+    
+    setAllTags(sortedTags)
 
     // Extraire les éditeurs disponibles dans les livres filtrés
     const publisherCount = {}
@@ -155,9 +165,29 @@ const Library = () => {
       filtered = filtered.filter(book => book.spicyLevel === selectedSpicyLevel)
     }
 
-    setBooks(filtered)
+    // Appliquer le tri
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'readDate':
+          // Tri par date de lecture (récent → ancien)
+          return new Date(b.readDate) - new Date(a.readDate)
+        case 'rating':
+          // Tri par note (meilleure → moins bonne)
+          return b.rating - a.rating
+        case 'title':
+          // Tri par titre (A → Z)
+          return a.title.localeCompare(b.title, 'fr')
+        case 'author':
+          // Tri par auteur (A → Z)
+          return a.author.localeCompare(b.author, 'fr')
+        default:
+          return 0
+      }
+    })
+
+    setBooks(sorted)
     setCurrentPage(1) // Reset to first page when filters change
-  }, [searchTerm, selectedTags, selectedCategory, selectedPublisher, selectedSpicyLevel])
+  }, [searchTerm, selectedTags, selectedCategory, selectedPublisher, selectedSpicyLevel, sortBy])
 
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -218,6 +248,10 @@ const Library = () => {
     setCurrentPage(page)
   }
 
+  const handleSortChange = (newSort) => {
+    setSortBy(newSort)
+  }
+
   // Calculate pagination
   const totalPages = Math.ceil(books.length / BOOKS_PER_PAGE)
   const startIndex = (currentPage - 1) * BOOKS_PER_PAGE
@@ -239,18 +273,28 @@ const Library = () => {
           </p>
         </motion.div>
 
-        {/* Search Bar */}
+        {/* Search Bar and Sort Selector */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="card-base p-6 mb-6"
         >
-          <SearchBar
-            searchTerm={searchTerm}
-            onSearchChange={handleSearchChange}
-            placeholder="Rechercher par titre, auteur, série, tags..."
-          />
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+            <div className="flex-1 w-full">
+              <SearchBar
+                searchTerm={searchTerm}
+                onSearchChange={handleSearchChange}
+                placeholder="Rechercher par titre, auteur, série, tags..."
+              />
+            </div>
+            <div className="w-full lg:w-auto">
+              <SortSelector
+                selectedSort={sortBy}
+                onSortChange={handleSortChange}
+              />
+            </div>
+          </div>
         </motion.div>
 
         {/* Advanced Filters - Collapsible */}

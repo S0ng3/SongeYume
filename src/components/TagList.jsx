@@ -1,9 +1,20 @@
-import { motion } from 'framer-motion'
-import { X, Tag } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { X, Tag, ChevronDown, ChevronUp } from 'lucide-react'
 import { isSubgenre } from '../utils/subgenres'
 
 const TagList = ({ tags, selectedTags, onTagClick, onClearTags }) => {
+  const [showAllTags, setShowAllTags] = useState(false)
   const isSelected = (tag) => selectedTags.includes(tag)
+
+  // Séparer les sous-genres des tags normaux
+  const subgenres = tags.filter(tag => isSubgenre(tag))
+  const normalTags = tags.filter(tag => !isSubgenre(tag))
+  
+  // Limiter l'affichage des tags normaux à 12 par défaut
+  const MAX_TAGS_DEFAULT = 12
+  const displayedNormalTags = showAllTags ? normalTags : normalTags.slice(0, MAX_TAGS_DEFAULT)
+  const hiddenTagsCount = normalTags.length - MAX_TAGS_DEFAULT
 
   return (
     <div>
@@ -28,7 +39,8 @@ const TagList = ({ tags, selectedTags, onTagClick, onClearTags }) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {tags.map((tag) => (
+        {/* Afficher d'abord tous les sous-genres */}
+        {subgenres.map((tag) => (
           <motion.button
             key={tag}
             whileHover={{ scale: 1.05 }}
@@ -36,18 +48,58 @@ const TagList = ({ tags, selectedTags, onTagClick, onClearTags }) => {
             onClick={() => onTagClick(tag)}
             className={`tag ${
               isSelected(tag)
-                ? isSubgenre(tag)
-                  ? 'bg-yellow-300 bg-opacity-100 text-background font-bold'
-                  : 'bg-accent bg-opacity-100 text-background font-semibold'
-                : isSubgenre(tag)
-                ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
-                : ''
+                ? 'bg-yellow-300 bg-opacity-100 text-background font-bold'
+                : 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
             }`}
           >
             {tag}
           </motion.button>
         ))}
+        
+        {/* Puis afficher les tags normaux (limités ou tous) */}
+        <AnimatePresence>
+          {displayedNormalTags.map((tag) => (
+            <motion.button
+              key={tag}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => onTagClick(tag)}
+              className={`tag ${
+                isSelected(tag)
+                  ? 'bg-accent bg-opacity-100 text-background font-semibold'
+                  : ''
+              }`}
+            >
+              {tag}
+            </motion.button>
+          ))}
+        </AnimatePresence>
       </div>
+
+      {/* Bouton Voir plus / Voir moins */}
+      {normalTags.length > MAX_TAGS_DEFAULT && (
+        <motion.button
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={() => setShowAllTags(!showAllTags)}
+          className="mt-4 flex items-center space-x-2 text-sm text-accent hover:text-opacity-80 transition-colors mx-auto"
+        >
+          {showAllTags ? (
+            <>
+              <ChevronUp className="w-4 h-4" />
+              <span>Voir moins de tags</span>
+            </>
+          ) : (
+            <>
+              <ChevronDown className="w-4 h-4" />
+              <span>Voir {hiddenTagsCount} tags supplémentaires</span>
+            </>
+          )}
+        </motion.button>
+      )}
 
       {selectedTags.length > 0 && (
         <motion.div
