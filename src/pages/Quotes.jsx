@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Quote, Book, User, Tag, Shuffle, Copy, Check, Share2, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Quote, Book, User, Tag, Shuffle, Copy, Check, Share2, Filter, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
 import { getImagePath } from '../utils/helpers'
+import { getCategoryNames } from '../data/categories'
+import { isSubgenre } from '../utils/subgenres'
 
 const Quotes = () => {
   // Extraire toutes les citations avec leurs métadonnées
@@ -36,8 +38,10 @@ const Quotes = () => {
   const [copiedIndex, setCopiedIndex] = useState(null)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [showAllTags, setShowAllTags] = useState(false)
   
   const QUOTES_PER_PAGE = 18
+  const MAX_TAGS_DEFAULT = 12
 
   // Listes uniques pour les filtres
   const uniqueBooks = useMemo(() => 
@@ -51,9 +55,25 @@ const Quotes = () => {
   )
   
   const uniqueTags = useMemo(() => {
+    const categoryNames = getCategoryNames()
     const tags = new Set()
-    allQuotes.forEach(q => q.tags.forEach(tag => tags.add(tag)))
-    return [...tags].sort()
+    allQuotes.forEach(q => {
+      q.tags.forEach(tag => {
+        // Exclure les noms de catégories
+        if (!categoryNames.includes(tag)) {
+          tags.add(tag)
+        }
+      })
+    })
+    // Trier : sous-genres en premier, puis tags alphabétiques
+    const sortedTags = [...tags].sort((a, b) => {
+      const aIsSubgenre = isSubgenre(a)
+      const bIsSubgenre = isSubgenre(b)
+      if (aIsSubgenre && !bIsSubgenre) return -1
+      if (!aIsSubgenre && bIsSubgenre) return 1
+      return a.localeCompare(b, 'fr')
+    })
+    return sortedTags
   }, [allQuotes])
 
   // Filtrer les citations
@@ -323,20 +343,50 @@ const Quotes = () => {
                         </button>
                       )}
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {uniqueTags.map(tag => (
+                    <div>
+                      {/* Tags affichés (limités ou tous) */}
+                      <div className="flex flex-wrap gap-2">
+                        {(showAllTags ? uniqueTags : uniqueTags.slice(0, MAX_TAGS_DEFAULT)).map(tag => {
+                          const tagIsSubgenre = isSubgenre(tag)
+                          return (
+                            <button
+                              key={tag}
+                              onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+                              className={`tag ${
+                                selectedTag === tag
+                                  ? tagIsSubgenre
+                                    ? 'bg-yellow-300 bg-opacity-100 text-background font-bold'
+                                    : 'bg-accent bg-opacity-100 text-background font-semibold'
+                                  : tagIsSubgenre
+                                  ? 'bg-yellow-300 bg-opacity-20 text-yellow-200 font-semibold'
+                                  : ''
+                              }`}
+                            >
+                              {tag}
+                            </button>
+                          )
+                        })}
+                      </div>
+
+                      {/* Bouton Voir plus / Voir moins */}
+                      {uniqueTags.length > MAX_TAGS_DEFAULT && (
                         <button
-                          key={tag}
-                          onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                          className={`px-3 py-1.5 rounded-full text-sm transition-all ${
-                            selectedTag === tag
-                              ? 'bg-accent text-background font-semibold'
-                              : 'bg-card-hover text-text-light hover:bg-accent hover:bg-opacity-20'
-                          }`}
+                          onClick={() => setShowAllTags(!showAllTags)}
+                          className="mt-3 flex items-center space-x-2 text-sm text-accent hover:text-opacity-80 transition-colors"
                         >
-                          {tag}
+                          {showAllTags ? (
+                            <>
+                              <ChevronUp className="w-4 h-4" />
+                              <span>Voir moins</span>
+                            </>
+                          ) : (
+                            <>
+                              <ChevronDown className="w-4 h-4" />
+                              <span>Voir plus ({uniqueTags.length - MAX_TAGS_DEFAULT} tags cachés)</span>
+                            </>
+                          )}
                         </button>
-                      ))}
+                      )}
                     </div>
                   </div>
 

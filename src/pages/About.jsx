@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { BookHeart, Sparkles, Target, Coffee } from 'lucide-react'
+import { getImagePath } from '../utils/helpers'
 
 const About = () => {
   const features = [
@@ -50,7 +51,24 @@ const About = () => {
             className="space-y-6"
           >
             <div className="card-base p-8">
-              <h2 className="text-3xl font-bold text-text-light mb-6">
+              {/* Photo de profil */}
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                className="flex justify-center mb-8"
+              >
+                <div className="relative">
+                  <img 
+                    src={getImagePath('/categories/classique.png')}
+                    alt="Photo de profil"
+                    className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover shadow-xl"
+                  />
+                  <div className="absolute inset-0 rounded-full bg-accent opacity-0 hover:opacity-10 transition-opacity duration-300"></div>
+                </div>
+              </motion.div>
+
+              <h2 className="text-3xl font-bold text-text-light mb-6 text-center">
                 Songe Yume
               </h2>
               <div className="space-y-4 text-text-light text-opacity-80 leading-relaxed">
@@ -67,15 +85,6 @@ const About = () => {
                   J'espère que vous prendrez autant de plaisir à explorer cette bibliothèque que j'en ai eu à la construire. Et n'hésitez pas à me contacter sur Instagram ou Babelio pour échanger : je suis timide, mais toujours ouverte à la discussion.
                 </p>
               </div>
-            </div>
-
-            <div className="card-base p-8 bg-accent bg-opacity-5 border-2 border-accent border-opacity-20">
-              <h3 className="text-xl font-bold text-accent mb-3">
-                ✨ Ma philosophie de lecture
-              </h3>
-              <p className="text-text-light text-opacity-80 leading-relaxed italic">
-                "Un livre est une fenêtre ouverte sur l'infini."
-              </p>
             </div>
           </motion.div>
 

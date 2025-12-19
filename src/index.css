@@ -41,6 +41,17 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-opacity-80;
   }
+
+  /* Couleur de sélection de texte personnalisée (jaune de la palette) */
+  ::selection {
+    background-color: #f5b557;
+    color: #1a1a20;
+  }
+
+  ::-moz-selection {
+    background-color: #f5b557;
+    color: #1a1a20;
+  }
 }
 
 @layer components {
