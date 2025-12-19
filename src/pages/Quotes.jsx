@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Quote, Book, User, Tag, Shuffle, Copy, Check, Share2, Filter, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
-import { getImagePath } from '../utils/helpers'
+import { getImagePath, getBookUrl } from '../utils/helpers'
 import { getCategoryNames } from '../data/categories'
 import { isSubgenre } from '../utils/subgenres'
 
@@ -194,7 +194,7 @@ const Quotes = () => {
               
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <Link 
-                  to={`/book/${randomQuote.bookId}`}
+                  to={getBookUrl(randomQuote.bookId, randomQuote.bookTitle)}
                   className="flex items-center space-x-3 group"
                 >
                   <img 
@@ -425,7 +425,7 @@ const Quotes = () => {
                   
                   <div className="space-y-3">
                     <Link 
-                      to={`/book/${quote.bookId}`}
+                      to={getBookUrl(quote.bookId, quote.bookTitle)}
                       className="block group"
                     >
                       <p className="text-accent font-semibold text-sm group-hover:text-opacity-80 transition-colors">

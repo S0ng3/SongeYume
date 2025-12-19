@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Quote, Sparkles, Shuffle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
-import { getImagePath } from '../utils/helpers'
+import { getImagePath, getBookUrl } from '../utils/helpers'
 
 /**
  * Composant Citation du Jour
@@ -110,7 +110,7 @@ const QuoteOfTheDay = () => {
 
         {/* Source */}
         <Link 
-          to={`/book/${quote.bookId}`}
+          to={getBookUrl(quote.bookId, quote.bookTitle)}
           className="flex items-center space-x-3 group w-fit"
         >
           <img 

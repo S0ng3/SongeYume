@@ -135,3 +135,23 @@ export const getImagePath = (path) => {
   return path
 }
 
+// Générer un slug SEO-friendly à partir d'un titre de livre
+export const generateSlug = (title) => {
+  if (!title) return ''
+  
+  return title
+    .toLowerCase()
+    .normalize('NFD') // Décomposer les caractères accentués
+    .replace(/[\u0300-\u036f]/g, '') // Supprimer les accents
+    .replace(/['']/g, '') // Supprimer les apostrophes
+    .replace(/[^a-z0-9]+/g, '-') // Remplacer les caractères non alphanumériques par des tirets
+    .replace(/^-+|-+$/g, '') // Supprimer les tirets au début et à la fin
+    .substring(0, 60) // Limiter la longueur
+}
+
+// Générer l'URL complète d'un livre avec son slug
+export const getBookUrl = (bookId, bookTitle) => {
+  const slug = generateSlug(bookTitle)
+  return `/book/${bookId}/${slug}`
+}
+

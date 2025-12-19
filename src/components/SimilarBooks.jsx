@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Sparkles, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
-import { getImagePath } from '../utils/helpers'
+import { getImagePath, getBookUrl } from '../utils/helpers'
 
 /**
  * Composant de recommandations de livres similaires
@@ -83,7 +83,7 @@ const SimilarBooks = ({ currentBook, maxResults = 4 }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Link to={`/book/${book.id}`} className="group block">
+            <Link to={getBookUrl(book.id, book.title)} className="group block">
               {/* Couverture */}
               <div className="relative mb-3">
                 <img

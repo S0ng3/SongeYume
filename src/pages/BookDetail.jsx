@@ -1,4 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Star, StarHalf, Quote, Instagram, ExternalLink, Calendar, BookMarked, BookOpen } from 'lucide-react'
 import booksData from '../data/books.json'
@@ -8,12 +9,22 @@ import SeriesTracker from '../components/SeriesTracker'
 import SpicyIndicator from '../components/SpicyIndicator'
 import ImageWithPlaceholder from '../components/ImageWithPlaceholder'
 import { isSubgenre } from '../utils/subgenres'
-import { getImagePath } from '../utils/helpers'
+import { getImagePath, generateSlug } from '../utils/helpers'
 
 const BookDetail = () => {
-  const { id } = useParams()
+  const { id, slug } = useParams()
   const navigate = useNavigate()
   const book = booksData.find(b => b.id === parseInt(id))
+
+  // Redirection SEO : si le slug est manquant ou incorrect, rediriger vers l'URL avec le bon slug
+  useEffect(() => {
+    if (book) {
+      const correctSlug = generateSlug(book.title)
+      if (!slug || slug !== correctSlug) {
+        navigate(`/book/${id}/${correctSlug}`, { replace: true })
+      }
+    }
+  }, [book, id, slug, navigate])
 
   // Filtrer les autres livres du même auteur
   const otherBooksByAuthor = book 

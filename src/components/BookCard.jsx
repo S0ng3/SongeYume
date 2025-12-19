@@ -4,7 +4,7 @@ import { Star } from 'lucide-react'
 import SpicyIndicator from './SpicyIndicator'
 import ImageWithPlaceholder from './ImageWithPlaceholder'
 import { isSubgenre } from '../utils/subgenres'
-import { getImagePath } from '../utils/helpers'
+import { getImagePath, getBookUrl } from '../utils/helpers'
 
 const BookCard = ({ book }) => {
 
@@ -15,7 +15,7 @@ const BookCard = ({ book }) => {
       transition={{ duration: 0.4 }}
       whileHover={{ y: -8 }}
     >
-      <Link to={`/book/${book.id}`}>
+      <Link to={getBookUrl(book.id, book.title)}>
         <div className="card-base card-hover overflow-hidden h-full flex flex-col group">
           {/* Book Cover */}
           <div className="relative">

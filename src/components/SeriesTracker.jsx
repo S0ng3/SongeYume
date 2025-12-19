@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { BookMarked, CheckCircle2, Circle, TrendingUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import booksData from '../data/books.json'
-import { getImagePath } from '../utils/helpers'
+import { getImagePath, getBookUrl } from '../utils/helpers'
 
 /**
  * Composant de suivi de série pour un livre
@@ -164,7 +164,7 @@ const SeriesTracker = ({ currentBook }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           {seriesInfo.previousBook && (
             <Link
-              to={`/book/${seriesInfo.previousBook.id}`}
+              to={getBookUrl(seriesInfo.previousBook.id, seriesInfo.previousBook.title)}
               className="card-base bg-card-hover p-4 hover:bg-opacity-80 transition-all group"
             >
               <p className="text-text-light text-opacity-60 text-xs mb-2">
@@ -192,7 +192,7 @@ const SeriesTracker = ({ currentBook }) => {
 
           {seriesInfo.nextBook && (
             <Link
-              to={`/book/${seriesInfo.nextBook.id}`}
+              to={getBookUrl(seriesInfo.nextBook.id, seriesInfo.nextBook.title)}
               className="card-base bg-accent bg-opacity-10 border-2 border-accent border-opacity-30 p-4 hover:bg-opacity-20 transition-all group"
             >
               <p className="text-accent text-xs font-semibold mb-2">
@@ -227,7 +227,7 @@ const SeriesTracker = ({ currentBook }) => {
           {seriesInfo.books.map((book) => (
             <Link
               key={book.id}
-              to={`/book/${book.id}`}
+              to={getBookUrl(book.id, book.title)}
               className={`group relative ${
                 book.id === currentBook.id ? 'ring-2 ring-accent rounded-lg' : ''
               }`}
