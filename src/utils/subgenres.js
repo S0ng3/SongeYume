@@ -11,7 +11,8 @@ export const SUBGENRE_CATEGORIES = {
     'Gunpowder',
     'Dark fantasy',
     'Fantasy historique',
-    'Grimdark'
+    'Grimdark',
+    "Steampunk"
   ],
   'Drame': [
     'Romance',

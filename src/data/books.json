@@ -655,5 +655,25 @@
         "babelioLink": "https://www.babelio.com/livres/Sapkowski-Le-Sorceleur--La-Croisee-des-corbeaux/1883257",
         "readDate": "2025-12-11",
         "publisher": "Bragelonne"
+    },
+    {
+        "id": 27,
+        "title": "La Guilde des queues de chats morts",
+        "author": "P. Djèlí Clark",
+        "cover": "/covers/la-guilde-des-queues-de-chats-morts.png",
+        "summary": "Eveen est morte. Ou plutôt morte-vivante. Depuis qu’elle a été réanimée et qu’elle a rejoint la guilde des Queues de chats morts, elle sert la déesse Aeril, Matrone des assassins, en tant que tueuse à gages. Assassins dont le serment le plus important exige que tout contrat accepté soit honoré, sous peine de s’attirer les foudres divines. Alors voilà Eveen bien embarrassée lorsqu’elle doit éliminer une jeune fille… qui lui ressemble trait pour trait.",
+        "personalReview": "Rien que le titre donne le ton : La Guilde des Queues de Chats Morts est une fantasy pleine d'humour, à la fois légère et captivante. J'ai dévoré ce texte au soleil, ce qui a sans doute amplifié le plaisir de suivre Eveen dans ses aventures. le dénouement final m'a particulièrement séduite, et découvrir le créole a été un défi aussi surprenant qu'enrichissant. Si vous cherchez de l'action, de l'humour et une bonne dose de badassitude… foncez !",
+        "rating": 4.5,
+        "maxRating": 5,
+        "quotes": ["Les Queues de chats morts ne sont pas des chats. Pas plus qu’ils n'ont de queues. Mais, morts, ils le sont sans conteste.","Règle d’assassin n° 182 : si la cible vous fait la conversation, c’est qu’elle cherche à gagner du temps."],
+        "tags": ["Fantasy", "Humour", "Univers parallèle", "Steampunk", "Héroïne", "Littérature américaine", "Diversité", "Mercenaires", "Assassins"],
+        "format": "Broché",  
+        "publishedOnInstagram": false,
+        "instagramLink": "",    
+        "publishedOnBabelio": true,
+        "babelioLink": "https://www.babelio.com/livres/Clark-La-Guilde-des-Queues-de-chats-morts/1825917",
+        "readDate": "2025-08-31",
+        "publisher": "L'Atalante"
     }
+    
 ]
